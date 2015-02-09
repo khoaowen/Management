@@ -1,0 +1,3 @@
+# Management
+my first application for managing people : Add, modify...
+Search for a person and print his information
