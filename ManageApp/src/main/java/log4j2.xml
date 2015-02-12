@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+
+  <Properties>
+    <Property name="logFolderName">manageAppLogs</Property>
+    <Property name="filename">app.log</Property>
+    <Property name="patternLayout">%d{dd MMM yyyy HH:mm:ss} %-5level %class{36} %L %M - %msg%xEx%n</Property>
+  </Properties>
+  
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+      <!-- Flow tracing is most useful with a pattern that shows location.
+           Below pattern outputs class, line number and method name. -->
+      <PatternLayout pattern="${patternLayout}"/>
+    </Console>
+    
+<!--     <File name="log" fileName="${filename}" append="false"> -->
+<!--       <PatternLayout header="${java:runtime} - ${java:vm} - ${java:os}"> -->
+<!--         <pattern> ${patternLayout}</pattern> -->
+<!--       </PatternLayout> -->
+<!--     </File> -->
+    
+    <RollingFile name="RollingFile" fileName="${logFolderName}/${filename}"
+                 filePattern="${logFolderName}/$${date:MM-yyyy}/app-%d{MM-dd-yyyy}-%i.log.gz">
+      <PatternLayout>
+        <Pattern>${patternLayout}</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="250 MB"/>
+      </Policies>
+    </RollingFile>
+    
+  </Appenders>
+  <Loggers>
+    <Root level="debug">
+<!--       <AppenderRef ref="log"/> -->
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="RollingFile"/>
+    </Root>
+  </Loggers>
+</Configuration>
