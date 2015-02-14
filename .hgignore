@@ -1,0 +1,5 @@
+syntax: glob
+ManageApp/target/classes/log4j2.xml
+ManageApp/.settings/org.eclipse.core.resources.prefs
+ManageApp/manageAppLogs/app.log
+ManageApp/target/classes/icon/application.ico
