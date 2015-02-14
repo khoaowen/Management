@@ -3,3 +3,7 @@ ManageApp/target/classes/log4j2.xml
 ManageApp/.settings/org.eclipse.core.resources.prefs
 ManageApp/manageAppLogs/app.log
 ManageApp/target/classes/icon/application.ico
+ManageApp/target/test-classes/com/khoaowen/AppTest.class
+ManageApp/.classpath
+ManageApp/.settings/org.eclipse.jdt.core.prefs
+ManageApp/target/classes/com/khoaowen/App.class
