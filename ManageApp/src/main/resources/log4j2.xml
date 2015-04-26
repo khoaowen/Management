@@ -23,7 +23,7 @@
     
     <RollingFile name="RollingFile" fileName="${logFolderName}/${filename}"
                  filePattern="${logFolderName}/$${date:MM-yyyy}/app-%d{MM-dd-yyyy}-%i.log.gz">
-      <PatternLayout>
+      <PatternLayout header="${java:runtime} - ${java:vm} - ${java:os}">
         <Pattern>${patternLayout}</Pattern>
       </PatternLayout>
       <Policies>
