@@ -17,7 +17,7 @@
                         <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label layoutY="4.0" text="%search.text" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0" />
-                              <TextField layoutX="72.0" promptText="%searchPrompt.text" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TextField layoutX="72.0" promptText="%searchPrompt.text" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="-60.0" AnchorPane.topAnchor="0.0">
                                  <FlowPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </FlowPane.margin>
