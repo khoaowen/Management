@@ -3,7 +3,6 @@ package com.khoaowen.utils;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Locale;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -13,12 +12,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
 public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 
+	public static final Logger logger = LogManager.getLogger("MainApp");
+	
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
 		// this is not called by Java FX
@@ -34,6 +36,16 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 	    aThrowable.printStackTrace(printWriter);
 	    return result.toString();
 	  }
+	
+	/**
+	 * Show the error with stack trace to user and log this stack trace
+	 * @param e exception which supplies the stack trace
+	 */
+	public static void showErrorAndLog(Exception e) {
+		String messageError = getStackTrace(e);
+		showError(messageError);
+		ExceptionHandler.logger.log(Level.FATAL, messageError);
+	}
 	
 	public static void showError(String stack) {
 		
@@ -74,7 +86,4 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 		alert.show();
 		
 	}
-	
-	public static final Logger logger = LogManager.getLogger("MainApp");
-
 }
