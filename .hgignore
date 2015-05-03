@@ -5,3 +5,4 @@ ManageApp/.settings/org.eclipse.jdt.core.prefs
 ManageApp/manageAppLogs/*
 ManageApp/target/*
 
+ManageApp/test-output/*

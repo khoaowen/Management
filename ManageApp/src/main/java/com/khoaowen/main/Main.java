@@ -11,13 +11,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import com.khoaowen.main.model.Person;
 import com.khoaowen.main.view.MainFrameController;
 import com.khoaowen.utils.ExceptionHandler;
-import com.khoaowen.utils.Resources;
+import com.khoaowen.utils.ResourceBundlesHelper;
 
 
 public class Main extends Application {
@@ -35,7 +34,7 @@ public class Main extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Manage App");
 		
-		Resources.setLocale(Locale.getDefault()); // new Locale("vi","VN")
+		ResourceBundlesHelper.setLocale(Locale.getDefault()); // new Locale("vi","VN")
 		
 		initRootLayout();
 		showPersonOverview();
@@ -51,7 +50,7 @@ public class Main extends Application {
 			// Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/RootLayout.fxml"));
-            rootLayout = FXMLLoader.load(loader.getLocation(), Resources.getBundle());
+            rootLayout = FXMLLoader.load(loader.getLocation(), ResourceBundlesHelper.getBundle());
 			
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
@@ -70,7 +69,7 @@ public class Main extends Application {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/MainFrame.fxml"));
-            loader.setResources(Resources.getBundle());
+            loader.setResources(ResourceBundlesHelper.getBundle());
             AnchorPane listPerson = loader.load();
             // Set person overview into the center of root layout.
             rootLayout.setCenter(listPerson);

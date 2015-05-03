@@ -3,128 +3,174 @@ package com.khoaowen.main.model;
 import java.time.LocalDate;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Person {
 
-	private StringProperty imagePath;
-	private StringProperty firstName;
-	private StringProperty lastName;
-	private ObjectProperty<Sexe> sexe;
-	private StringProperty religiousName;
-	private ObjectProperty<LocalDate> birthday;
-	private StringProperty ethnicGroup;
-	private StringProperty nationality;
-	private StringProperty hometown;
-	private StringProperty placeOfResidence;
+	private int id;
+	private final ObjectProperty<byte[]> image = new SimpleObjectProperty<>();
+	private final StringProperty firstName = new SimpleStringProperty();
+	private final StringProperty lastName = new SimpleStringProperty();
+	private final ObjectProperty<Sex> sex = new SimpleObjectProperty<>();
+	private final StringProperty email = new SimpleStringProperty();
+	private final StringProperty religiousName = new SimpleStringProperty();
+	private final ObjectProperty<LocalDate> birthday = new SimpleObjectProperty<>();
+
+	private LocalDate date;
+	
+	
+	
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	/**
+	 * The date that a person takes refuge in the Buddha, in the dharma and in
+	 * the sangha
+	 */
+	private final ObjectProperty<LocalDate> religiousDate = new SimpleObjectProperty<>();
+	/**
+	 * The date that the lay brother is adopted by Buddhist temple
+	 */
+	private final ObjectProperty<LocalDate> adoptedDate = new SimpleObjectProperty<>();
+	private final StringProperty ethnicGroup = new SimpleStringProperty();
+	private final StringProperty nationality = new SimpleStringProperty();
+	private final StringProperty hometown = new SimpleStringProperty();
+	private final StringProperty placeOfResidence = new SimpleStringProperty();
 	/**
 	 * Identity number
 	 */
-	private StringProperty idNumber;
+	private final StringProperty idNumber = new SimpleStringProperty();
 	/**
 	 * Date of issue of Id card
 	 */
-	private ObjectProperty<LocalDate> idNumberIssueDate;
+	private final ObjectProperty<LocalDate> idNumberIssueDate = new SimpleObjectProperty<>();
 	/**
 	 * Place of issue of Id card
 	 */
-	private StringProperty idNumberIssuePlace;
-	private StringProperty phoneNumber;
+	private final StringProperty idNumberIssuePlace = new SimpleStringProperty();
+	private final StringProperty phoneNumber = new SimpleStringProperty();
 	/**
 	 * Full name of father
 	 */
-	private StringProperty fatherFullName;
+	private final StringProperty fatherFullName = new SimpleStringProperty();
 	/**
 	 * Full name of mother
 	 */
-	private StringProperty motherFullName;
+	private final StringProperty motherFullName = new SimpleStringProperty();
 	/**
 	 * the level of study
 	 */
-	private StringProperty studyLevel;
+	private final StringProperty studyLevel = new SimpleStringProperty();
 	/**
 	 * the level of foreign language
 	 */
-	private StringProperty languageLevel;
-	private StringProperty note;
+	private final StringProperty languageLevel = new SimpleStringProperty();
+	private final StringProperty note = new SimpleStringProperty();
 
 	
-	public StringProperty imagePathProperty() {
-		return imagePath;
+	public int getId() {
+		return id;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public ObjectProperty<byte[]> imageProperty() {
+		return image;
+	}
+
 	public StringProperty firstNameProperty() {
 		return firstName;
 	}
-	
+
+	public StringProperty emailProperty() {
+		return email;
+	}
+
 	public StringProperty lastNameProperty() {
 		return lastName;
 	}
-	
-	public ObjectProperty<Sexe> sexeProperty() {
-		return sexe;
+
+	public ObjectProperty<Sex> sexProperty() {
+		return sex;
 	}
 
 	public StringProperty religousNameProperty() {
 		return religiousName;
 	}
-	
+
 	public ObjectProperty<LocalDate> birthdayProperty() {
 		return birthday;
 	}
-	
+
 	public StringProperty ethnicGroupProperty() {
 		return ethnicGroup;
 	}
-	
+
 	public StringProperty nationalityProperty() {
 		return nationality;
 	}
-	
+
 	public StringProperty hometownProperty() {
 		return hometown;
 	}
-	
+
 	public StringProperty placeOfResidenceProperty() {
 		return placeOfResidence;
 	}
-	
+
 	public StringProperty idNumberProperty() {
 		return idNumber;
 	}
-	
+
 	public ObjectProperty<LocalDate> idNumberIssueDateProperty() {
 		return idNumberIssueDate;
 	}
-	
+
 	public StringProperty idNumberIssuePlaceProperty() {
 		return idNumberIssuePlace;
 	}
-	
+
 	public StringProperty phoneNumberProperty() {
 		return phoneNumber;
 	}
-	
+
 	public StringProperty fatherFullNameProperty() {
 		return fatherFullName;
 	}
-	
+
 	public StringProperty motherFullNameProperty() {
 		return motherFullName;
 	}
-	
+
 	public StringProperty studyLevelProperty() {
 		return studyLevel;
 	}
-	
+
 	public StringProperty languageLevelProperty() {
 		return languageLevel;
 	}
-	
+
 	public StringProperty noteProperty() {
 		return note;
 	}
 	
+	public ObjectProperty<LocalDate> religiousDateProperty() {
+		return religiousDate;
+	}
+	
+	public ObjectProperty<LocalDate> adoptedDateProperty() {
+		return adoptedDate;
+	}
+
 	public String getFirstName() {
 		return firstName.get();
 	}
@@ -133,8 +179,12 @@ public class Person {
 		return lastName.get();
 	}
 
-	public Sexe getSexe() {
-		return sexe.get();
+	public String getEmail() {
+		return email.get();
+	}
+
+	public Sex getSex() {
+		return sex.get();
 	}
 
 	public String getReligiousName() {
@@ -196,22 +246,33 @@ public class Person {
 	public String getNote() {
 		return note.get();
 	}
-	
-	public String getImagePath() {
-		return imagePath.get();
+
+	public byte[] getImage() {
+		return image.get();
 	}
 	
+	public LocalDate getReligiousDate() {
+		return religiousDate.get();
+	}
+
+	public LocalDate getAdoptedDate() {
+		return adoptedDate.get();
+	}
 	
 	public void setFirstName(String firstName) {
-		this.firstName.set(firstName);;
+		this.firstName.set(firstName);
 	}
 
 	public void setLastName(String lastName) {
 		this.lastName.set(lastName);
 	}
 
-	public void setSexe(Sexe sexe) {
-		this.sexe.set(sexe);
+	public void setEmail(String email) {
+		this.email.set(email);
+	}
+
+	public void setSex(Sex sexe) {
+		this.sex.set(sexe);
 	}
 
 	public void setReligiousName(String religiousName) {
@@ -274,7 +335,20 @@ public class Person {
 		this.note.set(note);
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath.set(imagePath);
+	public void setImage(byte[] imageFile) {
+		this.image.set(imageFile);
+	}
+	
+	public void setReligiousDate(LocalDate religiousDate) {
+		this.religiousDate.set(religiousDate);
+	}
+	
+	public void setAdoptedDate(LocalDate adoptedDate) {
+		this.adoptedDate.set(adoptedDate);
+	}
+	
+	@Override
+	public String toString() {
+		return "Name " + this.getFirstName() + " " + this.getLastName() + "; email " + this.getEmail();
 	}
 }

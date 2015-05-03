@@ -61,6 +61,7 @@
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -79,10 +80,10 @@
                                  <children>
                                     <Label text="%lastname.text" />
                                     <Label text="%firstname.text" GridPane.rowIndex="1" />
-                                    <Label text="%sexe.text" GridPane.rowIndex="2" />
+                                    <Label text="%sexe.text" GridPane.rowIndex="3" />
                                     <TextField GridPane.columnIndex="1" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
                                           <RadioButton mnemonicParsing="false" text="%sexe.male.text">
                                              <toggleGroup>
@@ -92,16 +93,19 @@
                                           <RadioButton mnemonicParsing="false" text="%sexe.female.text" toggleGroup="$sexeGroup" />
                                        </children>
                                     </FlowPane>
-                                    <Label text="%religiousName.text" GridPane.rowIndex="3" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label text="%ethnicGroup.text" GridPane.rowIndex="4" />
+                                    <Label text="%religiousName.text" GridPane.rowIndex="4" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <Label text="%nationality.text" GridPane.rowIndex="5" />
+                                    <Label text="%ethnicGroup.text" GridPane.rowIndex="5" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <Label text="%hometown.text" GridPane.rowIndex="6" />
-                                    <Label text="%placeOfResidence.text" GridPane.rowIndex="7" />
+                                    <Label text="%nationality.text" GridPane.rowIndex="6" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label text="%hometown.text" GridPane.rowIndex="7" />
+                                    <Label text="%placeOfResidence.text" GridPane.rowIndex="8" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <Label text="label" GridPane.rowIndex="9" />
+                                    <Label text="%email.text" GridPane.rowIndex="2" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

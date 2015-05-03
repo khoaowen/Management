@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.khoaowen.main.mapper.PersonMapper">
+
+	<resultMap id="result" type="Person">
+		<result property="id" column="ID" />
+		<result property="firstName" column="FIRST_NAME" />
+		<result property="lastName" column="LAST_NAME" />
+		<result property="sex" column="SEX" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+		<result property="religiousDate" column="RELIGIOUS_DATE" typeHandler="com.khoaowen.utils.LocalDateTypeHandler" jdbcType="DATE" />
+		<result property="email" column="EMAIL" />
+	</resultMap>
+
+	<select id="getAll" resultMap="result">
+		select * from PERSON
+	</select>
+
+	<select id="getById" parameterType="int" resultMap="result">
+		select * from
+		PERSON where ID = #{id}
+	</select>
+
+	<delete id="deleteById" parameterType="int">
+		delete from PERSON where
+		ID = #{id};
+	</delete>
+
+	<insert id="insert" parameterType="Person" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
+		insert into PERSON (FIRST_NAME, LAST_NAME, SEX, RELIGIOUS_DATE, EMAIL) values (
+		#{firstName},
+		#{lastName},
+		#{sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+		#{religiousDate, typeHandler=com.khoaowen.utils.LocalDateTypeHandler},
+		#{email}
+		);
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select last_insert_id();
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="Person">
+		update PERSON
+		set
+		FIRST_NAME = #{firstName},
+		LAST_NAME = #{lastName},
+		SEX = #{sex},
+		RELIGIOUS_DATE = #{religiousDate},
+		EMAIL = #{email}
+		where ID = #{id};
+	</update>
+
+
+	<!-- test purpose only -->
+	<update id="createTable">
+	    drop table if exists PERSON;
+		create table if not exists PERSON (ID int not null auto_increment,
+		FIRST_NAME char(50),
+		LAST_NAME char(50),
+		SEX varchar default null,
+		RELIGIOUS_DATE date,
+		EMAIL char(50),
+		
+		PRIMARY KEY (id));
+	</update>
+
+</mapper>

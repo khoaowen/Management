@@ -13,7 +13,7 @@ public class JfxUtils {
         FXMLLoader loader = new FXMLLoader();
         try {
             loader.setLocation(JfxUtils.class.getResource(fxml));
-            loader.setResources(Resources.getBundle());
+            loader.setResources(ResourceBundlesHelper.getBundle());
             Node root = (Node) loader.load(Main.class.getResource(fxml).openStream());
             return root;
         } catch (IOException e) {

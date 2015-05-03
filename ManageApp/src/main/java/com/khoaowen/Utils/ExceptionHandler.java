@@ -43,14 +43,14 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 	 */
 	public static void showErrorAndLog(Exception e) {
 		String messageError = getStackTrace(e);
-		showError(messageError);
 		ExceptionHandler.logger.log(Level.FATAL, messageError);
+		showError(messageError);
 	}
 	
 	public static void showError(String stack) {
 		
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle(Resources.getMessageBundles("errorDialog.text"/*,new Locale("vi","VN")*/));
+		alert.setTitle(ResourceBundlesHelper.getMessageBundles("errorDialog.text"/*,new Locale("vi","VN")*/));
 		
 //		Enumeration e = Logger.getRootLogger().getAllAppenders();
 //	    while ( e.hasMoreElements() ){
@@ -59,11 +59,11 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 //	        System.out.println("File: " + ((FileAppender)app).getFile());
 //	      }
 //	    }
-		alert.setHeaderText(StringEscapeUtils.unescapeJava(Resources.getMessageBundles("anErrorOccurs.text")));
-		alert.setContentText(Resources.getMessageBundles("errorDialogFurtherInfo.text") + System.getProperty("user.dir")+System.getProperty("file.separator")+"manageAppLogs"+System.getProperty("file.separator")+"app.log");
+		alert.setHeaderText(StringEscapeUtils.unescapeJava(ResourceBundlesHelper.getMessageBundles("anErrorOccurs.text")));
+		alert.setContentText(ResourceBundlesHelper.getMessageBundles("errorDialogFurtherInfo.text") + System.getProperty("user.dir")+System.getProperty("file.separator")+"manageAppLogs"+System.getProperty("file.separator")+"app.log");
 
 
-		Label label = new Label(Resources.getMessageBundles("exceptionStackTrace.text"));
+		Label label = new Label(ResourceBundlesHelper.getMessageBundles("exceptionStackTrace.text"));
 
 		TextArea textArea = new TextArea(stack);
 		textArea.setEditable(false);

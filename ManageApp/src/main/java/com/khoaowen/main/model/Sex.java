@@ -1,7 +1,8 @@
 package com.khoaowen.main.model;
 
-public enum Sexe {
+public enum Sex {
 
 	MALE,
 	FEMALE;
+	
 }

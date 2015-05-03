@@ -51,7 +51,6 @@ public class MainFrameController {
      */
     public void setMainApp(Main mainApp) {
         this.main = mainApp;
-
         // Add observable list data to the table
         personTable.setItems(mainApp.getPersonData());
     }
