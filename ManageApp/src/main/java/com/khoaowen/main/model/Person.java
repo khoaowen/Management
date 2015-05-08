@@ -2,7 +2,9 @@ package com.khoaowen.main.model;
 
 import java.time.LocalDate;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -11,27 +13,18 @@ public class Person {
 
 	private int id;
 	private final ObjectProperty<byte[]> image = new SimpleObjectProperty<>();
+	/**
+	 * Indicates if the person lives in the temple
+	 */
+	private final BooleanProperty isPermanent= new SimpleBooleanProperty();
 	private final StringProperty firstName = new SimpleStringProperty();
 	private final StringProperty lastName = new SimpleStringProperty();
 	private final ObjectProperty<Sex> sex = new SimpleObjectProperty<>();
 	private final StringProperty email = new SimpleStringProperty();
 	private final StringProperty religiousName = new SimpleStringProperty();
 	private final ObjectProperty<LocalDate> birthday = new SimpleObjectProperty<>();
-
-	private LocalDate date;
-	
-	
-	
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-
 	/**
-	 * The date that a person takes refuge in the Buddha, in the dharma and in
+	 * The ceremony date which a person takes refuge in the Buddha, in the dharma and in
 	 * the sangha
 	 */
 	private final ObjectProperty<LocalDate> religiousDate = new SimpleObjectProperty<>();
@@ -81,6 +74,10 @@ public class Person {
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public BooleanProperty permanentProperty() {
+		return isPermanent;
 	}
 	
 	public ObjectProperty<byte[]> imageProperty() {
@@ -246,6 +243,10 @@ public class Person {
 	public String getNote() {
 		return note.get();
 	}
+	
+	public boolean isPermanent() {
+		return isPermanent.get();
+	}
 
 	public byte[] getImage() {
 		return image.get();
@@ -335,6 +336,10 @@ public class Person {
 		this.note.set(note);
 	}
 
+	public void setPermanent(boolean isPermanent) {
+		this.isPermanent.set(isPermanent);
+	}
+	
 	public void setImage(byte[] imageFile) {
 		this.image.set(imageFile);
 	}

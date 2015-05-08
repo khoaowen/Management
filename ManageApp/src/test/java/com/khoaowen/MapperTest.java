@@ -1,5 +1,7 @@
 package com.khoaowen;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -17,6 +19,7 @@ import com.khoaowen.main.mapper.PersonMapper;
 import com.khoaowen.main.model.Person;
 import com.khoaowen.main.model.Sex;
 import com.khoaowen.utils.DateUtil;
+import com.khoaowen.utils.ExceptionHandler;
 
 public class MapperTest {
 	
@@ -49,6 +52,21 @@ public class MapperTest {
 		PersonMapper personMapper = session.getMapper(PersonMapper.class);
 		for (int i = 0; i < 3; ++i) {
 			Person person = new Person();
+			
+			File file = new File("C:\\Users\\owen\\Desktop\\test.jpg"); //windows
+			byte[] bFile = new byte[(int) file.length()];
+
+			try {
+				FileInputStream fileInputStream = new FileInputStream(file);
+				fileInputStream.read(bFile);
+				fileInputStream.close();
+			} catch (Exception e) {
+				ExceptionHandler.showErrorAndLog(e);
+			}
+			person.setImage(bFile);
+			
+			//Image image = new Image(new ByteArrayInputStream(bFile));
+			
 			person.setFirstName("Dai " + i);
 			person.setLastName("Nguyen ngoc trang " + i);
 			person.setEmail("tieuthukieukys@yahoo.com " + i);
@@ -58,7 +76,10 @@ public class MapperTest {
 			System.out.println("Date: " + DateUtil.format(date));
 			personMapper.insert(person);
 			lists.add(person);
+			
 		}
+		
+		
 
 		Assert.assertEquals(3, personMapper.getAll().size());
 		Assert.assertEquals("Dai 1", personMapper.getById(lists.get(1).getId()).getFirstName());

@@ -5,15 +5,16 @@ import java.io.IOException;
 import java.util.Locale;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import com.khoaowen.main.model.Person;
+import org.apache.ibatis.session.SqlSession;
+
+import com.khoaowen.main.dao.MyBatisConnectionFactory;
+import com.khoaowen.main.mapper.PersonMapper;
 import com.khoaowen.main.view.MainFrameController;
 import com.khoaowen.utils.ExceptionHandler;
 import com.khoaowen.utils.ResourceBundlesHelper;
@@ -23,6 +24,8 @@ public class Main extends Application {
 	
 	private Stage primaryStage;
 	private BorderPane rootLayout;
+	private SqlSession session;
+	private PersonMapper personMapper;
 	
 	public Stage getPrimaryStage() {
 		return primaryStage;
@@ -30,16 +33,23 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler::showError);
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Manage App");
 		
-		ResourceBundlesHelper.setLocale(Locale.getDefault()); // new Locale("vi","VN")
+//		ResourceBundlesHelper.setLocale(Locale.getDefault());
+		ResourceBundlesHelper.setLocale(new Locale("vi","VN"));
 		
+		MyBatisConnectionFactory factory = new MyBatisConnectionFactory(
+				"C:\\Users\\owen\\Desktop\\test");
+		session = factory.openSession();
+		personMapper =  session.getMapper(PersonMapper.class);
 		initRootLayout();
 		showPersonOverview();
 		
 	}
+	
+	
 
 	/**
 	 * Initializes the root layout
@@ -77,19 +87,17 @@ public class Main extends Application {
             //Give the controller access to main app
             MainFrameController controller = loader.getController();
             controller.setMainApp(this);
-            
         } catch (IOException e) {
         	ExceptionHandler.showErrorAndLog(e);
         }
     }
-	
-	public static void main( String[] args ) {
-    	launch(args);
-    	
-    }
 
-	public ObservableList<Person> getPersonData() {
-		return FXCollections.emptyObservableList();
+	@Override
+	public void stop() throws Exception {
+		session.close();
 	}
 	
+	public PersonMapper getPersonMapper() {
+		return personMapper;
+	}
 }

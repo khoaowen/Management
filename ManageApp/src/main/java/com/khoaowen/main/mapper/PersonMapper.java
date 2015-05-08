@@ -6,6 +6,10 @@ import com.khoaowen.main.model.Person;
 
 public interface PersonMapper {
 
+	/**
+	 * 
+	 * @return list of available people in database
+	 */
 	List<Person> getAll();
 	Person getById(int id);
 	void deleteById(int id);

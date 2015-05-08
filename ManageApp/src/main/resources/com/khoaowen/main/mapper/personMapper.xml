@@ -12,9 +12,16 @@
 		<result property="sex" column="SEX" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
 		<result property="religiousDate" column="RELIGIOUS_DATE" typeHandler="com.khoaowen.utils.LocalDateTypeHandler" jdbcType="DATE" />
 		<result property="email" column="EMAIL" />
+		<result property="image" column="IMAGE" />
 	</resultMap>
+	
+	<resultMap id="lazyResult" type="Person">
+        <result property="id" column="ID" />
+        <result property="firstName" column="FIRST_NAME" />
+        <result property="lastName" column="LAST_NAME" />
+    </resultMap>
 
-	<select id="getAll" resultMap="result">
+	<select id="getAll" resultMap="lazyResult">
 		select * from PERSON
 	</select>
 
@@ -29,12 +36,19 @@
 	</delete>
 
 	<insert id="insert" parameterType="Person" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
-		insert into PERSON (FIRST_NAME, LAST_NAME, SEX, RELIGIOUS_DATE, EMAIL) values (
-		#{firstName},
-		#{lastName},
-		#{sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler},
-		#{religiousDate, typeHandler=com.khoaowen.utils.LocalDateTypeHandler},
-		#{email}
+		insert into PERSON (
+		FIRST_NAME, 
+		LAST_NAME, 
+		SEX, 
+		RELIGIOUS_DATE, 
+		EMAIL,
+		IMAGE) values (
+			#{firstName},
+			#{lastName},
+			#{sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+			#{religiousDate, typeHandler=com.khoaowen.utils.LocalDateTypeHandler},
+			#{email},
+			#{image}
 		);
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
 			select last_insert_id();
@@ -48,7 +62,8 @@
 		LAST_NAME = #{lastName},
 		SEX = #{sex},
 		RELIGIOUS_DATE = #{religiousDate},
-		EMAIL = #{email}
+		EMAIL = #{email},
+		IMAGE = #{image}
 		where ID = #{id};
 	</update>
 
@@ -62,7 +77,7 @@
 		SEX varchar default null,
 		RELIGIOUS_DATE date,
 		EMAIL char(50),
-		
+		IMAGE blob,
 		PRIMARY KEY (id));
 	</update>
 

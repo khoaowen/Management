@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -41,11 +42,31 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 	 * Show the error with stack trace to user and log this stack trace
 	 * @param e exception which supplies the stack trace
 	 */
-	public static void showErrorAndLog(Exception e) {
+	public static void showErrorAndLog(Throwable e) {
 		String messageError = getStackTrace(e);
 		ExceptionHandler.logger.log(Level.FATAL, messageError);
 		showError(messageError);
 	}
+	
+	/**
+	 * Show the error with stack trace to user and log this stack trace
+	 * @param e exception which supplies the stack trace
+	 */
+	public static void showErrorAndLog(String message, Throwable e) {
+		String messageError = getStackTrace(e);
+		ExceptionHandler.logger.log(Level.FATAL, message + ": " + messageError);
+		showError(message + ": " + messageError);
+	}
+	
+	
+	public static void showError(Thread t, Throwable e) {
+        if (Platform.isFxApplicationThread()) {
+        	showErrorAndLog(e);
+        } else {
+        	showErrorAndLog("An unexpected error occurred in "+t, e);
+
+        }
+    }
 	
 	public static void showError(String stack) {
 		
