@@ -28,6 +28,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.khoaowen.main.Main;
 import com.khoaowen.main.mapper.PersonMapper;
 import com.khoaowen.main.model.Person;
@@ -95,7 +97,10 @@ public class MainFrameController {
 		initTableLayout();
 		// Clear person details.
 	    showPersonDetails(null);
-	    configureFileChooser(fileChooser);
+	    JfxUtils.configureFileChooser(fileChooser, "imageChooser.title.text", 
+	    		Pair.of(ResourceBundlesHelper.getMessageBundles("allImages.extension.text"), "*.*"), 
+	    		Pair.of("JPG", "*.jpg"), 
+	    		Pair.of("PNG", "*.png"));
 	    addButton.setGraphic(new ImageView(ImageUtil.getImageResources("/icon/add_person.png",IMAGE_SIZE,IMAGE_SIZE)));
 	    printButton.setGraphic(new ImageView(ImageUtil.getImageResources("/icon/print.png", IMAGE_SIZE, IMAGE_SIZE)));
 	    personTable.getSelectionModel().selectedItemProperty().addListener(
@@ -257,17 +262,10 @@ public class MainFrameController {
 	    		selectedItem.setImage(ImageUtil.convertToByte(file.getAbsolutePath()));
 	    	}
 	    	personMapper.update(selectedItem);
+	    	showPersonDetails(selectedItem);
     	}
     }
     
-	private static void configureFileChooser(final FileChooser fileChooser) {
-		fileChooser.setTitle(ResourceBundlesHelper.getMessageBundles("fileChooser.title.text"));
-		fileChooser.setInitialDirectory(new File(System
-				.getProperty("user.home")));
-		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("All Images", "*.*"),
-				new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-				new FileChooser.ExtensionFilter("PNG", "*.png"));
-	}
+	
 
 }

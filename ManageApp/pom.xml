@@ -42,7 +42,7 @@
 		<dependency>
 			<groupId>com.akathist.maven.plugins.launch4j</groupId>
 			<artifactId>launch4j-maven-plugin</artifactId>
-			<version>1.7.4</version>
+			<version>${launch4j-maven-plugin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>

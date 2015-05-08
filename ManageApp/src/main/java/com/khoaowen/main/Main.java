@@ -17,6 +17,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.khoaowen.main.dao.MyBatisConnectionFactory;
 import com.khoaowen.main.mapper.PersonMapper;
 import com.khoaowen.main.view.MainFrameController;
+import com.khoaowen.main.view.RootLayoutController;
 import com.khoaowen.utils.ExceptionHandler;
 import com.khoaowen.utils.ResourceBundlesHelper;
 
@@ -59,10 +60,15 @@ public class Main extends Application {
 		try {
 			
 			// Load root layout from fxml file.
+            
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("view/RootLayout.fxml"));
-            rootLayout = FXMLLoader.load(loader.getLocation(), ResourceBundlesHelper.getBundle());
-			
+            loader.setResources(ResourceBundlesHelper.getBundle());
+            rootLayout = loader.load();
+            
+            //Give the controller access to main app
+            RootLayoutController controller = loader.getController();
+            controller.setMainApp(this);
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();

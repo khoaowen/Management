@@ -2,7 +2,11 @@ package com.khoaowen.utils;
 
 import java.text.MessageFormat;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 
 public class ResourceBundlesHelper {
 
@@ -10,7 +14,12 @@ public class ResourceBundlesHelper {
 	private static ResourceBundle bundles = ResourceBundle.getBundle(bundlePath);
 	
 	public static String getMessageBundles(String key) {
-		return bundles.getString(key);
+		try {
+			return bundles.getString(key);
+		} catch (MissingResourceException e) {
+			LogManager.getLogger(ResourceBundlesHelper.class).log(Level.WARN, "Can not find resource key " + key);
+			return key;
+		}
 	}
 	
 	public static String getMessageBundles(String key, Object... params) {

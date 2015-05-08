@@ -40,6 +40,10 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 	    return result.toString();
 	  }
 	
+	public static void log(Level level, String message) {
+		ExceptionHandler.logger.log(level, message);
+	}
+	
 	/**
 	 * Show the error with stack trace to user and log this stack trace
 	 * @param e exception which supplies the stack trace
