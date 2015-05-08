@@ -12,7 +12,6 @@ import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.io.FilenameUtils;
 
 public class ImageUtil {
 
