@@ -1,15 +1,20 @@
 package com.khoaowen.utils;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ResourceBundlesHelper {
 
-	private static String bundlePath = "bundles\\Bundle";
+	private static String bundlePath = "bundles/Bundle";
 	private static ResourceBundle bundles = ResourceBundle.getBundle(bundlePath);
 	
 	public static String getMessageBundles(String key) {
 		return bundles.getString(key);
+	}
+	
+	public static String getMessageBundles(String key, Object... params) {
+		return MessageFormat.format(bundles.getString(key), params);
 	}
 	
 	public static String getMessageBundles(String key, Locale locale) {

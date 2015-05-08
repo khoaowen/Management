@@ -13,6 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.1</log4j.version>
         <launch4j-maven-plugin.version>1.7.6</launch4j-maven-plugin.version>
+        <executable.version>1.0.0.0</executable.version>
     </properties>
 
 	<dependencies>
@@ -59,7 +60,12 @@
 			<artifactId>h2</artifactId>
 			<version>1.3.176</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+        
 	</dependencies>
 
 
@@ -99,7 +105,7 @@
 					<transformers>
 						<transformer
 							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-							<mainClass>com.khoaowen.Main</mainClass>
+							<mainClass>com.khoaowen.main.Main</mainClass>
 						</transformer>
 					</transformers>
 				</configuration>
@@ -121,7 +127,7 @@
 							<outfile>${project.build.directory}/manageApp.exe</outfile>
 							<downloadUrl>http://java.com/download</downloadUrl>
 							<classPath>
-								<mainClass>com.khoaowen.Main</mainClass>
+								<mainClass>com.khoaowen.main.Main</mainClass>
 								<preCp>anything</preCp>
 							</classPath>
 							<icon>src/main/resources/icon/application.ico</icon>
@@ -129,12 +135,12 @@
 								<minVersion>1.8.0</minVersion>
 							</jre>
 							<versionInfo>
-								<fileVersion>1.0.0.0</fileVersion>
+								<fileVersion>${executable.version}</fileVersion>
 								<txtFileVersion>${project.version}</txtFileVersion>
 								<fileDescription>${project.name}</fileDescription>
 								<copyright>2015 khoaowen</copyright>
-								<productVersion>1.0.0.0</productVersion>
-								<txtProductVersion>1.0.0.0</txtProductVersion>
+								<productVersion>${executable.version}</productVersion>
+								<txtProductVersion>${executable.version}</txtProductVersion>
 								<productName>${project.name}</productName>
 								<companyName>khoaowen</companyName>
 								<internalName>khoaowen</internalName>

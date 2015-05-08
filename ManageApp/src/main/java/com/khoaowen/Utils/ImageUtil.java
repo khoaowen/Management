@@ -4,6 +4,15 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FilenameUtils;
 
 public class ImageUtil {
 
@@ -52,5 +61,53 @@ public class ImageUtil {
 
 		return ret;
 	}
+	
+	/**
+	 * 
+	 * @param path path to file located in resource folder
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public static Image getImageResources(String path, int width, int height) {
+		Image img = new Image(ImageUtil.class.getResourceAsStream(path), width, height, true, true);
+		return img;
+	}
+	
+	/**
+	 * 
+	 * @param path path to file located in resource folder
+	 * @return
+	 */
+	public static Image getImageResources(String path) {
+		Image img = new Image(ImageUtil.class.getResourceAsStream(path));
+		return img;
+	}
+	
+	/**
+	 * Resize the image file to width of 400 by keeping the ratio height/width
+	 * @param imagePath
+	 * @return
+	 */
+	public static byte[] convertToByte(String imagePath) {
+		File file = new File(imagePath); 
+		BufferedImage img = null;
+		ByteArrayOutputStream output = new ByteArrayOutputStream((int)file.length());
+		try {
+			img = ImageIO.read(file);
+			int newWidth = 400;
+			BufferedImage scaledBuff = getScaledInstance(img, newWidth, calculateHeightFromWidth(img.getHeight(), img.getWidth(), newWidth), RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR, true);
+			ImageIO.write(scaledBuff,FilenameUtils.getExtension(file.getName()), output);
+		} catch (NullPointerException e) {
+			ExceptionHandler.showMessage(ResourceBundlesHelper.getMessageBundles("not.imageFile.warning.text", file.getName()), AlertType.WARNING);
+		}catch (Exception e) {
+			ExceptionHandler.showErrorAndLog(e);
+		}
+		return output.toByteArray();
+	}
 
+	private static int calculateHeightFromWidth(int orginalHeight, int originalWidth, int newWidth) {
+		double height = (double) orginalHeight / (double) originalWidth * (double) newWidth;
+		return (int) height;
+	}
 }

@@ -7,6 +7,7 @@ import java.util.Locale;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -36,6 +37,7 @@ public class Main extends Application {
 		Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler::showError);
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Manage App");
+		this.primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon/application.ico")));
 		
 //		ResourceBundlesHelper.setLocale(Locale.getDefault());
 		ResourceBundlesHelper.setLocale(new Locale("vi","VN"));
@@ -46,7 +48,6 @@ public class Main extends Application {
 		personMapper =  session.getMapper(PersonMapper.class);
 		initRootLayout();
 		showPersonOverview();
-		
 	}
 	
 	
@@ -59,12 +60,13 @@ public class Main extends Application {
 			
 			// Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("view/RootLayout.fxml"));
+            loader.setLocation(getClass().getResource("view/RootLayout.fxml"));
             rootLayout = FXMLLoader.load(loader.getLocation(), ResourceBundlesHelper.getBundle());
 			
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 			
 		} catch (Exception e) {
 			ExceptionHandler.showErrorAndLog(e);
@@ -78,7 +80,7 @@ public class Main extends Application {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("view/MainFrame.fxml"));
+            loader.setLocation(getClass().getResource("view/MainFrame.fxml"));
             loader.setResources(ResourceBundlesHelper.getBundle());
             AnchorPane listPerson = loader.load();
             // Set person overview into the center of root layout.

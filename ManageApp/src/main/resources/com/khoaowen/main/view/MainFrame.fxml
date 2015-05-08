@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -29,8 +31,10 @@
                         </AnchorPane>
                         <TableView fx:id="personTable" layoutY="40.0" prefHeight="546.0" prefWidth="284.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                           <columns>
-                            <TableColumn fx:id="lastNameColumn" prefWidth="107.0" text="%lastname.text" />
-                            <TableColumn fx:id="firstNameColumn" minWidth="0.0" prefWidth="112.0" text="%firstname.text" />
+                              <TableColumn fx:id="numberColumn" maxWidth="500.0" minWidth="15.0" prefWidth="50.0" text="#" />
+                            <TableColumn fx:id="lastNameColumn" minWidth="0.0" prefWidth="111.0" text="%lastname.text" />
+                            <TableColumn fx:id="firstNameColumn" minWidth="0.0" prefWidth="146.0" text="%firstname.text" />
+                              <TableColumn fx:id="deleteColumn" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" resizable="false" sortable="false" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -46,12 +50,28 @@
                      <children>
                         <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="570.0">
                           <items>
-                            <Button mnemonicParsing="false" text="Button" />
-                              <Button mnemonicParsing="false" onAction="#addNewElement" text="add" />
+                            <Button fx:id="printButton" disable="true" mnemonicParsing="false" />
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addNewPerson" />
                           </items>
                         </ToolBar>
-                        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="186.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true" />
-                        <ScrollPane fitToWidth="true" prefHeight="500.0" prefViewportHeight="448.0" prefViewportWidth="570.0" prefWidth="572.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0">
+                        <HBox alignment="CENTER">
+                           <children>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#uploadImage" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="changeImageHint" strokeType="OUTSIDE" strokeWidth="0.0" text="%changeImage.hint.text" textAlignment="CENTER" visible="false">
+                                       <font>
+                                          <Font name="System Italic" size="12.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <ScrollPane fx:id="formScrollpane" fitToWidth="true" prefHeight="500.0" prefViewportHeight="448.0" prefViewportWidth="570.0" prefWidth="572.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0">
                            <content>
                               <GridPane layoutY="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                 <columnConstraints>
@@ -95,12 +115,11 @@
                                     <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
-                                          <RadioButton fx:id="female" mnemonicParsing="false" text="%sexe.female.text">
+                                          <RadioButton fx:id="male" mnemonicParsing="false" text="%sexe.male.text">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="sexeGroup" />
-                                             </toggleGroup>
-                                          </RadioButton>
-                                          <RadioButton fx:id="male" mnemonicParsing="false" text="%sexe.male.text" toggleGroup="$sexeGroup" />
+                                             </toggleGroup></RadioButton>
+                                          <RadioButton fx:id="female" mnemonicParsing="false" text="%sexe.female.text" toggleGroup="$sexeGroup" />
                                        </children>
                                     </FlowPane>
                                     <DatePicker fx:id="birthday" GridPane.columnIndex="1" GridPane.rowIndex="4" />

@@ -3,10 +3,12 @@ package com.khoaowen.utils;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Optional;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -45,7 +47,7 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 	public static void showErrorAndLog(Throwable e) {
 		String messageError = getStackTrace(e);
 		ExceptionHandler.logger.log(Level.FATAL, messageError);
-		showError(messageError);
+		showErrorStack(messageError);
 	}
 	
 	/**
@@ -55,7 +57,7 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 	public static void showErrorAndLog(String message, Throwable e) {
 		String messageError = getStackTrace(e);
 		ExceptionHandler.logger.log(Level.FATAL, message + ": " + messageError);
-		showError(message + ": " + messageError);
+		showErrorStack(message + ": " + messageError);
 	}
 	
 	
@@ -68,7 +70,7 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
         }
     }
 	
-	public static void showError(String stack) {
+	public static void showErrorStack(String stack) {
 		
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle(ResourceBundlesHelper.getMessageBundles("errorDialog.text"/*,new Locale("vi","VN")*/));
@@ -107,4 +109,18 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 		alert.show();
 		
 	}
+	
+	public static void showMessage(String message, AlertType alertType) {
+		Alert alert = new Alert(alertType);
+		alert.setHeaderText(message);
+		alert.show();
+	}
+	
+	public static Optional<ButtonType> requestConfirmation(String message) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(message);
+		Optional<ButtonType> result = alert.showAndWait();
+		return result;
+	}
+	
 }
