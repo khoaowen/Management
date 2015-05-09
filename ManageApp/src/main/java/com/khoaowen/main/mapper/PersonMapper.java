@@ -11,6 +11,7 @@ public interface PersonMapper {
 	 * @return list of available people in database
 	 */
 	List<Person> getAll();
+	List<Person> lazyGetAll();
 	Person getById(int id);
 	void deleteById(int id);
 	int insert(Person person);

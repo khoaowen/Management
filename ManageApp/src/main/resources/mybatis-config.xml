@@ -6,11 +6,12 @@
 
 	<typeAliases>
 		<typeAlias alias="Person" type="com.khoaowen.main.model.Person" />
+		<typeAlias alias="LocalDateTypeHandler" type="com.khoaowen.main.dao.LocalDateTypeHandler" />
 	</typeAliases>
 
 	<typeHandlers>
 		<typeHandler 
-			handler="com.khoaowen.utils.LocalDateTypeHandler" />
+			handler="LocalDateTypeHandler" />
 	</typeHandlers>
 
 <!-- 	<environments default="development"> -->

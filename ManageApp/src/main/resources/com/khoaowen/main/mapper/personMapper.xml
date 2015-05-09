@@ -10,7 +10,7 @@
 		<result property="firstName" column="FIRST_NAME" />
 		<result property="lastName" column="LAST_NAME" />
 		<result property="sex" column="SEX" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
-		<result property="religiousDate" column="RELIGIOUS_DATE" typeHandler="com.khoaowen.utils.LocalDateTypeHandler" jdbcType="DATE" />
+		<result property="religiousDate" column="RELIGIOUS_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
 		<result property="email" column="EMAIL" />
 		<result property="image" column="IMAGE" />
 	</resultMap>
@@ -21,9 +21,15 @@
         <result property="lastName" column="LAST_NAME" />
     </resultMap>
 
-	<select id="getAll" resultMap="lazyResult">
+	<select id="getAll" resultMap="result">
 		select * from PERSON
 	</select>
+	
+	<select id="lazyGetAll" resultMap="lazyResult">
+        select id,
+        FIRST_NAME,
+        LAST_NAME from PERSON
+    </select>
 
 	<select id="getById" parameterType="int" resultMap="result">
 		select * from
@@ -46,7 +52,7 @@
 			#{firstName},
 			#{lastName},
 			#{sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler},
-			#{religiousDate, typeHandler=com.khoaowen.utils.LocalDateTypeHandler},
+			#{religiousDate, typeHandler=LocalDateTypeHandler},
 			#{email},
 			#{image}
 		);

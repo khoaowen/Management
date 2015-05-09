@@ -18,6 +18,7 @@ public class MyBatisConnectionFactory {
 
 	private SqlSessionFactory sqlSessionFactory;
 	private JdbcDataSource ds;
+	private SqlSession sqlSession;
 
 	public MyBatisConnectionFactory(String url) {
 		ds = createDatasource(url);
@@ -49,21 +50,32 @@ public class MyBatisConnectionFactory {
 		return ds;
 	}
 
-	public SqlSessionFactory getSqlSessionFactory() {
-		return sqlSessionFactory;
-	}
 	
 	/**
+	 * Always open one session. Create a new one if there's no session opened
+	 * before
 	 * 
-	 * @return @nullable
+	 * @return @nullable if problems
 	 */
 	public SqlSession openSession() {
 		try {
 			Connection conn = ds.getConnection();
-			return sqlSessionFactory.openSession(conn);
+			if (sqlSession == null) {
+				sqlSession = sqlSessionFactory.openSession(conn);
+			}
+			return sqlSession;
 		} catch (SQLException e) {
 			ExceptionHandler.showErrorAndLog(e);
 		}
 		return null;
+	}
+	
+	/**
+	 * Close session
+	 */
+	public void closeSession() {
+    	if (sqlSession != null) {
+    		sqlSession.close();
+    	}
 	}
 }

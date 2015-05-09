@@ -18,15 +18,15 @@ import com.khoaowen.main.dao.MyBatisConnectionFactory;
 import com.khoaowen.main.mapper.PersonMapper;
 import com.khoaowen.main.view.MainFrameController;
 import com.khoaowen.main.view.RootLayoutController;
+import com.khoaowen.utils.Constants;
 import com.khoaowen.utils.ExceptionHandler;
 import com.khoaowen.utils.ResourceBundlesHelper;
 
 
 public class Main extends Application {
-	
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-	private SqlSession session;
+	private MyBatisConnectionFactory factory;
 	private PersonMapper personMapper;
 	
 	public Stage getPrimaryStage() {
@@ -37,18 +37,13 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler::showError);
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Manage App");
-		this.primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon/application.ico")));
+		this.primaryStage.setTitle(Constants.MANAGE_APP_TITLE);
+		this.primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon/application.png")));
 		
 //		ResourceBundlesHelper.setLocale(Locale.getDefault());
 		ResourceBundlesHelper.setLocale(new Locale("vi","VN"));
 		
-		MyBatisConnectionFactory factory = new MyBatisConnectionFactory(
-				"C:\\Users\\owen\\Desktop\\test");
-		session = factory.openSession();
-		personMapper =  session.getMapper(PersonMapper.class);
 		initRootLayout();
-		showPersonOverview();
 	}
 	
 	
@@ -99,10 +94,37 @@ public class Main extends Application {
         	ExceptionHandler.showErrorAndLog(e);
         }
     }
+    
+	/**
+	 * Changes the database
+	 * 
+	 * @param filePath
+	 *            the location of the database
+	 * @param createNew
+	 *            create a new data base if {@code true}. Otherwise just open a
+	 *            new session to it
+	 */
+    public void swapDatabase(String filePath, boolean createNew) {
+    	if (factory != null) {
+    		factory.closeSession();
+    	}
+    	factory = new MyBatisConnectionFactory(
+				filePath);
+		SqlSession session = factory.openSession();
+		personMapper =  session.getMapper(PersonMapper.class);
+		if (createNew) {
+			// create a new empty table
+			session.update("createTable");
+		}
+		this.primaryStage.setTitle(Constants.MANAGE_APP_TITLE + " (" + filePath + Constants.DATABASE_EXT+")");
+		showPersonOverview();
+    }
 
 	@Override
 	public void stop() throws Exception {
-		session.close();
+		if (factory != null) {
+			factory.closeSession();
+		}
 	}
 	
 	public PersonMapper getPersonMapper() {

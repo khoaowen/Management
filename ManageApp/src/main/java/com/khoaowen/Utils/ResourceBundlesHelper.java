@@ -17,7 +17,7 @@ public class ResourceBundlesHelper {
 		try {
 			return bundles.getString(key);
 		} catch (MissingResourceException e) {
-			LogManager.getLogger(ResourceBundlesHelper.class).log(Level.WARN, "Can not find resource key " + key);
+			LogManager.getLogger(ResourceBundlesHelper.class).log(Level.WARN, e.getMessage());
 			return key;
 		}
 	}

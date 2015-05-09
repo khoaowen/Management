@@ -75,5 +75,16 @@ public class PersonDAO implements PersonMapper{
 			session.close();
 		}
 	}
+	
+	@Override
+	public List<Person> lazyGetAll() {
+		SqlSession session = myBatisConnectionFactory.openSession();
+		try {
+			PersonMapper personMapper = session.getMapper(PersonMapper.class);
+			return personMapper.lazyGetAll();
+		} finally {
+			session.close();
+		}
+	}
 
 }

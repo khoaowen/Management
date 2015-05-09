@@ -35,6 +35,19 @@ public class JfxUtils {
         }
     }
     
+	/**
+	 * Configures the interface of file chooser
+	 * 
+	 * @param fileChooser
+	 * @param title
+	 *            title of the dialog
+	 * @param extensions
+	 *            filter file extensions available for user to choose. The
+	 *            format for each filter is a {@link Pair} which is (
+	 *            {@code file extension description} ,
+	 *            {@code regex for file extension}) <br>
+	 *            For example: (All images , *.*), (JPG, *.jpg)...
+	 */
     public static void configureFileChooser(final FileChooser fileChooser, String title, Pair<String, String>... extensions) {
 		fileChooser.setTitle(ResourceBundlesHelper.getMessageBundles("imageChooser.title.text"));
 		fileChooser.setInitialDirectory(new File(System

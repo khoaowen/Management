@@ -80,6 +80,8 @@ public class MainFrameController {
 	
 	private Main main;
 	
+	private Person currentSelected;
+	
 	private FileChooser fileChooser = new FileChooser();
 	
 	/**
@@ -114,6 +116,28 @@ public class MainFrameController {
 	    	changeImageHint.setVisible(false);
 	    	main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT);});
 	    initBinding();
+	    initListeners();
+	}
+
+	/**
+	 * Any changes by user must be persisted in database
+	 */
+	private void initListeners() {
+		lastName.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					if (oldValue == null && newValue == null) {
+						return;
+					}
+					if ((oldValue == null && newValue != null) || !oldValue.equals(newValue)) {
+						Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+						if (currentSelected != null && selectedItem != null 
+								&& selectedItem.getId() == currentSelected.getId()) {
+							selectedItem.setLastName(newValue);
+							updatePerson(selectedItem);
+						}
+					}
+				});
+		
 	}
 
 	private void initBinding() {
@@ -152,7 +176,7 @@ public class MainFrameController {
 									return;
 								}
 								personTable.getSelectionModel().select(tableRow.getIndex());
-								deletePerson();
+								deletePerson(item);
 							}
 						});
 						vbox.getChildren().add(button);
@@ -174,7 +198,10 @@ public class MainFrameController {
     public void setMainApp(Main mainApp) {
         this.main = mainApp;
         // Add observable list data to the table
-        personTable.setItems(FXCollections.observableArrayList(mainApp.getPersonMapper().getAll()));
+        PersonMapper personMapper = mainApp.getPersonMapper();
+        if (personMapper != null) {
+        	personTable.setItems(FXCollections.observableArrayList(personMapper.getAll()));
+        }
     }
     
     /**
@@ -183,7 +210,12 @@ public class MainFrameController {
      *
      * @param person the person or null
      */
-    private void showPersonDetails(Person person) {
+    private void showPersonDetails(Person personId) {
+    	Person person = null;
+    	if (personId != null) {
+    		PersonMapper personMapper = main.getPersonMapper();
+    		person = personMapper.getById(personId.getId());
+    	}
         if (person != null) {
         	displayForm(true);
             // Fill the labels with info from the person object.
@@ -216,6 +248,9 @@ public class MainFrameController {
             birthday.setValue(null);
             imageView.setImage(null);
         }
+        
+        // update the current selected person once the datas are updated
+        currentSelected = person;
     }
     
     private void displayForm(boolean display) {
@@ -240,16 +275,18 @@ public class MainFrameController {
     /**
      * Deletes selected person
      */
-    void deletePerson() {
+    void deletePerson(Person person) {
     	Optional<ButtonType> requestConfirmation = ExceptionHandler.requestConfirmation(ResourceBundlesHelper.getMessageBundles("delete.person.confirmation.question.text"));
     	if (requestConfirmation.get() == ButtonType.OK) { 
 	    	PersonMapper personMapper = main.getPersonMapper();
-	    	Person selectedItem = personTable.getSelectionModel().getSelectedItem();
-	    	personTable.getItems().remove(selectedItem);
-			if (selectedItem != null) {
-				personMapper.deleteById(selectedItem.getId());
-			}
+	    	personTable.getItems().remove(person);
+			personMapper.deleteById(person.getId());
     	}
+    }
+    
+    void updatePerson(Person person) {
+    	PersonMapper personMapper = main.getPersonMapper();
+    	personMapper.update(person);
     }
     
     @FXML
@@ -259,10 +296,14 @@ public class MainFrameController {
     	if (selectedItem != null) {
 	    	File file = fileChooser.showOpenDialog(main.getPrimaryStage());
 	    	if (file != null) {
-	    		selectedItem.setImage(ImageUtil.convertToByte(file.getAbsolutePath()));
+	    		byte[] bytes = ImageUtil.convertToByte(file.getAbsolutePath());
+	    		// only update image if the new one is valid
+	    		if (bytes.length>  0) {
+					selectedItem.setImage(bytes);
+		    		personMapper.update(selectedItem);
+		    		showPersonDetails(selectedItem);
+	    		}
 	    	}
-	    	personMapper.update(selectedItem);
-	    	showPersonDetails(selectedItem);
     	}
     }
     
