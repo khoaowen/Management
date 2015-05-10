@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
@@ -20,6 +21,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -66,7 +68,39 @@ public class MainFrameController {
 	@FXML
 	private TextField email;
 	@FXML
+	private TextField ethnicGroup;
+	@FXML
+	private TextField nationality;
+	@FXML
+	private TextField hometown;
+	@FXML
+	private TextArea placeOfResidence;
+	@FXML
 	private DatePicker birthday;
+	@FXML
+	private DatePicker religiousDate;
+	@FXML
+	private DatePicker adoptedDate;
+	@FXML
+	private TextField idNumber;
+	@FXML
+	private DatePicker idNumberIssueDate;
+	@FXML
+	private TextField idNumberIssuePlace;
+	@FXML
+	private TextField phoneNumber;
+	@FXML
+	private TextField fatherFullName;
+	@FXML
+	private TextField motherFullName;
+	@FXML
+	private TextField studyLevel;
+	@FXML
+	private TextField languageLevel;
+	@FXML
+	private TextArea note;
+	@FXML
+	private CheckBox isPermanent;
 	@FXML
 	private ImageView imageView;
 	@FXML
@@ -120,24 +154,216 @@ public class MainFrameController {
 	}
 
 	/**
-	 * Any changes by user must be persisted in database
+	 * Initializes listeners for input control.
+	 * Any changes by user must be persisted in database.
 	 */
 	private void initListeners() {
 		lastName.textProperty().addListener(
 				(observable, oldValue, newValue) -> {
-					if (oldValue == null && newValue == null) {
-						return;
-					}
-					if ((oldValue == null && newValue != null) || !oldValue.equals(newValue)) {
-						Person selectedItem = personTable.getSelectionModel().getSelectedItem();
-						if (currentSelected != null && selectedItem != null 
-								&& selectedItem.getId() == currentSelected.getId()) {
-							selectedItem.setLastName(newValue);
-							updatePerson(selectedItem);
-						}
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setLastName(newValue);
+						updatePerson(selectedItem);
 					}
 				});
-		
+		firstName.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setFirstName(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		email.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setEmail(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		male.selectedProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setSex(newValue?Sex.MALE:Sex.FEMALE);
+						updatePerson(selectedItem);
+					}
+				});
+		female.selectedProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setSex(newValue?Sex.FEMALE:Sex.MALE);
+						updatePerson(selectedItem);
+					}
+				});
+		birthday.valueProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setBirthday(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		ethnicGroup.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setEthnicGroup(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		nationality.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setNationality(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		hometown.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setHometown(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		placeOfResidence.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setPlaceOfResidence(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		religiousName.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setReligiousName(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		religiousDate.valueProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setReligiousDate(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		adoptedDate.valueProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setAdoptedDate(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		idNumber.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setIdNumber(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		idNumberIssueDate.valueProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setIdNumberIssueDate(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		idNumberIssuePlace.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setIdNumberIssuePlace(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		phoneNumber.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setPhoneNumber(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		fatherFullName.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setFatherFullName(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		motherFullName.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setMotherFullName(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		studyLevel.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setStudyLevel(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		languageLevel.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setLanguageLevel(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		note.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setNote(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		isPermanent.selectedProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setIsPermanent(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+	}
+	
+	/**
+	 * Check if user has modified the data via the form in order to update the databse for the current person.
+	 * However, No update query should be done if user changes person via the list.
+	 * @param oldValue
+	 * @param newValue
+	 * @param selectedItem
+	 * @return 
+	 */
+	private <T> boolean shouldUpdatePersonInDatabase(T oldValue, T newValue, Person selectedItem) {
+		if (oldValue == null && newValue == null) {
+			return false;
+		}
+		if ((oldValue == null && newValue != null) || !oldValue.equals(newValue)) {
+			// check if user did not change item by clicking on the list
+			if (currentSelected != null && selectedItem != null 
+					&& selectedItem.getId() == currentSelected.getId()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void initBinding() {
@@ -219,34 +445,67 @@ public class MainFrameController {
         if (person != null) {
         	displayForm(true);
             // Fill the labels with info from the person object.
-        	firstName.setText(person.getFirstName());
-            lastName.setText(person.getLastName());
-            email.setText(person.getEmail());
-            if (person.getSex() == Sex.FEMALE) {
-            	female.setSelected(true);
-            } else {
-            	male.setSelected(true);
-            }
-            religiousName.setText(person.getReligiousName());
-            birthday.setValue(person.getBirthday());
-            if (person.getImage() != null) {
+        	if (person.getImage() != null) {
 	            Image image = new Image(new ByteArrayInputStream(person.getImage()));
 	            imageView.setImage(image);
             } else {
             	imageView.setImage(ImageUtil.getImageResources("/icon/person-placeholder.jpg"));
             }
+        	firstName.setText(person.getFirstName());
+            lastName.setText(person.getLastName());
+            email.setText(person.getEmail());
+            if (person.getSex() == Sex.FEMALE) {
+            	male.setSelected(false);
+            	female.setSelected(true);
+            } else {
+            	male.setSelected(true);
+            	female.setSelected(false);
+            }
+            religiousName.setText(person.getReligiousName());
+            birthday.setValue(person.getBirthday());
+            religiousDate.setValue(person.getReligiousDate());
+            ethnicGroup.setText(person.getEthnicGroup());
+            nationality.setText(person.getNationality());
+            hometown.setText(person.getHometown());
+            placeOfResidence.setText(person.getPlaceOfResidence());
+            adoptedDate.setValue(person.getAdoptedDate());
+            idNumber.setText(person.getIdNumber());
+            idNumberIssueDate.setValue(person.getIdNumberIssueDate());
+            idNumberIssuePlace.setText(person.getIdNumberIssuePlace());
+            phoneNumber.setText(person.getPhoneNumber());
+            fatherFullName.setText(person.getFatherFullName());
+            motherFullName.setText(person.getMotherFullName());
+            studyLevel.setText(person.getStudyLevel());
+            languageLevel.setText(person.getLanguageLevel());
+            note.setText(person.getNote());
+            isPermanent.setSelected(person.getIsPermanent());
 
         } else {
         	displayForm(false);
             // Person is null, remove all the text.
+        	imageView.setImage(null);
             firstName.setText("");
             lastName.setText("");
             email.setText("");
-            male.setSelected(false);
-            female.setSelected(false);
+            male.setSelected(true);
             religiousName.setText("");
             birthday.setValue(null);
-            imageView.setImage(null);
+            religiousDate.setValue(null);
+            ethnicGroup.setText("");
+            nationality.setText("");
+            hometown.setText("");
+            placeOfResidence.setText("");
+            adoptedDate.setValue(null);
+            idNumber.setText("");
+            idNumberIssueDate.setValue(null);
+            idNumberIssuePlace.setText("");
+            phoneNumber.setText("");
+            fatherFullName.setText("");
+            motherFullName.setText("");
+            studyLevel.setText("");
+            languageLevel.setText("");
+            note.setText("");
+            isPermanent.setSelected(false);
         }
         
         // update the current selected person once the datas are updated

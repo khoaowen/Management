@@ -9,10 +9,27 @@
 		<result property="id" column="ID" />
 		<result property="firstName" column="FIRST_NAME" />
 		<result property="lastName" column="LAST_NAME" />
+		<result property="isPermanent" column="IS_PERMANENT" />
 		<result property="sex" column="SEX" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
-		<result property="religiousDate" column="RELIGIOUS_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
 		<result property="email" column="EMAIL" />
+		<result property="birthday" column="BIRTHDAY" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
+		<result property="religiousName" column="RELIGIOUS_NAME" />
+		<result property="religiousDate" column="RELIGIOUS_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
+		<result property="adoptedDate" column="ADOPTED_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
+		<result property="ethnicGroup" column="ETHNIC_GROUP" />
+		<result property="nationality" column="NATIONALITY" />
+		<result property="hometown" column="HOMETOWN" />
+		<result property="placeOfResidence" column="PLACE_OF_RESIDENCE" />
 		<result property="image" column="IMAGE" />
+		<result property="idNumber" column="ID_NUMBER" />
+		<result property="idNumberIssueDate" column="ID_NUMBER_ISSUE_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
+		<result property="idNumberIssuePlace" column="ID_NUMBER_ISSUE_PLACE" />
+		<result property="phoneNumber" column="PHONE_NUMBER" />
+		<result property="fatherFullName" column="FATHER_FULLNAME" />
+		<result property="motherFullName" column="MOTHER_FULLNAME" />
+		<result property="studyLevel" column="STUDY_LEVEL" />
+		<result property="languageLevel" column="LANGUAGE_LEVEL" />
+		<result property="note" column="NOTE" />
 	</resultMap>
 	
 	<resultMap id="lazyResult" type="Person">
@@ -43,18 +60,53 @@
 
 	<insert id="insert" parameterType="Person" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
 		insert into PERSON (
-		FIRST_NAME, 
-		LAST_NAME, 
-		SEX, 
-		RELIGIOUS_DATE, 
-		EMAIL,
-		IMAGE) values (
+		FIRST_NAME,
+        LAST_NAME,
+        IS_PERMANENT,
+        SEX,
+        EMAIL,
+        BIRTHDAY,
+        RELIGIOUS_NAME,
+        RELIGIOUS_DATE,
+        ADOPTED_DATE,
+        ETHNIC_GROUP,
+        NATIONALITY,
+        HOMETOWN,
+        PLACE_OF_RESIDENCE,
+        IMAGE,
+        ID_NUMBER,
+        ID_NUMBER_ISSUE_DATE,
+        ID_NUMBER_ISSUE_PLACE,
+        PHONE_NUMBER,
+        FATHER_FULLNAME,
+        MOTHER_FULLNAME,
+        STUDY_LEVEL,
+        LANGUAGE_LEVEL,
+        NOTE,
+		) values (
 			#{firstName},
 			#{lastName},
+			#{isPermanent},
 			#{sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler},
-			#{religiousDate, typeHandler=LocalDateTypeHandler},
 			#{email},
-			#{image}
+			#{birthday, typeHandler=LocalDateTypeHandler},
+			#{religiousName},
+			#{religiousDate, typeHandler=LocalDateTypeHandler},
+			#{adoptedDate, typeHandler=LocalDateTypeHandler},
+			#{ethnicGroup},
+			#{nationality},
+			#{hometown},
+			#{placeOfResidence},
+			#{image},
+			#{idNumber},
+			#{idNumberIssueDate, typeHandler=LocalDateTypeHandler},
+			#{idNumberIssuePlace},
+			#{phoneNumber},
+			#{fatherFullName},
+			#{motherFullName},
+			#{studyLevel},
+			#{languageLevel},
+			#{note},
 		);
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
 			select last_insert_id();
@@ -65,11 +117,28 @@
 		update PERSON
 		set
 		FIRST_NAME = #{firstName},
-		LAST_NAME = #{lastName},
-		SEX = #{sex},
-		RELIGIOUS_DATE = #{religiousDate},
-		EMAIL = #{email},
-		IMAGE = #{image}
+        LAST_NAME = #{lastName},
+        IS_PERMANENT = #{isPermanent},
+        SEX = #{sex},
+        EMAIL = #{email},
+        BIRTHDAY = #{birthday},
+        RELIGIOUS_NAME = #{religiousName},
+        RELIGIOUS_DATE = #{religiousDate},
+        ADOPTED_DATE = #{adoptedDate},
+        ETHNIC_GROUP = #{ethnicGroup},
+        NATIONALITY = #{nationality},
+        HOMETOWN = #{hometown},
+        PLACE_OF_RESIDENCE = #{placeOfResidence},
+        IMAGE = #{image},
+        ID_NUMBER = #{idNumber},
+        ID_NUMBER_ISSUE_DATE = #{idNumberIssueDate},
+        ID_NUMBER_ISSUE_PLACE = #{idNumberIssuePlace},
+        PHONE_NUMBER = #{phoneNumber},
+        FATHER_FULLNAME = #{fatherFullName},
+        MOTHER_FULLNAME = #{motherFullName},
+        STUDY_LEVEL = #{studyLevel},
+        LANGUAGE_LEVEL = #{languageLevel},
+        NOTE = #{note}
 		where ID = #{id};
 	</update>
 
@@ -77,13 +146,31 @@
 	<!-- test purpose only -->
 	<update id="createTable">
 	    drop table if exists PERSON;
-		create table if not exists PERSON (ID int not null auto_increment,
-		FIRST_NAME char(50),
-		LAST_NAME char(50),
+		create table if not exists PERSON (
+		ID int not null auto_increment,
+		FIRST_NAME char,
+		LAST_NAME char,
+		IS_PERMANENT boolean,
 		SEX varchar default null,
+		EMAIL char,
+		BIRTHDAY date,
+		RELIGIOUS_NAME char,
 		RELIGIOUS_DATE date,
-		EMAIL char(50),
+		ADOPTED_DATE date,
+		ETHNIC_GROUP char,
+		NATIONALITY char,
+		HOMETOWN char,
+		PLACE_OF_RESIDENCE char,
 		IMAGE blob,
+		ID_NUMBER char,
+		ID_NUMBER_ISSUE_DATE date,
+		ID_NUMBER_ISSUE_PLACE char,
+		PHONE_NUMBER char,
+		FATHER_FULLNAME char,
+		MOTHER_FULLNAME char,
+		STUDY_LEVEL char,
+		LANGUAGE_LEVEL char,
+		NOTE char,
 		PRIMARY KEY (id));
 	</update>
 

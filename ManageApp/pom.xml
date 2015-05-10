@@ -130,6 +130,7 @@
 							</classPath>
 							<icon>src/main/resources/icon/application.ico</icon>
 							<jre>
+							    <path>jre1.8.0_45</path> 
 								<minVersion>1.8.0</minVersion>
 							</jre>
 							<versionInfo>

@@ -244,7 +244,7 @@ public class Person {
 		return note.get();
 	}
 	
-	public boolean isPermanent() {
+	public Boolean getIsPermanent() {
 		return isPermanent.get();
 	}
 
@@ -336,7 +336,7 @@ public class Person {
 		this.note.set(note);
 	}
 
-	public void setPermanent(boolean isPermanent) {
+	public void setIsPermanent(Boolean isPermanent) {
 		this.isPermanent.set(isPermanent);
 	}
 	
