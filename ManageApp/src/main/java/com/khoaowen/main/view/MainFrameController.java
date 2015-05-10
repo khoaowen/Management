@@ -2,6 +2,12 @@ package com.khoaowen.main.view;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.time.chrono.Chronology;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DecimalStyle;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 import java.util.Optional;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -137,6 +143,12 @@ public class MainFrameController {
 	    		Pair.of(ResourceBundlesHelper.getMessageBundles("allImages.extension.text"), "*.*"), 
 	    		Pair.of("JPG", "*.jpg"), 
 	    		Pair.of("PNG", "*.png"));
+	    
+        birthday.setPromptText(getPatternFromDatePicker(birthday));
+        religiousDate.setPromptText(getPatternFromDatePicker(religiousDate));
+        adoptedDate.setPromptText(getPatternFromDatePicker(adoptedDate));
+        idNumberIssueDate.setPromptText(getPatternFromDatePicker(idNumberIssueDate));
+        
 	    addButton.setGraphic(new ImageView(ImageUtil.getImageResources("/icon/add_person.png",IMAGE_SIZE,IMAGE_SIZE)));
 	    printButton.setGraphic(new ImageView(ImageUtil.getImageResources("/icon/print.png", IMAGE_SIZE, IMAGE_SIZE)));
 	    personTable.getSelectionModel().selectedItemProperty().addListener(
@@ -364,6 +376,24 @@ public class MainFrameController {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Get the pattern format of date from {@code datePicker}
+	 * @param datePicker
+	 * @return
+	 */
+	private String getPatternFromDatePicker(DatePicker datePicker) {
+		Locale locale = Locale.getDefault(Locale.Category.FORMAT);
+        Chronology chrono = birthday.getChronology();
+        String pattern =
+            DateTimeFormatterBuilder.getLocalizedDateTimePattern(FormatStyle.SHORT,
+                                                                 null, chrono, locale);
+        if (pattern.contains("yy") && !pattern.contains("yyy")) {
+            // Modify pattern to show four-digit year, including leading zeros.
+            return pattern.replace("yy", "yyyy");
+        }
+        return pattern;
 	}
 
 	private void initBinding() {
