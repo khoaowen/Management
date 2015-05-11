@@ -53,7 +53,7 @@ public class MapperTest {
 		for (int i = 0; i < 3; ++i) {
 			Person person = new Person();
 			
-			File file = new File("C:\\Users\\owen\\Desktop\\test.jpg"); //windows
+			File file = new File(getClass().getClassLoader().getResource("icon/application.png").getPath()); //windows
 			byte[] bFile = new byte[(int) file.length()];
 
 			try {
@@ -65,7 +65,6 @@ public class MapperTest {
 			}
 			person.setImage(bFile);
 			
-			//Image image = new Image(new ByteArrayInputStream(bFile));
 			
 			person.setFirstName("Dai " + i);
 			person.setLastName("Nguyen ngoc trang " + i);

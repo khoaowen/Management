@@ -8,7 +8,7 @@
 
 <BorderPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.khoaowen.main.view.RootLayoutController">
    <top>
-      <MenuBar prefWidth="800.0" BorderPane.alignment="CENTER">
+      <MenuBar prefHeight="0.0" prefWidth="800.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="%menu.file.text">
             <items>
@@ -35,6 +35,12 @@
               <MenuItem mnemonicParsing="false" text="%menu.about.text" />
             </items>
           </Menu>
+            <Menu fx:id="languageMenu" mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="vnMenu" mnemonicParsing="false" onAction="#setVietnameseLanguage" />
+                  <MenuItem fx:id="enMenu" mnemonicParsing="false" onAction="#setEnglishLanguage" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
