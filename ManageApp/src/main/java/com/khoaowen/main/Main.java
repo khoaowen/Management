@@ -2,6 +2,7 @@ package com.khoaowen.main;
 
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.util.Locale;
 
@@ -14,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.logging.log4j.Level;
 
 import com.khoaowen.main.dao.MyBatisConnectionFactory;
 import com.khoaowen.main.mapper.PersonMapper;
@@ -29,6 +31,9 @@ public class Main extends Application {
 	private BorderPane rootLayout;
 	private MyBatisConnectionFactory factory;
 	private PersonMapper personMapper;
+//	static{
+//		System.setProperty("java.awt.headless", "true"); 
+//	}
 	
 	public Stage getPrimaryStage() {
 		return primaryStage;
@@ -45,6 +50,7 @@ public class Main extends Application {
 		ResourceBundlesHelper.setLocale(new Locale("vi","VN"));
 		
 		initRootLayout();
+		
 	}
 	
 	
@@ -68,6 +74,7 @@ public class Main extends Application {
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			ExceptionHandler.log(Level.INFO, "Manage App starts...");
 			
 			
 		} catch (Exception e) {
@@ -105,6 +112,14 @@ public class Main extends Application {
         loader.setLocation(getClass().getResource("view/About.fxml"));
         loader.setResources(ResourceBundlesHelper.getBundle());
         return loader;
+    }
+    
+    /**
+     * 
+     * @return the resource for creating report
+     */
+    public URL getJasperResource() {
+    	return this.getClass().getResource("jasper/exportFormula.jasper");
     }
     
 	/**

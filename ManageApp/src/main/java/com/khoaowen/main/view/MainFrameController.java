@@ -2,7 +2,7 @@ package com.khoaowen.main.view;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
+import java.net.URL;
 import java.time.chrono.Chronology;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.FormatStyle;
@@ -42,10 +42,12 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.Level;
 
 import com.khoaowen.main.Main;
 import com.khoaowen.main.mapper.PersonMapper;
@@ -613,13 +615,10 @@ public class MainFrameController {
     
     @FXML
     void printPerson() {
-        InputStream reportStream = this.getClass().getResourceAsStream("/jasper/exportFormula.jrxml");  
+        URL reportStream = main.getJasperResource();  
 		try {
-			// Convert template to JasperDesign
-			JasperDesign jd = JRXmlLoader.load(reportStream);
-
-			// Compile design to JasperReport
-			JasperReport jr = JasperCompileManager.compileReport(jd);
+			
+			JasperReport jr = (JasperReport) JRLoader.loadObject(reportStream);
 
 			// Create the JasperPrint object
 			// Make sure to pass the JasperReport, report parameters, and data
@@ -631,8 +630,8 @@ public class MainFrameController {
 			if (selectedItem != null) {
 				mapParameters.put("PERSON_ID", selectedItem.getId());
 			}
-			
 			JasperPrint jp = JasperFillManager.fillReport(jr, mapParameters, main.getConnection());
+			
 			JasperViewer jv = new JasperViewer(jp, false);
 			jv.setVisible(true);
 		} catch (JRException e) {
