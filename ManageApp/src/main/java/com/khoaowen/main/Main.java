@@ -2,6 +2,7 @@ package com.khoaowen.main;
 
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Locale;
 
 import javafx.application.Application;
@@ -95,6 +96,17 @@ public class Main extends Application {
         }
     }
     
+    /**
+     * 
+     * @return the loader for dialog "about information"
+     */
+    public FXMLLoader getAboutInformationLoader() {
+    	FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("view/About.fxml"));
+        loader.setResources(ResourceBundlesHelper.getBundle());
+        return loader;
+    }
+    
 	/**
 	 * Changes the database
 	 * 
@@ -129,5 +141,13 @@ public class Main extends Application {
 	
 	public PersonMapper getPersonMapper() {
 		return personMapper;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Connection getConnection() {
+		return factory.getConnection();
 	}
 }

@@ -2,12 +2,13 @@ package com.khoaowen.main.view;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.time.chrono.Chronology;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DecimalStyle;
 import java.time.format.FormatStyle;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -35,6 +36,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -357,7 +366,7 @@ public class MainFrameController {
 	}
 	
 	/**
-	 * Check if user has modified the data via the form in order to update the databse for the current person.
+	 * Check if user has modified the data via the form in order to update the database for the current person.
 	 * However, No update query should be done if user changes person via the list.
 	 * @param oldValue
 	 * @param newValue
@@ -484,12 +493,16 @@ public class MainFrameController {
         	firstName.setText(person.getFirstName());
             lastName.setText(person.getLastName());
             email.setText(person.getEmail());
-            if (person.getSex() == Sex.FEMALE) {
+            
+            if (person.getSex() == null) {
             	male.setSelected(false);
-            	female.setSelected(true);
+				female.setSelected(false);
+            } else if (person.getSex() == Sex.FEMALE) {
+            	male.setSelected(false);
+				female.setSelected(true);
             } else {
             	male.setSelected(true);
-            	female.setSelected(false);
+				female.setSelected(false);
             }
             religiousName.setText(person.getReligiousName());
             birthday.setValue(person.getBirthday());
@@ -517,7 +530,8 @@ public class MainFrameController {
             firstName.setText("");
             lastName.setText("");
             email.setText("");
-            male.setSelected(true);
+            male.setSelected(false);
+            female.setSelected(false);
             religiousName.setText("");
             birthday.setValue(null);
             religiousDate.setValue(null);
@@ -545,6 +559,7 @@ public class MainFrameController {
     private void displayForm(boolean display) {
     	formScrollpane.setVisible(display);
     	imageView.setVisible(display);
+    	printButton.setDisable(!display);
     }
     
     @FXML
@@ -565,7 +580,7 @@ public class MainFrameController {
      * Deletes selected person
      */
     void deletePerson(Person person) {
-    	Optional<ButtonType> requestConfirmation = ExceptionHandler.requestConfirmation(ResourceBundlesHelper.getMessageBundles("delete.person.confirmation.question.text"));
+    	Optional<ButtonType> requestConfirmation = ExceptionHandler.requestConfirmation(ResourceBundlesHelper.getMessageBundles("delete.person.confirmation.question.text"), main.getPrimaryStage());
     	if (requestConfirmation.get() == ButtonType.OK) { 
 	    	PersonMapper personMapper = main.getPersonMapper();
 	    	personTable.getItems().remove(person);
@@ -596,6 +611,34 @@ public class MainFrameController {
     	}
     }
     
+    @FXML
+    void printPerson() {
+        InputStream reportStream = this.getClass().getResourceAsStream("/jasper/exportFormula.jrxml");  
+		try {
+			// Convert template to JasperDesign
+			JasperDesign jd = JRXmlLoader.load(reportStream);
+
+			// Compile design to JasperReport
+			JasperReport jr = JasperCompileManager.compileReport(jd);
+
+			// Create the JasperPrint object
+			// Make sure to pass the JasperReport, report parameters, and data
+			// source
+			
+			Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+			
+			Map<String, Object> mapParameters = new HashMap<String, Object>();
+			if (selectedItem != null) {
+				mapParameters.put("PERSON_ID", selectedItem.getId());
+			}
+			
+			JasperPrint jp = JasperFillManager.fillReport(jr, mapParameters, main.getConnection());
+			JasperViewer jv = new JasperViewer(jp, false);
+			jv.setVisible(true);
+		} catch (JRException e) {
+        	ExceptionHandler.showErrorAndLog("Can not open Jasper report", e);
+        }
+    }
 	
 
 }

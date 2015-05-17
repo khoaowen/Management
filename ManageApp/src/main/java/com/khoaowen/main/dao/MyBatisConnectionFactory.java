@@ -19,6 +19,7 @@ public class MyBatisConnectionFactory {
 	private SqlSessionFactory sqlSessionFactory;
 	private JdbcDataSource ds;
 	private SqlSession sqlSession;
+	private Connection connection;
 
 	public MyBatisConnectionFactory(String url) {
 		ds = createDatasource(url);
@@ -59,15 +60,23 @@ public class MyBatisConnectionFactory {
 	 */
 	public SqlSession openSession() {
 		try {
-			Connection conn = ds.getConnection();
+			connection = ds.getConnection();
 			if (sqlSession == null) {
-				sqlSession = sqlSessionFactory.openSession(conn);
+				sqlSession = sqlSessionFactory.openSession(connection);
 			}
 			return sqlSession;
 		} catch (SQLException e) {
 			ExceptionHandler.showErrorAndLog(e);
 		}
 		return null;
+	}
+	
+	/**
+	 * 
+	 * @return @nullable return the current connection to database 
+	 */
+	public Connection getConnection() {
+		return connection;
 	}
 	
 	/**

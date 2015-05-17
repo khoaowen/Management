@@ -50,7 +50,7 @@
                      <children>
                         <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="570.0">
                           <items>
-                            <Button fx:id="printButton" disable="true" mnemonicParsing="false" />
+                            <Button fx:id="printButton" mnemonicParsing="false" onAction="#printPerson" />
                               <Button fx:id="addButton" mnemonicParsing="false" onAction="#addNewPerson" />
                           </items>
                         </ToolBar>

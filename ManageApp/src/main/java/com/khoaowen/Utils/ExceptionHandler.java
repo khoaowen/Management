@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.stage.Window;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.logging.log4j.Level;
@@ -120,8 +121,9 @@ public final class ExceptionHandler implements Thread.UncaughtExceptionHandler{
 		alert.show();
 	}
 	
-	public static Optional<ButtonType> requestConfirmation(String message) {
+	public static Optional<ButtonType> requestConfirmation(String message, Window owner) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.initOwner(owner);
 		alert.setHeaderText(message);
 		Optional<ButtonType> result = alert.showAndWait();
 		return result;
