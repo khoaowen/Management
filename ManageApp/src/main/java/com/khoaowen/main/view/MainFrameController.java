@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -630,10 +631,24 @@ public class MainFrameController {
 			if (selectedItem != null) {
 				mapParameters.put("PERSON_ID", selectedItem.getId());
 			}
-			JasperPrint jp = JasperFillManager.fillReport(jr, mapParameters, main.getConnection());
+			Platform.runLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						JasperPrint jp = JasperFillManager.fillReport(jr,
+								mapParameters, main.getConnection());
+
+						JasperViewer jv = new JasperViewer(jp, false);
+						jv.setVisible(true);
+					} catch (JRException e) {
+						ExceptionHandler.showErrorAndLog(
+								"Can not open Jasper report", e);
+					}
+
+				}
+			});
 			
-			JasperViewer jv = new JasperViewer(jp, false);
-			jv.setVisible(true);
 		} catch (JRException e) {
         	ExceptionHandler.showErrorAndLog("Can not open Jasper report", e);
         }
