@@ -69,5 +69,14 @@
 			<export key="net.sf.jasperreports.xhtml">'DejaVu Sans Mono', 'Courier New', Courier, monospace</export>
 		</exportFonts>
 	</fontFamily>
+	
+	<fontFamily name="Arial Unicode MS">
+        <normal>net/sf/jasperreports/fonts/Arial Unicode MS/Arial Unicode MS.ttf</normal>
+        <bold>net/sf/jasperreports/fonts/Arial Unicode MS/Arial-Unicode-Bold.ttf</bold>
+        <italic>net/sf/jasperreports/fonts/Arial Unicode MS/Arial-Unicode-Italic.ttf</italic>
+        <boldItalic>net/sf/jasperreports/fonts/Arial Unicode MS/Arial-Unicode-Bold-Italic.ttf</boldItalic>
+        <pdfEncoding>Identity-H</pdfEncoding>
+        <pdfEmbedded>true</pdfEmbedded>
+    </fontFamily>
 
 </fontFamilies>
