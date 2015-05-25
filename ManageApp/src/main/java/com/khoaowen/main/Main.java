@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.Locale;
+import java.util.prefs.Preferences;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import org.apache.logging.log4j.Level;
 
 import com.khoaowen.main.dao.MyBatisConnectionFactory;
 import com.khoaowen.main.mapper.PersonMapper;
+import com.khoaowen.main.model.Person;
 import com.khoaowen.main.view.MainFrameController;
 import com.khoaowen.main.view.RootLayoutController;
 import com.khoaowen.utils.Constants;
@@ -31,9 +33,7 @@ public class Main extends Application {
 	private BorderPane rootLayout;
 	private MyBatisConnectionFactory factory;
 	private PersonMapper personMapper;
-//	static{
-//		System.setProperty("java.awt.headless", "true"); 
-//	}
+	private MainFrameController mainFrameController;
 	
 	public Stage getPrimaryStage() {
 		return primaryStage;
@@ -46,11 +46,10 @@ public class Main extends Application {
 		this.primaryStage.setTitle(Constants.MANAGE_APP_TITLE);
 		this.primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon/application.png")));
 		
-//		ResourceBundlesHelper.setLocale(Locale.getDefault());
 		ResourceBundlesHelper.setLocale(new Locale("vi","VN"));
 		
 		initRootLayout();
-		
+		ExceptionHandler.log(Level.INFO, "Manage App starts...");
 	}
 	
 	
@@ -74,7 +73,6 @@ public class Main extends Application {
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			ExceptionHandler.log(Level.INFO, "Manage App starts...");
 			
 			
 		} catch (Exception e) {
@@ -85,7 +83,7 @@ public class Main extends Application {
 	/**
      * Shows the person overview inside the root layout.
      */
-    public void showPersonOverview() {
+    public void showPersonOverview(Person person) {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
@@ -96,8 +94,9 @@ public class Main extends Application {
             rootLayout.setCenter(listPerson);
             
             //Give the controller access to main app
-            MainFrameController controller = loader.getController();
-            controller.setMainApp(this);
+            mainFrameController = loader.getController();
+            mainFrameController.setMainApp(this);
+            mainFrameController.selectPerson(person);
         } catch (IOException e) {
         	ExceptionHandler.showErrorAndLog(e);
         }
@@ -144,7 +143,7 @@ public class Main extends Application {
 			session.update("createTable");
 		}
 		this.primaryStage.setTitle(Constants.MANAGE_APP_TITLE + " (" + filePath + Constants.DATABASE_EXT+")");
-		showPersonOverview();
+		showPersonOverview(null);
     }
 
 	@Override
@@ -165,4 +164,45 @@ public class Main extends Application {
 	public Connection getConnection() {
 		return factory.getConnection();
 	}
+
+	public void refreshGui() {
+		boolean initContent = false;
+		Person currentPerson = null;
+		if (((BorderPane)this.primaryStage.getScene().getRoot()).getCenter() != null) {
+			initContent = true;
+			currentPerson = mainFrameController.getCurrentSelected();
+		}
+		backupUserPrefs();
+		((BorderPane)this.primaryStage.getScene().getRoot()).getChildren().clear();
+		initRootLayout();
+		if (initContent) {
+			showPersonOverview(currentPerson);
+		}
+		restoreUserPrefs();
+	}
+
+	private void restoreUserPrefs() {
+		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
+	    // get window location from user preferences: use x=100, y=100, width=400, height=400 as default
+	    double x = userPrefs.getDouble("stage.x", 100);
+	    double y = userPrefs.getDouble("stage.y", 100);
+	    double w = userPrefs.getDouble("stage.width", 400);
+	    double h = userPrefs.getDouble("stage.height", 400);
+	    
+	    primaryStage.setX(x);
+	    primaryStage.setY(y);
+	    primaryStage.setWidth(w);
+	    primaryStage.setHeight(h);
+		
+	}
+
+	private void backupUserPrefs() {
+		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
+	    userPrefs.putDouble("stage.x", primaryStage.getX());
+	    userPrefs.putDouble("stage.y", primaryStage.getY());
+	    userPrefs.putDouble("stage.width", primaryStage.getWidth());
+	    userPrefs.putDouble("stage.height", primaryStage.getHeight());
+	}
+	
+	
 }

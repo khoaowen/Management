@@ -21,7 +21,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
@@ -38,17 +37,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.Level;
 
 import com.khoaowen.main.Main;
 import com.khoaowen.main.mapper.PersonMapper;
@@ -117,8 +112,6 @@ public class MainFrameController {
 	private TextField languageLevel;
 	@FXML
 	private TextArea note;
-	@FXML
-	private CheckBox isPermanent;
 	@FXML
 	private ImageView imageView;
 	@FXML
@@ -358,14 +351,6 @@ public class MainFrameController {
 						updatePerson(selectedItem);
 					}
 				});
-		isPermanent.selectedProperty().addListener(
-				(observable, oldValue, newValue) -> {
-					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
-					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
-						selectedItem.setIsPermanent(newValue);
-						updatePerson(selectedItem);
-					}
-				});
 	}
 	
 	/**
@@ -524,7 +509,6 @@ public class MainFrameController {
             studyLevel.setText(person.getStudyLevel());
             languageLevel.setText(person.getLanguageLevel());
             note.setText(person.getNote());
-            isPermanent.setSelected(person.getIsPermanent());
 
         } else {
         	displayForm(false);
@@ -552,7 +536,6 @@ public class MainFrameController {
             studyLevel.setText("");
             languageLevel.setText("");
             note.setText("");
-            isPermanent.setSelected(false);
         }
         
         // update the current selected person once the datas are updated
@@ -653,6 +636,27 @@ public class MainFrameController {
         	ExceptionHandler.showErrorAndLog("Can not open Jasper report", e);
         }
     }
-	
+    
+    /**
+     * 
+     * @return the item which is currently selected by user
+     */
+    public Person getCurrentSelected() {
+		return currentSelected;
+	}
+
+    /**
+     * Select in the table view the person {@code person}
+     * @param person
+     */
+	public void selectPerson(Person person) {
+		if (person == null) return;
+		// search for this person in table data
+		for (Person p : personTable.getItems()) {
+			if (p.getId() == person.getId()) {
+				personTable.getSelectionModel().select(p);
+			}
+		}
+	}
 
 }

@@ -62,9 +62,13 @@ public class RootLayoutController {
 	private void initialize() {
 		JfxUtils.configureFileChooser(fileChooser, "databaseChooser.title.text", 
 	    		Pair.of(ResourceBundlesHelper.getMessageBundles("database.description.text"), Constants.DATABASE_EXT_REGEX));
-		setVietnameseLanguage();
 		vnMenu.setGraphic(new ImageView(vnFlagImage));
 		enMenu.setGraphic(new ImageView(enFlagImage));
+		if (ResourceBundlesHelper.getBundle().getLocale().equals(new Locale("vi","VN"))) {
+			languageMenu.setGraphic(new ImageView(vnFlagImage));
+		} else {
+			languageMenu.setGraphic(new ImageView(enFlagImage));
+		}
 	}
 	
 	@FXML
@@ -94,12 +98,14 @@ public class RootLayoutController {
 	private void setVietnameseLanguage() {
 		ResourceBundlesHelper.setLocale(new Locale("vi","VN"));
 		languageMenu.setGraphic(new ImageView(vnFlagImage));
+		main.refreshGui();
 	}
 	
 	@FXML
 	private void setEnglishLanguage() {
-		ResourceBundlesHelper.setLocale(Locale.ENGLISH);
+		ResourceBundlesHelper.setLocale(Locale.US);
 		languageMenu.setGraphic(new ImageView(enFlagImage));
+		main.refreshGui();
 	}
 	
 	@FXML
