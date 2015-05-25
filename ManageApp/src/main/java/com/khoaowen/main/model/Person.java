@@ -2,9 +2,7 @@ package com.khoaowen.main.model;
 
 import java.time.LocalDate;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -13,16 +11,14 @@ public class Person {
 
 	private int id;
 	private final ObjectProperty<byte[]> image = new SimpleObjectProperty<>();
-	/**
-	 * Indicates if the person lives in the temple
-	 */
-	private final BooleanProperty isPermanent= new SimpleBooleanProperty();
 	private final StringProperty firstName = new SimpleStringProperty();
 	private final StringProperty lastName = new SimpleStringProperty();
 	private final ObjectProperty<Sex> sex = new SimpleObjectProperty<>();
+	private final ObjectProperty<Role> role = new SimpleObjectProperty<>();
 	private final StringProperty email = new SimpleStringProperty();
 	private final StringProperty religiousName = new SimpleStringProperty();
 	private final ObjectProperty<LocalDate> birthday = new SimpleObjectProperty<>();
+	private final StringProperty placeOfBirth = new SimpleStringProperty();
 	/**
 	 * The ceremony date which a person takes refuge in the Buddha, in the dharma and in
 	 * the sangha
@@ -36,6 +32,7 @@ public class Person {
 	private final StringProperty nationality = new SimpleStringProperty();
 	private final StringProperty hometown = new SimpleStringProperty();
 	private final StringProperty placeOfResidence = new SimpleStringProperty();
+	private final StringProperty placeOfTempResidence = new SimpleStringProperty();
 	/**
 	 * Identity number
 	 */
@@ -76,10 +73,6 @@ public class Person {
 		this.id = id;
 	}
 
-	public BooleanProperty permanentProperty() {
-		return isPermanent;
-	}
-	
 	public ObjectProperty<byte[]> imageProperty() {
 		return image;
 	}
@@ -99,6 +92,10 @@ public class Person {
 	public ObjectProperty<Sex> sexProperty() {
 		return sex;
 	}
+	
+	public ObjectProperty<Role> roleProperty() {
+		return role;
+	}
 
 	public StringProperty religousNameProperty() {
 		return religiousName;
@@ -107,7 +104,11 @@ public class Person {
 	public ObjectProperty<LocalDate> birthdayProperty() {
 		return birthday;
 	}
-
+	
+	public StringProperty placeOfBirthd() {
+		return placeOfBirth;
+	}
+ 
 	public StringProperty ethnicGroupProperty() {
 		return ethnicGroup;
 	}
@@ -122,6 +123,10 @@ public class Person {
 
 	public StringProperty placeOfResidenceProperty() {
 		return placeOfResidence;
+	}
+	
+	public StringProperty placeOfTempResidenceProperty() {
+		return placeOfTempResidence;
 	}
 
 	public StringProperty idNumberProperty() {
@@ -183,6 +188,10 @@ public class Person {
 	public Sex getSex() {
 		return sex.get();
 	}
+	
+	public Role getRole() {
+		return role.get();
+	}
 
 	public String getReligiousName() {
 		return religiousName.get();
@@ -190,6 +199,10 @@ public class Person {
 
 	public LocalDate getBirthday() {
 		return birthday.get();
+	}
+	
+	public String getPlaceOfBirth() {
+		return placeOfBirth.get();
 	}
 
 	public String getEthnicGroup() {
@@ -206,6 +219,10 @@ public class Person {
 
 	public String getPlaceOfResidence() {
 		return placeOfResidence.get();
+	}
+	
+	public String getPlaceOfTempResidence() {
+		return placeOfTempResidence.get();
 	}
 
 	public String getIdNumber() {
@@ -244,10 +261,6 @@ public class Person {
 		return note.get();
 	}
 	
-	public Boolean getIsPermanent() {
-		return isPermanent.get();
-	}
-
 	public byte[] getImage() {
 		return image.get();
 	}
@@ -276,12 +289,20 @@ public class Person {
 		this.sex.set(sexe);
 	}
 
+	public void setRole(Role role) {
+		this.role.set(role);
+	}
+	
 	public void setReligiousName(String religiousName) {
 		this.religiousName.set(religiousName);
 	}
 
 	public void setBirthday(LocalDate birthday) {
 		this.birthday.set(birthday);
+	}
+	
+	public void setPlaceOfBirth(String placeOfBirth) {
+		this.placeOfBirth.set(placeOfBirth);
 	}
 
 	public void setEthnicGroup(String ethnicGroup) {
@@ -298,6 +319,10 @@ public class Person {
 
 	public void setPlaceOfResidence(String placeOfResidence) {
 		this.placeOfResidence.set(placeOfResidence);
+	}
+	
+	public void setPlaceOfTempResidence(String placeOfTempResidence) {
+		this.placeOfTempResidence.set(placeOfTempResidence);
 	}
 
 	public void setIdNumber(String idNumber) {
@@ -336,10 +361,6 @@ public class Person {
 		this.note.set(note);
 	}
 
-	public void setIsPermanent(Boolean isPermanent) {
-		this.isPermanent.set(isPermanent);
-	}
-	
 	public void setImage(byte[] imageFile) {
 		this.image.set(imageFile);
 	}

@@ -9,10 +9,11 @@
 		<result property="id" column="ID" />
 		<result property="firstName" column="FIRST_NAME" />
 		<result property="lastName" column="LAST_NAME" />
-		<result property="isPermanent" column="IS_PERMANENT" />
 		<result property="sex" column="SEX" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+		<result property="role" column="ROLE" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
 		<result property="email" column="EMAIL" />
 		<result property="birthday" column="BIRTHDAY" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
+		<result property="placeOfBirth" column= "PLACE_OF_BIRTH" />
 		<result property="religiousName" column="RELIGIOUS_NAME" />
 		<result property="religiousDate" column="RELIGIOUS_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
 		<result property="adoptedDate" column="ADOPTED_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
@@ -20,6 +21,7 @@
 		<result property="nationality" column="NATIONALITY" />
 		<result property="hometown" column="HOMETOWN" />
 		<result property="placeOfResidence" column="PLACE_OF_RESIDENCE" />
+		<result property="placeOfTempResidence" column="PLACE_OF_TEMP_RESIDENCE" />
 		<result property="image" column="IMAGE" />
 		<result property="idNumber" column="ID_NUMBER" />
 		<result property="idNumberIssueDate" column="ID_NUMBER_ISSUE_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
@@ -62,16 +64,18 @@
 		insert into PERSON (
 		FIRST_NAME,
         LAST_NAME,
-        IS_PERMANENT,
         SEX,
+        ROLE,
         EMAIL,
         BIRTHDAY,
+        PLACE_OF_BIRTH,
         RELIGIOUS_NAME,
         RELIGIOUS_DATE,
         ADOPTED_DATE,
         ETHNIC_GROUP,
         NATIONALITY,
         HOMETOWN,
+        PLACE_OF_TEMP_RESIDENCE,
         PLACE_OF_RESIDENCE,
         IMAGE,
         ID_NUMBER,
@@ -86,16 +90,18 @@
 		) values (
 			#{firstName},
 			#{lastName},
-			#{isPermanent},
 			#{sex, typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+			#{role, typeHandler=org.apache.ibatis.type.EnumTypeHandler},
 			#{email},
 			#{birthday, typeHandler=LocalDateTypeHandler},
+			#{placeOfBirth},
 			#{religiousName},
 			#{religiousDate, typeHandler=LocalDateTypeHandler},
 			#{adoptedDate, typeHandler=LocalDateTypeHandler},
 			#{ethnicGroup},
 			#{nationality},
 			#{hometown},
+			#{placeOfTempResidence},
 			#{placeOfResidence},
 			#{image},
 			#{idNumber},
@@ -118,16 +124,18 @@
 		set
 		FIRST_NAME = #{firstName},
         LAST_NAME = #{lastName},
-        IS_PERMANENT = #{isPermanent},
         SEX = #{sex},
+        ROLE = #{role},
         EMAIL = #{email},
         BIRTHDAY = #{birthday},
+        PLACE_OF_BIRTH = #{placeOfBirth},
         RELIGIOUS_NAME = #{religiousName},
         RELIGIOUS_DATE = #{religiousDate},
         ADOPTED_DATE = #{adoptedDate},
         ETHNIC_GROUP = #{ethnicGroup},
         NATIONALITY = #{nationality},
         HOMETOWN = #{hometown},
+        PLACE_OF_TEMP_RESIDENCE = #{placeOfTempResidence},
         PLACE_OF_RESIDENCE = #{placeOfResidence},
         IMAGE = #{image},
         ID_NUMBER = #{idNumber},
@@ -143,23 +151,24 @@
 	</update>
 
 
-	<!-- test purpose only -->
 	<update id="createTable">
 	    drop table if exists PERSON;
 		create table if not exists PERSON (
 		ID int not null auto_increment,
 		FIRST_NAME char,
 		LAST_NAME char,
-		IS_PERMANENT boolean,
 		SEX varchar default null,
+		ROLE varchar default null,
 		EMAIL char,
 		BIRTHDAY date,
+		PLACE_OF_BIRTH char,
 		RELIGIOUS_NAME char,
 		RELIGIOUS_DATE date,
 		ADOPTED_DATE date,
 		ETHNIC_GROUP char,
 		NATIONALITY char,
 		HOMETOWN char,
+		PLACE_OF_TEMP_RESIDENCE char,
 		PLACE_OF_RESIDENCE char,
 		IMAGE blob,
 		ID_NUMBER char,

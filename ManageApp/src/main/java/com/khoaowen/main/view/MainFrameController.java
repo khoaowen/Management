@@ -89,7 +89,11 @@ public class MainFrameController {
 	@FXML
 	private TextArea placeOfResidence;
 	@FXML
+	private TextArea placeOfTempResidence;
+	@FXML
 	private DatePicker birthday;
+	@FXML
+	private TextField placeOfBirth;
 	@FXML
 	private DatePicker religiousDate;
 	@FXML
@@ -223,6 +227,14 @@ public class MainFrameController {
 						updatePerson(selectedItem);
 					}
 				});
+		placeOfBirth.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setPlaceOfBirth(newValue);
+						updatePerson(selectedItem);
+					}
+				});
 		ethnicGroup.textProperty().addListener(
 				(observable, oldValue, newValue) -> {
 					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
@@ -252,6 +264,14 @@ public class MainFrameController {
 					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
 					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
 						selectedItem.setPlaceOfResidence(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		placeOfTempResidence.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setPlaceOfTempResidence(newValue);
 						updatePerson(selectedItem);
 					}
 				});
@@ -494,11 +514,13 @@ public class MainFrameController {
             }
             religiousName.setText(person.getReligiousName());
             birthday.setValue(person.getBirthday());
+            placeOfBirth.setText(person.getPlaceOfBirth());
             religiousDate.setValue(person.getReligiousDate());
             ethnicGroup.setText(person.getEthnicGroup());
             nationality.setText(person.getNationality());
             hometown.setText(person.getHometown());
             placeOfResidence.setText(person.getPlaceOfResidence());
+            placeOfTempResidence.setText(person.getPlaceOfTempResidence());
             adoptedDate.setValue(person.getAdoptedDate());
             idNumber.setText(person.getIdNumber());
             idNumberIssueDate.setValue(person.getIdNumberIssueDate());
@@ -521,10 +543,12 @@ public class MainFrameController {
             female.setSelected(false);
             religiousName.setText("");
             birthday.setValue(null);
+            placeOfBirth.setText("");
             religiousDate.setValue(null);
             ethnicGroup.setText("");
             nationality.setText("");
             hometown.setText("");
+            placeOfTempResidence.setText("");
             placeOfResidence.setText("");
             adoptedDate.setValue(null);
             idNumber.setText("");

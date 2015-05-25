@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.4.final using JasperReports Library version 6.0.4  -->
-<!-- 2015-05-24T10:02:26 -->
+<!-- 2015-05-25T15:48:17 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3c38b30-dd6b-4073-b394-78fdf358df84">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="h2 DB"/>
 	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
@@ -18,9 +18,6 @@
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="LAST_NAME" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="IS_PERMANENT" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="SEX" class="java.lang.String">
@@ -83,6 +80,9 @@
 	<field name="NOTE" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="PLACE_OF_BIRTH" class="java.lang.String"/>
+	<field name="PLACE_OF_TEMP_RESIDENCE" class="java.lang.String"/>
+	<field name="ROLE" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
