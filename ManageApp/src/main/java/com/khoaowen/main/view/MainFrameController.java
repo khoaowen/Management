@@ -77,6 +77,8 @@ public class MainFrameController {
 	@FXML
 	private RadioButton female;
 	@FXML
+	private TextField sila;
+	@FXML
 	private TextField religiousName;
 	@FXML
 	private TextField email;
@@ -280,6 +282,14 @@ public class MainFrameController {
 					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
 					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
 						selectedItem.setReligiousName(newValue);
+						updatePerson(selectedItem);
+					}
+				});
+		sila.textProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
+					if (shouldUpdatePersonInDatabase(oldValue, newValue, selectedItem)) {
+						selectedItem.setSila(newValue);
 						updatePerson(selectedItem);
 					}
 				});
@@ -512,6 +522,7 @@ public class MainFrameController {
             	male.setSelected(true);
 				female.setSelected(false);
             }
+            sila.setText(person.getSila());
             religiousName.setText(person.getReligiousName());
             birthday.setValue(person.getBirthday());
             placeOfBirth.setText(person.getPlaceOfBirth());
@@ -541,6 +552,7 @@ public class MainFrameController {
             email.setText("");
             male.setSelected(false);
             female.setSelected(false);
+            sila.setText("");
             religiousName.setText("");
             birthday.setValue(null);
             placeOfBirth.setText("");

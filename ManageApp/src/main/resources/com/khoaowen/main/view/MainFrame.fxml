@@ -106,18 +106,19 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label text="%lastname.text" />
                                     <Label text="%firstname.text" GridPane.rowIndex="1" />
                                     <Label text="%sexe.text" GridPane.rowIndex="2" />
-                                    <Label text="%religiousName.text" GridPane.rowIndex="12" />
+                                    <Label text="%religiousName.text" GridPane.rowIndex="13" />
                                     <Label text="%ethnicGroup.text" GridPane.rowIndex="5" />
                                     <Label text="%nationality.text" GridPane.rowIndex="6" />
                                     <Label text="%hometown.text" GridPane.rowIndex="7" />
                                     <Label text="%placeOfResidence.text" GridPane.rowIndex="8" />
-                                    <Label text="%religiousDate.text" GridPane.rowIndex="13" />
-                                    <Label text="%email.text" GridPane.rowIndex="20" />
+                                    <Label text="%religiousDate.text" GridPane.rowIndex="14" />
+                                    <Label text="%email.text" GridPane.rowIndex="21" />
                                     <Label text="%birthday.text" GridPane.rowIndex="3" />
                                     <TextField fx:id="lastName" GridPane.columnIndex="1" />
                                     <TextField fx:id="firstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -136,32 +137,34 @@
                                     <TextField fx:id="nationality" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                     <TextField fx:id="hometown" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                     <TextArea fx:id="placeOfResidence" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" GridPane.rowSpan="2" />
-                                    <TextField fx:id="religiousName" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                                    <DatePicker fx:id="religiousDate" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                                    <Label text="%adoptedDate.text" GridPane.rowIndex="14" />
-                                    <DatePicker fx:id="adoptedDate" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                                    <Label text="%id.number.text" GridPane.rowIndex="15" />
-                                    <TextField fx:id="idNumber" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                                    <Label text="%id.number.issue.date.text" GridPane.rowIndex="16" />
-                                    <DatePicker fx:id="idNumberIssueDate" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                                    <Label text="%id.number.issue.place.text" GridPane.rowIndex="17" />
-                                    <TextField fx:id="idNumberIssuePlace" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                                    <Label text="%phone.number.text" GridPane.rowIndex="21" />
-                                    <TextField fx:id="studyLevel" GridPane.columnIndex="1" GridPane.rowIndex="18" />
-                                    <TextField fx:id="languageLevel" GridPane.columnIndex="1" GridPane.rowIndex="19" />
-                                    <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="20" />
-                                    <TextField fx:id="phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="21" />
-                                    <Label text="%father.fullname.text" GridPane.rowIndex="22" />
-                                    <TextField fx:id="fatherFullName" GridPane.columnIndex="1" GridPane.rowIndex="22" />
-                                    <Label text="%mother.fullname.text" GridPane.rowIndex="23" />
-                                    <TextField fx:id="motherFullName" GridPane.columnIndex="1" GridPane.rowIndex="23" />
-                                    <Label text="%study.level.text" GridPane.rowIndex="18" />
-                                    <Label text="%language.level.text" GridPane.rowIndex="19" />
-                                    <Label text="%note.text" GridPane.rowIndex="24" />
-                                    <TextArea fx:id="note" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="24" GridPane.rowSpan="3" />
+                                    <TextField fx:id="sila" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                    <TextField fx:id="religiousName" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                    <DatePicker fx:id="religiousDate" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                                    <Label text="%adoptedDate.text" GridPane.rowIndex="15" />
+                                    <DatePicker fx:id="adoptedDate" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                                    <Label text="%id.number.text" GridPane.rowIndex="16" />
+                                    <TextField fx:id="idNumber" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                                    <Label text="%id.number.issue.date.text" GridPane.rowIndex="17" />
+                                    <DatePicker fx:id="idNumberIssueDate" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                                    <Label text="%id.number.issue.place.text" GridPane.rowIndex="18" />
+                                    <TextField fx:id="idNumberIssuePlace" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                                    <Label text="%phone.number.text" GridPane.rowIndex="22" />
+                                    <TextField fx:id="studyLevel" GridPane.columnIndex="1" GridPane.rowIndex="19" />
+                                    <TextField fx:id="languageLevel" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+                                    <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="21" />
+                                    <TextField fx:id="phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="22" />
+                                    <Label text="%father.fullname.text" GridPane.rowIndex="23" />
+                                    <TextField fx:id="fatherFullName" GridPane.columnIndex="1" GridPane.rowIndex="23" />
+                                    <Label text="%mother.fullname.text" GridPane.rowIndex="24" />
+                                    <TextField fx:id="motherFullName" GridPane.columnIndex="1" GridPane.rowIndex="24" />
+                                    <Label text="%study.level.text" GridPane.rowIndex="19" />
+                                    <Label text="%language.level.text" GridPane.rowIndex="20" />
+                                    <Label text="%note.text" GridPane.rowIndex="25" />
+                                    <TextArea fx:id="note" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="25" GridPane.rowSpan="3" />
                                     <Label text="%placeOfBirth.text" GridPane.rowIndex="4" />
                                     <Label text="%placeOfTempResidence.text" GridPane.rowIndex="10" />
                                     <TextArea fx:id="placeOfTempResidence" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10" GridPane.rowSpan="2" />
+                                    <Label text="%sila.text" GridPane.rowIndex="12" />
                                  </children>
                                  <padding>
                                     <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />

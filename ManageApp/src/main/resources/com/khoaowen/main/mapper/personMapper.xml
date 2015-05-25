@@ -15,6 +15,7 @@
 		<result property="birthday" column="BIRTHDAY" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
 		<result property="placeOfBirth" column= "PLACE_OF_BIRTH" />
 		<result property="religiousName" column="RELIGIOUS_NAME" />
+		<result property="sila" column="SILA" />
 		<result property="religiousDate" column="RELIGIOUS_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
 		<result property="adoptedDate" column="ADOPTED_DATE" typeHandler="LocalDateTypeHandler" jdbcType="DATE" />
 		<result property="ethnicGroup" column="ETHNIC_GROUP" />
@@ -69,6 +70,7 @@
         EMAIL,
         BIRTHDAY,
         PLACE_OF_BIRTH,
+        SILA,
         RELIGIOUS_NAME,
         RELIGIOUS_DATE,
         ADOPTED_DATE,
@@ -95,6 +97,7 @@
 			#{email},
 			#{birthday, typeHandler=LocalDateTypeHandler},
 			#{placeOfBirth},
+			#{sila},
 			#{religiousName},
 			#{religiousDate, typeHandler=LocalDateTypeHandler},
 			#{adoptedDate, typeHandler=LocalDateTypeHandler},
@@ -129,6 +132,7 @@
         EMAIL = #{email},
         BIRTHDAY = #{birthday},
         PLACE_OF_BIRTH = #{placeOfBirth},
+        SILA = #{sila},
         RELIGIOUS_NAME = #{religiousName},
         RELIGIOUS_DATE = #{religiousDate},
         ADOPTED_DATE = #{adoptedDate},
@@ -162,6 +166,7 @@
 		EMAIL char,
 		BIRTHDAY date,
 		PLACE_OF_BIRTH char,
+		SILA char,
 		RELIGIOUS_NAME char,
 		RELIGIOUS_DATE date,
 		ADOPTED_DATE date,

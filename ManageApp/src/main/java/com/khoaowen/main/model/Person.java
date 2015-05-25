@@ -17,6 +17,10 @@ public class Person {
 	private final ObjectProperty<Role> role = new SimpleObjectProperty<>();
 	private final StringProperty email = new SimpleStringProperty();
 	private final StringProperty religiousName = new SimpleStringProperty();
+	/**
+	 * "Religous name" for master of temple
+	 */
+	private final StringProperty sila = new SimpleStringProperty();
 	private final ObjectProperty<LocalDate> birthday = new SimpleObjectProperty<>();
 	private final StringProperty placeOfBirth = new SimpleStringProperty();
 	/**
@@ -99,6 +103,10 @@ public class Person {
 
 	public StringProperty religousNameProperty() {
 		return religiousName;
+	}
+	
+	public StringProperty silaProperty() {
+		return sila;
 	}
 
 	public ObjectProperty<LocalDate> birthdayProperty() {
@@ -195,6 +203,10 @@ public class Person {
 
 	public String getReligiousName() {
 		return religiousName.get();
+	}
+	
+	public String getSila() {
+		return sila.get();
 	}
 
 	public LocalDate getBirthday() {
@@ -295,6 +307,10 @@ public class Person {
 	
 	public void setReligiousName(String religiousName) {
 		this.religiousName.set(religiousName);
+	}
+	
+	public void setSila(String sila) {
+		this.sila.set(sila);
 	}
 
 	public void setBirthday(LocalDate birthday) {

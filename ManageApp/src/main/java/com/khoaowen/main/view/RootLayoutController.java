@@ -3,6 +3,7 @@ package com.khoaowen.main.view;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.prefs.Preferences;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -77,15 +78,20 @@ public class RootLayoutController {
 		File file = fileChooser.showSaveDialog(main.getPrimaryStage());
 		if (file != null) {
 			main.swapDatabase(FilenameUtils.removeExtension(FilenameUtils.removeExtension(file.getAbsolutePath())), true);
+			Preferences userPrefs = Preferences.userNodeForPackage(getClass());
+		    userPrefs.put(Constants.DATABASE_DESTINATION_PREF, file.getParent());
 		}
 	}
 	
 	@FXML
 	private void openDatabase() {
+		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
 		fileChooser.setTitle(ResourceBundlesHelper.getMessageBundles("openDatabaseChooser.title.text"));
+		fileChooser.setInitialDirectory(new File(userPrefs.get(Constants.DATABASE_DESTINATION_PREF, System.getProperty("user.home"))));
 		File file = fileChooser.showOpenDialog(main.getPrimaryStage());
 		if (file != null) {
 			main.swapDatabase(FilenameUtils.removeExtension(FilenameUtils.removeExtension(file.getAbsolutePath())), false);
+			userPrefs.put(Constants.DATABASE_DESTINATION_PREF, file.getParent());
 		}
 	}
 	

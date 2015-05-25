@@ -29,6 +29,7 @@ import com.khoaowen.utils.ResourceBundlesHelper;
 
 
 public class Main extends Application {
+	
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private MyBatisConnectionFactory factory;
@@ -184,10 +185,10 @@ public class Main extends Application {
 	private void restoreUserPrefs() {
 		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
 	    // get window location from user preferences: use x=100, y=100, width=400, height=400 as default
-	    double x = userPrefs.getDouble("stage.x", 100);
-	    double y = userPrefs.getDouble("stage.y", 100);
-	    double w = userPrefs.getDouble("stage.width", 400);
-	    double h = userPrefs.getDouble("stage.height", 400);
+	    double x = userPrefs.getDouble(Constants.STAGE_X, 100);
+	    double y = userPrefs.getDouble(Constants.STAGE_Y, 100);
+	    double w = userPrefs.getDouble(Constants.STAGE_WIDTH, 400);
+	    double h = userPrefs.getDouble(Constants.STAGE_HEIGHT, 400);
 	    
 	    primaryStage.setX(x);
 	    primaryStage.setY(y);
@@ -198,10 +199,10 @@ public class Main extends Application {
 
 	private void backupUserPrefs() {
 		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
-	    userPrefs.putDouble("stage.x", primaryStage.getX());
-	    userPrefs.putDouble("stage.y", primaryStage.getY());
-	    userPrefs.putDouble("stage.width", primaryStage.getWidth());
-	    userPrefs.putDouble("stage.height", primaryStage.getHeight());
+	    userPrefs.putDouble(Constants.STAGE_X, primaryStage.getX());
+	    userPrefs.putDouble(Constants.STAGE_Y, primaryStage.getY());
+	    userPrefs.putDouble(Constants.STAGE_WIDTH, primaryStage.getWidth());
+	    userPrefs.putDouble(Constants.STAGE_HEIGHT, primaryStage.getHeight());
 	}
 	
 	
