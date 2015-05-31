@@ -137,4 +137,35 @@ public class RootLayoutController {
 		}
 		
 	}
+	
+	/**
+	 * Restore user preferences at dynamically language changes
+	 */
+	public void restoreUserPrefs() {
+		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
+	    // get window location from user preferences: use x=100, y=100, width=400, height=400 as default
+	    double x = userPrefs.getDouble(Constants.STAGE_X_PREF, 100);
+	    double y = userPrefs.getDouble(Constants.STAGE_Y_PREF, 100);
+	    double w = userPrefs.getDouble(Constants.STAGE_WIDTH_PREF, 400);
+	    double h = userPrefs.getDouble(Constants.STAGE_HEIGHT_PREF, 400);
+	    
+	    main.getPrimaryStage().setX(x);
+	    main.getPrimaryStage().setY(y);
+	    main.getPrimaryStage().setWidth(w);
+	    main.getPrimaryStage().setHeight(h);
+		
+	}
+	/**
+	 * Backup user preferences to restore at dynamically language changes
+	 */
+	public void backupUserPrefs() {
+		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
+	    userPrefs.putDouble(Constants.STAGE_X_PREF, main.getPrimaryStage().getX());
+	    userPrefs.putDouble(Constants.STAGE_Y_PREF, main.getPrimaryStage().getY());
+	    userPrefs.putDouble(Constants.STAGE_WIDTH_PREF, main.getPrimaryStage().getWidth());
+	    userPrefs.putDouble(Constants.STAGE_HEIGHT_PREF, main.getPrimaryStage().getHeight());
+	    
+	    
+	}
+	
 }

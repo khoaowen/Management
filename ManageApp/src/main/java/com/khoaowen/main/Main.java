@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.prefs.Preferences;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -35,6 +36,7 @@ public class Main extends Application {
 	private MyBatisConnectionFactory factory;
 	private PersonMapper personMapper;
 	private MainFrameController mainFrameController;
+	private RootLayoutController rootLayoutController;
 	
 	public Stage getPrimaryStage() {
 		return primaryStage;
@@ -47,8 +49,7 @@ public class Main extends Application {
 		this.primaryStage.setTitle(Constants.MANAGE_APP_TITLE);
 		this.primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon/application.png")));
 		
-		ResourceBundlesHelper.setLocale(new Locale("vi","VN"));
-		
+		restoreLocale();
 		initRootLayout();
 		ExceptionHandler.log(Level.INFO, "Manage App starts...");
 	}
@@ -69,9 +70,10 @@ public class Main extends Application {
             rootLayout = loader.load();
             
             //Give the controller access to main app
-            RootLayoutController controller = loader.getController();
-            controller.setMainApp(this);
+            rootLayoutController = loader.getController();
+            rootLayoutController.setMainApp(this);
 			Scene scene = new Scene(rootLayout);
+			scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
@@ -137,21 +139,43 @@ public class Main extends Application {
     	}
     	factory = new MyBatisConnectionFactory(
 				filePath);
-		SqlSession session = factory.openSession();
-		personMapper =  session.getMapper(PersonMapper.class);
-		if (createNew) {
-			// create a new empty table
-			session.update("createTable");
-		}
-		this.primaryStage.setTitle(Constants.MANAGE_APP_TITLE + " (" + filePath + Constants.DATABASE_EXT+")");
-		showPersonOverview(null);
+    	
+    	showLoadingPane();
+    	new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				SqlSession session = factory.openSession();
+				personMapper =  session.getMapper(PersonMapper.class);
+				if (createNew) {
+					// create a new empty table
+					session.update("createTable");
+				}
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						primaryStage.setTitle(Constants.MANAGE_APP_TITLE + " (" + filePath + Constants.DATABASE_EXT+")");
+						showPersonOverview(null);
+					}
+				});
+			}
+		}).start();
+    	
+    	
+		
     }
+
+	private void showLoadingPane() {
+		rootLayout.setCenter(MainFrameController.createLoadingPane());
+	}
 
 	@Override
 	public void stop() throws Exception {
 		if (factory != null) {
 			factory.closeSession();
 		}
+		backUpLocale();
 	}
 	
 	public PersonMapper getPersonMapper() {
@@ -173,37 +197,27 @@ public class Main extends Application {
 			initContent = true;
 			currentPerson = mainFrameController.getCurrentSelected();
 		}
-		backupUserPrefs();
+		rootLayoutController.backupUserPrefs();
 		((BorderPane)this.primaryStage.getScene().getRoot()).getChildren().clear();
 		initRootLayout();
 		if (initContent) {
 			showPersonOverview(currentPerson);
 		}
-		restoreUserPrefs();
+		rootLayoutController.restoreUserPrefs();
 	}
 
-	private void restoreUserPrefs() {
+	public void restoreLocale() {
 		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
-	    // get window location from user preferences: use x=100, y=100, width=400, height=400 as default
-	    double x = userPrefs.getDouble(Constants.STAGE_X, 100);
-	    double y = userPrefs.getDouble(Constants.STAGE_Y, 100);
-	    double w = userPrefs.getDouble(Constants.STAGE_WIDTH, 400);
-	    double h = userPrefs.getDouble(Constants.STAGE_HEIGHT, 400);
-	    
-	    primaryStage.setX(x);
-	    primaryStage.setY(y);
-	    primaryStage.setWidth(w);
-	    primaryStage.setHeight(h);
-		
-	}
-
-	private void backupUserPrefs() {
-		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
-	    userPrefs.putDouble(Constants.STAGE_X, primaryStage.getX());
-	    userPrefs.putDouble(Constants.STAGE_Y, primaryStage.getY());
-	    userPrefs.putDouble(Constants.STAGE_WIDTH, primaryStage.getWidth());
-	    userPrefs.putDouble(Constants.STAGE_HEIGHT, primaryStage.getHeight());
+		String locale = userPrefs.get(Constants.LOCALE_PREF, "en");
+	    if (locale.equals("vi")) {
+	    	ResourceBundlesHelper.setLocale(new Locale("vi","VN"));
+	    }
 	}
 	
+	public void backUpLocale() {
+		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
+	    userPrefs.put(Constants.LOCALE_PREF, ResourceBundlesHelper.getBundle().getLocale().getLanguage());
+	}
+
 	
 }

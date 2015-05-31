@@ -19,9 +19,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
@@ -33,6 +35,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -128,6 +132,8 @@ public class MainFrameController {
 	private ScrollPane formScrollpane;
 	@FXML
 	private Text changeImageHint;
+	@FXML
+	private StackPane stackPane;
 	
 	private Main main;
 	
@@ -650,23 +656,38 @@ public class MainFrameController {
 			if (selectedItem != null) {
 				mapParameters.put("PERSON_ID", selectedItem.getId());
 			}
-			Platform.runLater(new Runnable() {
-				
+			BorderPane progressPane = createLoadingPane();
+			progressPane.getStyleClass().add("progressPaneBackground");
+			stackPane.getChildren().add(progressPane);
+			new Thread(new Runnable() {
+				JasperViewer jv ;
 				@Override
 				public void run() {
 					try {
 						JasperPrint jp = JasperFillManager.fillReport(jr,
 								mapParameters, main.getConnection());
 
-						JasperViewer jv = new JasperViewer(jp, false);
-						jv.setVisible(true);
+						jv = new JasperViewer(jp, false);
 					} catch (JRException e) {
 						ExceptionHandler.showErrorAndLog(
 								"Can not open Jasper report", e);
+					} finally {
+						Platform.runLater(new Runnable() {
+							
+							@Override
+							public void run() {
+								stackPane.getChildren().remove(progressPane);
+								if (jv != null) {
+									jv.setVisible(true);
+								}
+							}
+						});
 					}
-
+					
 				}
-			});
+			}).start();
+			
+			
 			
 		} catch (JRException e) {
         	ExceptionHandler.showErrorAndLog("Can not open Jasper report", e);
@@ -693,6 +714,14 @@ public class MainFrameController {
 				personTable.getSelectionModel().select(p);
 			}
 		}
+	}
+	
+	public static BorderPane createLoadingPane() {
+		ProgressIndicator progressBar = new ProgressIndicator();
+		progressBar.setPrefSize(100, 100);
+		Group progressGroup= new Group(progressBar);
+		BorderPane progressPane = new BorderPane(progressGroup);
+		return progressPane;
 	}
 
 }

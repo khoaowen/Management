@@ -10,8 +10,9 @@ public class Constants {
 	 */
 	public static final String DATABASE_DESTINATION_PREF = "database.destination.preference";
 	
-	public static final String STAGE_HEIGHT = "stage.height";
-	public static final String STAGE_WIDTH = "stage.width";
-	public static final String STAGE_X = "stage.x";
-	public static final String STAGE_Y = "stage.y";
+	public static final String STAGE_HEIGHT_PREF = "stage.height";
+	public static final String STAGE_WIDTH_PREF = "stage.width";
+	public static final String STAGE_X_PREF = "stage.x";
+	public static final String STAGE_Y_PREF = "stage.y";
+	public static final String LOCALE_PREF = "locale";
 }

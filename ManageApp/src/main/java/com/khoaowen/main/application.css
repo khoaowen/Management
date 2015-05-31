@@ -1,1 +1,4 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.progressPaneBackground {
+    -fx-background-color: rgba(186, 186, 186, 0.5); 
+    -fx-background-radius: 1;
+}
