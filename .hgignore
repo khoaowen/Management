@@ -6,3 +6,4 @@ ManageApp/manageAppLogs/*
 ManageApp/target/*
 
 ManageApp/test-output/*
+ManageApp/.project
