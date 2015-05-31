@@ -73,7 +73,7 @@ public class Main extends Application {
             rootLayoutController = loader.getController();
             rootLayoutController.setMainApp(this);
 			Scene scene = new Scene(rootLayout);
-			scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(Main.class.getResource("view/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			

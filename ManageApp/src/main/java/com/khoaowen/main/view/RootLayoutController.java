@@ -87,7 +87,10 @@ public class RootLayoutController {
 	private void openDatabase() {
 		Preferences userPrefs = Preferences.userNodeForPackage(getClass());
 		fileChooser.setTitle(ResourceBundlesHelper.getMessageBundles("openDatabaseChooser.title.text"));
-		fileChooser.setInitialDirectory(new File(userPrefs.get(Constants.DATABASE_DESTINATION_PREF, System.getProperty("user.home"))));
+		File initialDirectory = new File(userPrefs.get(Constants.DATABASE_DESTINATION_PREF, System.getProperty("user.home")));
+		if (initialDirectory.isDirectory()) {
+			fileChooser.setInitialDirectory(initialDirectory);
+		}
 		File file = fileChooser.showOpenDialog(main.getPrimaryStage());
 		if (file != null) {
 			main.swapDatabase(FilenameUtils.removeExtension(FilenameUtils.removeExtension(file.getAbsolutePath())), false);
