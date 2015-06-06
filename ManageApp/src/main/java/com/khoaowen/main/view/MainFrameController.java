@@ -23,6 +23,8 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
@@ -36,11 +38,13 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -52,6 +56,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.khoaowen.main.Main;
 import com.khoaowen.main.mapper.PersonMapper;
 import com.khoaowen.main.model.Person;
+import com.khoaowen.main.model.Role;
 import com.khoaowen.main.model.Sex;
 import com.khoaowen.utils.ExceptionHandler;
 import com.khoaowen.utils.ImageUtil;
@@ -61,6 +66,10 @@ import com.khoaowen.utils.ResourceBundlesHelper;
 public class MainFrameController {
 	
 	private static final int IMAGE_SIZE = 24;
+	/**
+	 * row number of sala in the gridpane form
+	 */
+	private static final int SILA_ROW_OF_GRIDPANE = 12;
 	
 	@FXML
 	private TableView<Person> personTable;
@@ -73,6 +82,8 @@ public class MainFrameController {
 	@FXML
 	private TableColumn<Person, String> firstNameColumn;
 	@FXML
+	private TableColumn<Person, Role> roleColumn;
+	@FXML
 	private TextField lastName;
 	@FXML
 	private TextField firstName;
@@ -83,7 +94,11 @@ public class MainFrameController {
 	@FXML
 	private TextField sila;
 	@FXML
+	private Label silaLabel;
+	@FXML
 	private TextField religiousName;
+	@FXML
+	private Label religiousNameLabel;
 	@FXML
 	private TextField email;
 	@FXML
@@ -105,6 +120,8 @@ public class MainFrameController {
 	@FXML
 	private DatePicker adoptedDate;
 	@FXML
+	private Label adoptedDateLabel;
+	@FXML
 	private TextField idNumber;
 	@FXML
 	private DatePicker idNumberIssueDate;
@@ -115,17 +132,25 @@ public class MainFrameController {
 	@FXML
 	private TextField fatherFullName;
 	@FXML
+	private Label fatherFullNameLabel;
+	@FXML
 	private TextField motherFullName;
+	@FXML
+	private Label motherFullNameLabel;
 	@FXML
 	private TextField studyLevel;
 	@FXML
+	private Label studyLevelLabel;
+	@FXML
 	private TextField languageLevel;
+	@FXML
+	private Label languageLevelLabel;
 	@FXML
 	private TextArea note;
 	@FXML
 	private ImageView imageView;
 	@FXML
-	private Button addButton;
+	private MenuButton addButton;
 	@FXML
 	private Button printButton;
 	@FXML
@@ -134,6 +159,8 @@ public class MainFrameController {
 	private Text changeImageHint;
 	@FXML
 	private StackPane stackPane;
+	@FXML
+	private GridPane gridpane;
 	
 	private Main main;
 	
@@ -438,6 +465,7 @@ public class MainFrameController {
 	private void initTableLayout() {
 		lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
 		firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+		roleColumn.setCellValueFactory(cellData -> cellData.getValue().roleProperty());
 		numberColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<String>(personTable.getItems().indexOf(cellData.getValue())+1 + ""));
 		numberColumn.setSortable(false);
 		deleteColumn.setCellFactory(cellData -> {
@@ -507,6 +535,8 @@ public class MainFrameController {
     	}
         if (person != null) {
         	displayForm(true);
+        	configureForm(person.getRole());
+        	
             // Fill the labels with info from the person object.
         	if (person.getImage() != null) {
 	            Image image = new Image(new ByteArrayInputStream(person.getImage()));
@@ -584,15 +614,88 @@ public class MainFrameController {
         currentSelected = person;
     }
     
-    private void displayForm(boolean display) {
+    private void configureForm(Role role) {
+		switch (role) {
+		case BUDDHIST:
+			sila.setDisable(true);
+			silaLabel.setDisable(true);
+			religiousName.setDisable(false);
+			religiousNameLabel.setDisable(false);
+			adoptedDate.setDisable(true);
+			adoptedDateLabel.setDisable(true);
+			studyLevel.setDisable(true);
+			studyLevelLabel.setDisable(true);
+			languageLevel.setDisable(true);
+			languageLevelLabel.setDisable(true);
+			motherFullName.setDisable(true);
+			motherFullNameLabel.setDisable(true);
+			fatherFullName.setDisable(true);
+			fatherFullNameLabel.setDisable(true);
+			break;
+		case LAY_BROTHER:
+			sila.setDisable(true);
+			silaLabel.setDisable(true);
+			religiousName.setDisable(false);
+			religiousNameLabel.setDisable(false);
+			adoptedDate.setDisable(false);
+			adoptedDateLabel.setDisable(false);
+			studyLevel.setDisable(false);
+			studyLevelLabel.setDisable(false);
+			languageLevel.setDisable(false);
+			languageLevelLabel.setDisable(false);
+			motherFullName.setDisable(false);
+			motherFullNameLabel.setDisable(false);
+			fatherFullName.setDisable(false);
+			fatherFullNameLabel.setDisable(false);
+			break;
+		case MASTER_BUDDHIST:
+			sila.setDisable(false);
+			silaLabel.setDisable(false);
+			religiousName.setDisable(true);
+			religiousNameLabel.setDisable(true);
+			adoptedDate.setDisable(false);
+			adoptedDateLabel.setDisable(false);
+			studyLevel.setDisable(false);
+			studyLevelLabel.setDisable(false);
+			languageLevel.setDisable(false);
+			languageLevelLabel.setDisable(false);
+			motherFullName.setDisable(true);
+			motherFullNameLabel.setDisable(true);
+			fatherFullName.setDisable(true);
+			fatherFullNameLabel.setDisable(true);
+			break;
+		}
+		
+	}
+
+	private void displayForm(boolean display) {
     	formScrollpane.setVisible(display);
     	imageView.setVisible(display);
     	printButton.setDisable(!display);
     }
     
     @FXML
-    void addNewPerson() {
+    void addNewBuddhist() {
     	Person person = new Person();
+    	person.setRole(Role.BUDDHIST);
+    	persistPerson(person);
+    }
+    
+    @FXML
+    void addNewMaster() {
+    	Person person = new Person();
+    	person.setRole(Role.MASTER_BUDDHIST);
+    	persistPerson(person);
+    }
+    
+    @FXML
+    void addNewLayBrother() {
+    	Person person = new Person();
+    	person.setRole(Role.LAY_BROTHER);
+    	persistPerson(person);
+    }
+    
+    private void persistPerson(Person person) {
 		PersonMapper personMapper = main.getPersonMapper();
 		// insert empty person in database
 		personMapper.insert(person);
@@ -655,6 +758,8 @@ public class MainFrameController {
 			Map<String, Object> mapParameters = new HashMap<String, Object>();
 			if (selectedItem != null) {
 				mapParameters.put("PERSON_ID", selectedItem.getId());
+				mapParameters.put(JRParameter.REPORT_RESOURCE_BUNDLE, ResourceBundlesHelper.getBundle());
+				mapParameters.put(JRParameter.REPORT_LOCALE, ResourceBundlesHelper.getBundle().getLocale());
 			}
 			BorderPane progressPane = createLoadingPane();
 			progressPane.getStyleClass().add("progressPaneBackground");

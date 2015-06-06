@@ -40,6 +40,7 @@ public class AboutController {
 		builder.append(getAppVersion());
 		builder.append("\nJava version: ");
 		builder.append(getJavaVersion());
+		builder.append("\n\nChương trình Manage App được viết dành cho Tu viện An Lạc Hạnh");
 		textArea.setText(builder.toString());
 		
 	}

@@ -20,7 +20,7 @@
             <Font name="Impact" size="26.0" />
          </font>
       </Label>
-      <TextArea fx:id="textArea" editable="false" focusTraversable="false" layoutX="15.0" layoutY="66.0" prefHeight="138.0" prefWidth="347.0" text="Build information&#10;Version&#10;Java version: " AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="61.0" />
+      <TextArea fx:id="textArea" editable="false" focusTraversable="false" layoutX="15.0" layoutY="66.0" prefHeight="138.0" prefWidth="347.0" text="Build information&#10;Version&#10;Java version: " wrapText="true" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="61.0" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

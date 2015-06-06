@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import com.khoaowen.main.dao.MyBatisConnectionFactory;
 import com.khoaowen.main.mapper.PersonMapper;
 import com.khoaowen.main.model.Person;
+import com.khoaowen.main.model.Role;
 import com.khoaowen.main.model.Sex;
 import com.khoaowen.utils.DateUtil;
 import com.khoaowen.utils.ExceptionHandler;
@@ -65,7 +66,7 @@ public class MapperTest {
 			}
 			person.setImage(bFile);
 			
-			
+			person.setRole(Role.BUDDHIST);
 			person.setFirstName("Dai " + i);
 			person.setLastName("Nguyen ngoc trang " + i);
 			person.setEmail("tieuthukieukys@yahoo.com " + i);
@@ -99,6 +100,7 @@ public class MapperTest {
 		Person p = personMapper.getAll().get(1);
 		String updatedName = "UPDateed name";
 		p.setFirstName(updatedName);
+		p.setRole(Role.LAY_BROTHER);
 		p.setSex(Sex.MALE);
 		p.setReligiousDate(LocalDate.of(2015, 10, 10));
 		personMapper.update(p);

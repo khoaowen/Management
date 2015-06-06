@@ -12,7 +12,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<log4j.version>2.1</log4j.version>
-		<launch4j-maven-plugin.version>1.7.6</launch4j-maven-plugin.version>
+		<launch4j-maven-plugin.version>1.7.7</launch4j-maven-plugin.version>
 		<executable.version>1.0.0.0</executable.version>
 		<mainClass>com.khoaowen.main.Main</mainClass>
 	</properties>
