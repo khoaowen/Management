@@ -9,6 +9,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.khoaowen.main.Main;
@@ -17,12 +18,12 @@ public class JfxUtils {
 	
 	public static DropShadow borderGlow = new DropShadow();
 	{	borderGlow.setColor(Color.BLUE);
-		borderGlow.setOffsetX(0f);
-		borderGlow.setOffsetY(0f);
+		borderGlow.setOffsetX(3f);
+		borderGlow.setOffsetY(3f);
 		borderGlow.setWidth(10);
 		borderGlow.setHeight(10);
 	}
-	 
+	
     public static Node loadFxml(String fxml) {
         FXMLLoader loader = new FXMLLoader();
         try {
@@ -56,5 +57,19 @@ public class JfxUtils {
 			fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(pair.getLeft(), pair.getRight()));
 		}
 	}
+    
+    /**
+     * Normalize characters from the string {@code s} for comparison
+     * @param s
+     * @return
+     */
+    public static String normalizeStringToCompare(String s) {
+    	if (s == null) {
+    		return "";
+    	}
+    	String result;
+    	result = ExtFunc.removeAccent(StringUtils.lowerCase(StringUtils.stripAccents(s)));
+    	return result;
+    }
     
 }

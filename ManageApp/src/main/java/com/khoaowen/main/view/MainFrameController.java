@@ -6,14 +6,18 @@ import java.net.URL;
 import java.time.chrono.Chronology;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.FormatStyle;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,8 +29,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -34,6 +40,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -66,11 +73,6 @@ import com.khoaowen.utils.ResourceBundlesHelper;
 public class MainFrameController {
 	
 	private static final int IMAGE_SIZE = 24;
-	/**
-	 * row number of sala in the gridpane form
-	 */
-	private static final int SILA_ROW_OF_GRIDPANE = 12;
-	
 	@FXML
 	private TableView<Person> personTable;
 	@FXML
@@ -152,8 +154,6 @@ public class MainFrameController {
 	@FXML
 	private MenuButton addButton;
 	@FXML
-	private Button printButton;
-	@FXML
 	private ScrollPane formScrollpane;
 	@FXML
 	private Text changeImageHint;
@@ -161,12 +161,33 @@ public class MainFrameController {
 	private StackPane stackPane;
 	@FXML
 	private GridPane gridpane;
+	@FXML
+	private MenuButton printButton;
+	@FXML
+	private MenuButton filterSearch;
+	@FXML
+	private MenuItem printPersonMenuItem;
+	@FXML
+	private MenuItem printListMenuItem;
+	@FXML
+	private TextField searchListTextField;
+	@FXML
+	private RadioMenuItem displayBuddhistCheckMenu;
+	@FXML
+	private RadioMenuItem displayLayBrotherCheckMenu;
+	@FXML
+	private RadioMenuItem displayMasterCheckMenu;
+	@FXML
+	private RadioMenuItem displayAllCheckMenu;
 	
+	private SearchTFListener textFieldListener;
 	private Main main;
 	
 	private Person currentSelected;
 	
 	private FileChooser fileChooser = new FileChooser();
+	private Predicate<Person>  originalSearchPredicateData;
+	private Predicate<Person>  currentSearchPredicateData;
 	
 	/**
 	 * The constructor is called before the {@link #initialize} method
@@ -193,27 +214,24 @@ public class MainFrameController {
         adoptedDate.setPromptText(getPatternFromDatePicker(adoptedDate));
         idNumberIssueDate.setPromptText(getPatternFromDatePicker(idNumberIssueDate));
         
+        ToggleGroup toggleGroup = new ToggleGroup();
+        displayBuddhistCheckMenu.setToggleGroup(toggleGroup);
+        displayLayBrotherCheckMenu.setToggleGroup(toggleGroup);
+        displayMasterCheckMenu.setToggleGroup(toggleGroup);
+        displayAllCheckMenu.setToggleGroup(toggleGroup);
+        
 	    addButton.setGraphic(new ImageView(ImageUtil.getImageResources("/icon/add_person.png",IMAGE_SIZE,IMAGE_SIZE)));
 	    printButton.setGraphic(new ImageView(ImageUtil.getImageResources("/icon/print.png", IMAGE_SIZE, IMAGE_SIZE)));
-	    personTable.getSelectionModel().selectedItemProperty().addListener(
-	    		(observable, oldValue, newValue) -> showPersonDetails(newValue));
-	    imageView.setOnMouseEntered(event -> {
-	    	imageView.setEffect(JfxUtils.borderGlow);
-	    	changeImageHint.setVisible(true);
-	    	main.getPrimaryStage().getScene().setCursor(Cursor.HAND);});
-	    imageView.setOnMouseExited(event -> {
-	    	imageView.setEffect(null);
-	    	changeImageHint.setVisible(false);
-	    	main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT);});
+	    filterSearch.setGraphic(new ImageView(ImageUtil.getImageResources("/icon/setting.png", IMAGE_SIZE-5, IMAGE_SIZE-5)));
 	    initBinding();
-	    initListeners();
+	    initListenersForPersisting();
 	}
 
 	/**
 	 * Initializes listeners for input control.
 	 * Any changes by user must be persisted in database.
 	 */
-	private void initListeners() {
+	private void initListenersForPersisting() {
 		lastName.textProperty().addListener(
 				(observable, oldValue, newValue) -> {
 					Person selectedItem = personTable.getSelectionModel().getSelectedItem();
@@ -457,9 +475,16 @@ public class MainFrameController {
 	}
 
 	private void initBinding() {
-//		firstName.textProperty().bindBidirectional(firstNameColumn.getCellFactory().);
-//		lastName.textProperty().bindBidirectional(lastNameColumn.textProperty());
-//		formScrollpane.visibleProperty().bind(Bindings.size(personTable.getItems()).greaterThan(0));
+		personTable.getSelectionModel().selectedItemProperty().addListener(
+	    		(observable, oldValue, newValue) -> showPersonDetails(newValue));
+	    imageView.setOnMouseEntered(event -> {
+	    	imageView.setEffect(JfxUtils.borderGlow);
+	    	changeImageHint.setVisible(true);
+	    	main.getPrimaryStage().getScene().setCursor(Cursor.HAND);});
+	    imageView.setOnMouseExited(event -> {
+	    	imageView.setEffect(null);
+	    	changeImageHint.setVisible(false);
+	    	main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT);});
 	}
 
 	private void initTableLayout() {
@@ -517,11 +542,40 @@ public class MainFrameController {
         // Add observable list data to the table
         PersonMapper personMapper = mainApp.getPersonMapper();
         if (personMapper != null) {
-        	personTable.setItems(FXCollections.observableArrayList(personMapper.getAll()));
+        	initItemsForTable(personMapper.getAll());
+        	
         }
     }
     
     /**
+     * Initialize the items for table which can be filtered and sorted
+     * @param people
+     */
+    private void initItemsForTable(List<Person> people) {
+    	// reset the listener of textField (if was already set) before reinitializing it with new list of people
+    	if (textFieldListener != null) {
+    		searchListTextField.clear();
+    		searchListTextField.textProperty().removeListener(textFieldListener);
+    	}
+    	
+    	// add listener to the search text field for filtering items
+    	textFieldListener = new SearchTFListener(searchListTextField, people);
+		searchListTextField.textProperty().addListener(textFieldListener);
+		originalSearchPredicateData = (Predicate<Person>) textFieldListener.getFilteredData().getPredicate();
+		SortedList<Person> sortedList = new SortedList<Person>(textFieldListener.getFilteredData());
+    	//Bind the SortedList comparator to the TableView comparator.
+    	sortedList.comparatorProperty().bind(personTable.comparatorProperty());
+    	personTable.setItems(sortedList);
+
+    	// set back current predicate for search if exists
+    	if (currentSearchPredicateData != null) {
+    		textFieldListener.setExternalPred(currentSearchPredicateData);
+    		FilteredList<Person> filteredData = textFieldListener.getFilteredData();
+        	filteredData.setPredicate(originalSearchPredicateData.and(currentSearchPredicateData));
+    	}
+	}
+
+	/**
      * Fills all text fields to show details about the person.
      * If the specified person is null, all text fields are cleared.
      *
@@ -671,7 +725,7 @@ public class MainFrameController {
 	private void displayForm(boolean display) {
     	formScrollpane.setVisible(display);
     	imageView.setVisible(display);
-    	printButton.setDisable(!display);
+    	printPersonMenuItem.setDisable(!display);
     }
     
     @FXML
@@ -700,10 +754,10 @@ public class MainFrameController {
 		// insert empty person in database
 		personMapper.insert(person);
 		
-		// add this person to the table view
-		personTable.getItems().add(person);
-		personTable.getSelectionModel().select(person);
-		personTable.scrollTo(person);
+		// add this person to the table view by reinitialize its content
+		initItemsForTable(personMapper.getAll());
+		
+		selectPerson(person);
     }
     
     
@@ -714,8 +768,9 @@ public class MainFrameController {
     	Optional<ButtonType> requestConfirmation = ExceptionHandler.requestConfirmation(ResourceBundlesHelper.getMessageBundles("delete.person.confirmation.question.text"), main.getPrimaryStage());
     	if (requestConfirmation.get() == ButtonType.OK) { 
 	    	PersonMapper personMapper = main.getPersonMapper();
-	    	personTable.getItems().remove(person);
 			personMapper.deleteById(person.getId());
+			// reinitialize the table's content
+			initItemsForTable(personMapper.getAll());
     	}
     }
     
@@ -792,13 +847,63 @@ public class MainFrameController {
 				}
 			}).start();
 			
-			
-			
 		} catch (JRException e) {
         	ExceptionHandler.showErrorAndLog("Can not open Jasper report", e);
         }
     }
     
+    @FXML
+    void printList() {
+    	System.out.println("print list: " + Arrays.toString(textFieldListener.getFilteredData().toArray()));
+    }
+    
+    @FXML
+    void displayBuddhistCheckMenu() {
+    	setPredicate(displayBuddhistCheckMenu, Role.BUDDHIST);
+    	if (!filterSearch.getStyleClass().contains("redShadow")) {
+    		filterSearch.getStyleClass().add("redShadow");
+    	}
+    }
+    
+    @FXML
+    void displayLayBrotherCheckMenu() {
+    	setPredicate(displayLayBrotherCheckMenu, Role.LAY_BROTHER);
+    	if (!filterSearch.getStyleClass().contains("redShadow")) {
+    		filterSearch.getStyleClass().add("redShadow");
+    	}
+    }
+    
+    @FXML
+    void displayMasterCheckMenu() {
+    	setPredicate(displayMasterCheckMenu, Role.MASTER_BUDDHIST);
+    	if (!filterSearch.getStyleClass().contains("redShadow")) {
+    		filterSearch.getStyleClass().add("redShadow");
+    	}
+    }
+    
+    private void setPredicate(RadioMenuItem menuItem, Role role) {
+    	Predicate<Person> pred = (person-> {
+    		if (menuItem.isSelected()) {
+    			return person.getRole() == role;
+    		} else {
+    			return person.getRole() != role;
+    		}
+    	});
+    	currentSearchPredicateData = pred;
+    	textFieldListener.setExternalPred(pred);
+    	FilteredList<Person> filteredData = textFieldListener.getFilteredData();
+    	filteredData.setPredicate(originalSearchPredicateData.and(pred));
+    }
+    
+    @FXML
+    void displayAllCheckMenu() {
+    	textFieldListener.setExternalPred(null);
+    	FilteredList<Person> filteredData = textFieldListener.getFilteredData();
+    	filteredData.setPredicate(originalSearchPredicateData);
+    	currentSearchPredicateData = null;
+    	filterSearch.getStyleClass().remove("redShadow");
+    }
+     
     /**
      * 
      * @return the item which is currently selected by user
@@ -817,6 +922,7 @@ public class MainFrameController {
 		for (Person p : personTable.getItems()) {
 			if (p.getId() == person.getId()) {
 				personTable.getSelectionModel().select(p);
+				personTable.scrollTo(p);
 			}
 		}
 	}
