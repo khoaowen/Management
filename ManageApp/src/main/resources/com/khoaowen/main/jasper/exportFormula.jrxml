@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.4.final using JasperReports Library version 6.0.4  -->
-<!-- 2015-05-31T19:42:01 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3c38b30-dd6b-4073-b394-78fdf358df84">
+<!-- 2015-06-13T22:27:30 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="521" leftMargin="37" rightMargin="37" topMargin="20" bottomMargin="20" uuid="d3c38b30-dd6b-4073-b394-78fdf358df84">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="h2 DB"/>
 	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 	<style name="Style1" isDefault="true" pattern="" fontName="Arial Unicode MS"/>
@@ -132,642 +132,818 @@ Tu Viện An Lạc Hạnh
 		</band>
 	</title>
 	<detail>
-		<band height="254">
+		<band height="50" splitType="Stretch">
 			<property name="local_mesure_unitheight" value="pixel"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 			<frame>
-				<reportElement x="16" y="0" width="523" height="254" uuid="9e87fa5e-4c54-409d-899c-83c4a3f5dc89"/>
+				<reportElement x="0" y="0" width="521" height="25" uuid="12dbd35f-1200-49b1-a409-f968c84875e1"/>
 				<frame>
-					<reportElement x="0" y="0" width="368" height="21" uuid="8e161580-918b-43f4-8f66-038aab7680ec"/>
-					<textField isBlankWhenNull="true">
-						<reportElement x="83" y="1" width="285" height="19" uuid="38978d50-5e52-4641-a79a-5161820e72b5"/>
-						<textElement verticalAlignment="Middle">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{LAST_NAME} == null ? "" : 
-($F{LAST_NAME} + " " + ($F{FIRST_NAME} == null ? "" : $F{FIRST_NAME}))]]></textFieldExpression>
-					</textField>
+					<reportElement x="0" y="0" width="520" height="21" uuid="8701ff87-0941-4998-b341-a8738ec992d0">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
 					<staticText>
-						<reportElement x="0" y="2" width="70" height="19" uuid="b67bcdee-4794-4a69-b1b3-9f20b0479833"/>
-						<textElement textAlignment="Left">
+						<reportElement x="0" y="0" width="66" height="21" uuid="6af331be-8df2-4a98-84d0-5845552be00e"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
 						</textElement>
 						<text><![CDATA[Họ và tên:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="70" y="20" width="297" height="1" uuid="1e15d942-8d42-4592-9750-83ebf58237f3"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement key="" x="0" y="104" width="523" height="57" isRemoveLineWhenBlank="true" uuid="66ad8031-fda3-46d9-9e59-5e0922fb48a1">
-						<printWhenExpression><![CDATA[$F{PLACE_OF_TEMP_RESIDENCE} != null && !$F{PLACE_OF_TEMP_RESIDENCE}.isEmpty()]]></printWhenExpression>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="100" y="0" width="423" height="56" uuid="a4366f24-a55e-46a1-a119-89948dddbb91"/>
-						<box>
-							<topPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-							<leftPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-							<bottomPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-							<rightPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-						</box>
-						<textElement verticalAlignment="Middle">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{PLACE_OF_TEMP_RESIDENCE}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="94" height="28" uuid="a1aef3dc-80a4-4c1f-945c-e33e483808ab"/>
-						<textElement textAlignment="Left" verticalAlignment="Top">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Tạm trú:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="94" y="56" width="429" height="1" uuid="fa87bd91-8a2c-4146-8287-d9f68d97fc78"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="0" y="21" width="260" height="21" uuid="3879cf3e-1fe9-4ca6-b5c6-eb9cbd4c69aa"/>
-					<textField isBlankWhenNull="true">
-						<reportElement x="170" y="0" width="90" height="19" uuid="956ca5bd-5bdf-4e46-a3df-db7092ded62c">
-							<property name="local_mesure_unitheight" value="pixel"/>
-							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<frame>
+						<reportElement x="66" y="0" width="316" height="21" uuid="188185f7-8a5d-4dd0-b818-a192814cd061">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						</reportElement>
-						<textElement verticalAlignment="Middle">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{BIRTHDAY})]]></textFieldExpression>
-					</textField>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="316" height="20" uuid="b0847815-c9bc-4ca9-b453-7f7ec9ef69f4"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{LAST_NAME} == null ? "" : 
+($F{LAST_NAME} + " " + ($F{FIRST_NAME} == null ? "" : $F{FIRST_NAME}))]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="316" height="1" uuid="1b76f8ed-6f84-4724-89d2-1e56e5118ced"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 					<staticText>
-						<reportElement x="0" y="2" width="150" height="19" uuid="4f416efc-67f5-432e-a046-796dfde249a9"/>
-						<textElement textAlignment="Left">
+						<reportElement x="383" y="0" width="70" height="21" uuid="55455050-52b8-42b7-9dce-a3f722bac564"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Arial Unicode MS" size="13"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Giới tính:]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="454" y="0" width="66" height="21" uuid="03c93718-d5a6-4dad-915d-e74acf3c7e7a">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="66" height="20" uuid="b37b3f18-b1b4-4421-ac5b-d4028e2ac725"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{SEX}.equals("MALE")?"Nam":
+($F{SEX}.equals("FEMALE")?"Nữ":"")]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="66" height="1" uuid="88dcf3eb-015f-48ef-84a0-ea28e17a8096"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
+				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="25" width="521" height="25" uuid="daf8b82f-a5fc-4227-87ed-520f7718bc35"/>
+				<frame>
+					<reportElement x="0" y="0" width="521" height="21" uuid="849b5934-300b-4d3d-b42b-235a82bcbd1b">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<staticText>
+						<reportElement x="0" y="0" width="147" height="21" uuid="341dfb3e-d44e-48c4-ab8e-e007879eeede"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
 						</textElement>
 						<text><![CDATA[Ngày, tháng, năm sinh:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="150" y="20" width="110" height="1" uuid="b2cba8d1-2326-4301-980a-00883ac79bca"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="260" y="21" width="263" height="21" uuid="af162582-f051-427c-b05b-58440ac58983">
-						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="70" y="0" width="192" height="19" uuid="df154486-d2a2-4d5a-a347-d30aa308d844">
-							<property name="local_mesure_unitheight" value="pixel"/>
-							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<frame>
+						<reportElement x="147" y="0" width="128" height="21" uuid="e5be10a7-15fc-4e76-a9eb-a7dd54649509">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						</reportElement>
-						<textElement verticalAlignment="Middle">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{PLACE_OF_BIRTH}]]></textFieldExpression>
-					</textField>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="128" height="20" uuid="2b56b371-3555-4624-a28c-5bdec5d6874c"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{BIRTHDAY})]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="128" height="1" uuid="afea61be-9618-4cc4-8bd7-43448dd48922"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 					<staticText>
-						<reportElement x="0" y="1" width="70" height="19" uuid="c2fa2a44-eb82-4903-8a9d-c7a2cd27ca10"/>
-						<textElement textAlignment="Left">
+						<reportElement x="276" y="0" width="70" height="21" uuid="572a264c-1f23-4501-8b0f-1fc7d83cefc2"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
+							<paragraph leftIndent="2"/>
 						</textElement>
 						<text><![CDATA[Nơi sinh:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="70" y="20" width="193" height="1" uuid="d974d988-45b7-4a93-b231-f3d60b998b41"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
+					<frame>
+						<reportElement x="347" y="0" width="174" height="21" uuid="e54b5d60-e3d8-43d0-be99-ebf12c11b8a3">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="174" height="20" uuid="13c5febc-0cc4-47c3-9cee-f963676e6d42"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{PLACE_OF_BIRTH}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="174" height="1" uuid="055aa1d1-f42a-4cdf-9c61-148e617ca6cc"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 				</frame>
+			</frame>
+		</band>
+		<band height="131">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="521" height="66" uuid="ac502a0c-3a40-4bd9-b352-1492bedf5c38"/>
+				<box topPadding="2"/>
 				<frame>
-					<reportElement x="0" y="43" width="523" height="61" uuid="9411970e-7dfe-4282-8084-39a602513a6f"/>
-					<textField isBlankWhenNull="true">
-						<reportElement x="100" y="0" width="423" height="56" uuid="63159a79-fb04-4bab-982d-5ab3d08b59f3"/>
-						<box>
-							<topPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-							<leftPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-							<bottomPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-							<rightPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-						</box>
-						<textElement verticalAlignment="Middle">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{PLACE_OF_RESIDENCE}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="94" height="28" uuid="0b05760c-4ffd-4b7f-bc7c-b745047af9c4"/>
-						<textElement textAlignment="Left" verticalAlignment="Top">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Thường trú:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="94" y="57" width="429" height="1" uuid="0199c0d9-fa84-4291-8d30-bce5056dfda6"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="0" y="162" width="180" height="21" uuid="9b9b6f1d-8b6f-4ab6-bf2a-d509676469a0">
-						<property name="local_mesure_unity" value="pixel"/>
+					<reportElement x="0" y="0" width="521" height="61" uuid="d0b5819d-3288-40b6-987f-5d14a2b23c91">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="80" y="1" width="100" height="19" uuid="8547bd2e-6485-4c6e-8421-8b6591950d35"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{HOMETOWN}]]></textFieldExpression>
-					</textField>
+					<frame>
+						<reportElement x="0" y="0" width="521" height="61" uuid="676d8d89-048d-47f7-b1bd-dd5e7fe111bc">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+							<property name="local_mesure_unitheight" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<staticText>
+							<reportElement x="0" y="0" width="76" height="61" uuid="ea3cd2ac-77e4-4f35-a926-f220f3317870"/>
+							<textElement textAlignment="Left" verticalAlignment="Top">
+								<font fontName="Arial Unicode MS" size="13"/>
+							</textElement>
+							<text><![CDATA[Thường trú:]]></text>
+						</staticText>
+						<frame>
+							<reportElement x="76" y="0" width="445" height="61" uuid="f2d06da7-8903-404b-90e6-39e57f230414">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="445" height="60" uuid="efb1adc9-b585-44c8-b429-74d508d2f03c"/>
+								<textElement verticalAlignment="Top">
+									<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{PLACE_OF_RESIDENCE}]]></textFieldExpression>
+							</textField>
+							<line>
+								<reportElement x="0" y="60" width="445" height="1" uuid="6611c935-5efc-4c7c-9709-9d7d15030bfb"/>
+								<graphicElement>
+									<pen lineStyle="Dotted"/>
+								</graphicElement>
+							</line>
+						</frame>
+					</frame>
+				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="66" width="521" height="65" uuid="37207c98-010c-4169-82b2-aef2bffd9c49"/>
+				<frame>
+					<reportElement x="0" y="0" width="521" height="61" uuid="2e36a937-f371-47e5-b464-bab8bda54fa7">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<frame>
+						<reportElement x="0" y="0" width="521" height="61" uuid="38fb5bce-40d8-4b27-bb7f-a51aa13d9bf7">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+							<property name="local_mesure_unitheight" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<staticText>
+							<reportElement x="0" y="0" width="76" height="61" uuid="b0e7dec7-753c-4bf5-9002-a4f5a9b1122b"/>
+							<textElement textAlignment="Left" verticalAlignment="Top">
+								<font fontName="Arial Unicode MS" size="13"/>
+							</textElement>
+							<text><![CDATA[Tạm trú:]]></text>
+						</staticText>
+						<frame>
+							<reportElement x="76" y="0" width="445" height="61" uuid="46f2b6a2-b6b3-4aab-ba02-39ca16adb7bc">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="445" height="60" uuid="79b754ea-60a4-4711-bcbd-42bbadd4c6d9"/>
+								<textElement verticalAlignment="Top">
+									<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{PLACE_OF_TEMP_RESIDENCE}]]></textFieldExpression>
+							</textField>
+							<line>
+								<reportElement x="0" y="60" width="445" height="1" uuid="c2b8a877-82e0-4cff-8929-42fbddfcf72a"/>
+								<graphicElement>
+									<pen lineStyle="Dotted"/>
+								</graphicElement>
+							</line>
+						</frame>
+					</frame>
+				</frame>
+			</frame>
+		</band>
+		<band height="235">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<frame>
+				<reportElement x="0" y="0" width="521" height="27" uuid="c13560b1-5637-4933-b59d-47d06d34fd51"/>
+				<frame>
+					<reportElement x="0" y="0" width="521" height="21" uuid="b96f23c5-ea73-4a27-8a58-84a4b1aa7927">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
 					<staticText>
-						<reportElement x="0" y="2" width="70" height="19" uuid="11f5b893-6290-4917-a4d2-9922dd214577"/>
-						<textElement textAlignment="Left">
+						<reportElement x="0" y="0" width="76" height="21" uuid="7d7bfd11-9393-451a-9420-5b16f8362b2a"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
 						</textElement>
 						<text><![CDATA[Quê Quán:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="70" y="20" width="110" height="1" uuid="9eb617a5-60f7-4312-8fff-6ae2965b5b51"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="184" y="162" width="140" height="21" uuid="ccbb4f88-b382-4205-a38a-44126dac0e65"/>
-					<textField isBlankWhenNull="true">
-						<reportElement x="66" y="1" width="74" height="19" uuid="1c8c73b6-fd88-4801-b859-491026e99cf9"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{ETHNIC_GROUP}]]></textFieldExpression>
-					</textField>
+					<frame>
+						<reportElement x="76" y="0" width="101" height="21" uuid="a4532858-fea6-44f9-80a3-2b5377e53b70">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="101" height="20" uuid="a1af6875-d87f-4b63-9210-1d6aa67cd52a"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{HOMETOWN}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="101" height="1" uuid="3767e5ff-e6e9-4250-a64d-2aab2e6aabac"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 					<staticText>
-						<reportElement x="0" y="2" width="60" height="19" uuid="ed2bfede-6aca-47e1-a56f-2b9696cfbce3"/>
-						<textElement textAlignment="Left">
+						<reportElement x="177" y="0" width="70" height="21" uuid="ba4c387f-b057-48ed-8f7f-0f4e7d76752a"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
+							<paragraph leftIndent="2"/>
 						</textElement>
 						<text><![CDATA[Dân tộc:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="60" y="20" width="80" height="1" uuid="e5eb81a7-d9bf-416a-a705-c506826b8da0"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="0" y="183" width="523" height="21" isRemoveLineWhenBlank="true" uuid="620120a0-c476-4e31-ae65-6690446fab23">
-						<printWhenExpression><![CDATA[$F{SILA} != null && !$F{SILA}.isEmpty()]]></printWhenExpression>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="108" y="1" width="415" height="19" uuid="462a1c0a-cbbd-41dc-8d35-353fec66c811"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{SILA}]]></textFieldExpression>
-					</textField>
+					<frame>
+						<reportElement x="247" y="0" width="89" height="21" uuid="e8d9e86b-f528-4ac4-aad1-8797af33dcf1">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="89" height="20" uuid="68e6870a-20c5-4296-af79-313b01d91730"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{ETHNIC_GROUP}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="89" height="1" uuid="8a95dde1-fb75-4f37-922a-02c9ed62d06d"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 					<staticText>
-						<reportElement x="0" y="2" width="70" height="19" uuid="daa67ecc-b865-4362-9303-9ae0e335685a"/>
-						<textElement textAlignment="Left">
+						<reportElement x="336" y="0" width="71" height="21" uuid="484bc306-4378-4a5d-b045-b4239986a353"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Arial Unicode MS" size="13"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Quốc tịch:]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="407" y="0" width="114" height="21" uuid="0577edaa-4391-42d3-8263-022fdead3108">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="114" height="20" uuid="098ba540-ee4b-430f-ab2d-04b65e0db303"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{NATIONALITY}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="114" height="1" uuid="618d90a5-faa7-487e-b957-6ff1d549bef9"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
+				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="27" width="521" height="26" uuid="83c99611-b7a5-4ffd-abae-8a60d9a3ef9e">
+					<printWhenExpression><![CDATA[$F{SILA} != null && !$F{SILA}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<frame>
+					<reportElement x="0" y="0" width="520" height="21" uuid="a7664f7c-7f68-4c6a-894c-046fd9cb64af">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<staticText>
+						<reportElement x="0" y="0" width="76" height="21" uuid="e53ca45a-10d6-4590-b7e5-6226b8f46333"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
 						</textElement>
 						<text><![CDATA[Giới phẩm:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="70" y="20" width="453" height="1" uuid="0fd84b5c-9f84-46f0-b4cb-f029fef2c72e"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
+					<frame>
+						<reportElement x="76" y="0" width="444" height="21" uuid="4d095698-9506-41e7-a1c0-c36641a60477">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="444" height="20" uuid="14de3357-701c-4fad-8271-ba2483f713b9"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{SILA}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="444" height="1" uuid="a5e4f1fa-2327-4f4c-ba6e-c7baef5883f7"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="53" width="521" height="26" uuid="64a58e8b-8317-400c-9871-ceb81f2c4d49"/>
 				<frame>
-					<reportElement x="0" y="204" width="271" height="21" isRemoveLineWhenBlank="true" uuid="a87845a4-31ab-4175-8aea-979fca26512f">
-						<printWhenExpression><![CDATA[$F{RELIGIOUS_NAME} != null && !$F{RELIGIOUS_NAME}.isEmpty()]]></printWhenExpression>
+					<reportElement x="0" y="0" width="520" height="21" uuid="dd07aa88-901e-4a47-b8d7-d5c6ba333957">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="108" y="1" width="163" height="19" uuid="0f1d9064-af51-4c4c-b34a-d3da35a8202c"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{RELIGIOUS_NAME}]]></textFieldExpression>
-					</textField>
 					<staticText>
-						<reportElement x="0" y="2" width="70" height="19" uuid="f84d7155-2c0f-4e47-9a6b-150bbb9b1b4e"/>
-						<textElement textAlignment="Left">
+						<reportElement x="0" y="0" width="73" height="21" uuid="afb8e529-e669-42af-a846-839763a0f880">
+							<printWhenExpression><![CDATA[$F{RELIGIOUS_NAME} != null && !$F{RELIGIOUS_NAME}.isEmpty()]]></printWhenExpression>
+						</reportElement>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
 						</textElement>
 						<text><![CDATA[Pháp danh:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="70" y="20" width="201" height="1" uuid="a7c9a092-eafa-4a95-b9ee-345e32a98691"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
+					<frame>
+						<reportElement x="73" y="0" width="214" height="21" uuid="3ed3d4ce-f903-4709-a5b0-ab3502fba13b">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<printWhenExpression><![CDATA[$F{RELIGIOUS_NAME} != null && !$F{RELIGIOUS_NAME}.isEmpty()]]></printWhenExpression>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="214" height="20" uuid="0a5f0e89-c0d1-461f-9872-8d9fffd02671"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{RELIGIOUS_NAME}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="214" height="1" uuid="ad095a69-e8fc-4877-88dd-921c11c16d22"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
+					<staticText>
+						<reportElement x="287" y="0" width="73" height="21" uuid="88691a58-9270-4ea6-a8d8-75b4845ba9a4"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Arial Unicode MS" size="13"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Ngày quy y:]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="360" y="0" width="160" height="21" uuid="a7257d67-677c-4550-828e-56a11658f544">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="160" height="20" uuid="8f84ea68-cb09-4422-b91f-35da6888e336"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{RELIGIOUS_DATE})]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="160" height="1" uuid="73451109-c7c0-4534-864d-ea45a156d607"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="79" width="521" height="26" uuid="f045bcd7-5fdd-4c59-9e9b-45503581a04f">
+					<printWhenExpression><![CDATA[$F{ADOPTED_DATE}!=null]]></printWhenExpression>
+				</reportElement>
 				<frame>
-					<reportElement x="0" y="233" width="523" height="21" isRemoveLineWhenBlank="true" uuid="98ad5ca1-4acb-4211-bcd5-698f33f666ff">
+					<reportElement x="0" y="0" width="520" height="21" uuid="b9175798-5ab8-460c-9f71-1f5f424c0e5e">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<printWhenExpression><![CDATA[$F{ADOPTED_DATE} != null]]></printWhenExpression>
 					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="108" y="1" width="415" height="19" uuid="fe699c4a-da90-4505-99f6-89f2cecba6b1">
-							<property name="local_mesure_unitheight" value="pixel"/>
-							<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						</reportElement>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{ADOPTED_DATE})]]></textFieldExpression>
-					</textField>
 					<staticText>
-						<reportElement x="0" y="2" width="94" height="19" uuid="9b2f4c01-0401-4e5d-9c55-480961f060c1"/>
-						<textElement textAlignment="Left">
+						<reportElement x="0" y="0" width="99" height="21" uuid="f1f5ccc4-2685-4421-ac07-c39ba92bfcaa"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
 						</textElement>
 						<text><![CDATA[Ngày vào chùa:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="94" y="20" width="429" height="1" uuid="a3488650-4ace-46e7-8e23-33c8e04aeedc"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="368" y="0" width="155" height="21" uuid="01ea74c9-069a-4d7b-a9f4-4f216e2af7d5"/>
-					<textField isBlankWhenNull="true">
-						<reportElement x="83" y="1" width="72" height="19" uuid="8145d907-e4a3-4d9e-bd3c-b9c5ecf07c3e"/>
-						<textElement verticalAlignment="Middle">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{SEX}.equals("MALE")?"Nam":
-($F{SEX}.equals("FEMALE")?"Nữ":"")]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="70" height="19" uuid="65dcfca2-432a-458e-872e-4045cf06ec39"/>
-						<textElement textAlignment="Left">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Giới tính:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="70" y="20" width="85" height="1" uuid="3bf428b0-87e1-4a54-bfd8-89fdd126d69b"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="324" y="162" width="199" height="21" uuid="1b0af447-5a8b-4a78-ad6f-08357ddb8005"/>
-					<textField isBlankWhenNull="true">
-						<reportElement x="90" y="1" width="109" height="19" uuid="fcab8be5-d7e2-412f-ab26-169d27aedbc5"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{NATIONALITY}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="90" height="19" uuid="71959703-f7cc-41fa-bf6c-c507974eb1d6"/>
-						<textElement textAlignment="Left">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Quốc tịch:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="84" y="20" width="115" height="1" uuid="1c4bb41f-b105-44d2-94a7-7d9b80b1c7bb"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement key="" x="280" y="204" width="243" height="21" isRemoveLineWhenBlank="true" uuid="2dbdc5ae-5dcb-4874-9a12-c8543c069a3d">
-						<printWhenExpression><![CDATA[$F{RELIGIOUS_DATE} != null]]></printWhenExpression>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="108" y="1" width="135" height="19" uuid="2db28dd4-3d05-4fb2-9033-384e8e4eadf6">
-							<property name="local_mesure_unitheight" value="pixel"/>
-							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<frame>
+						<reportElement x="99" y="0" width="421" height="21" uuid="2e51f0a3-db56-42c0-bade-7dadeceb23cd">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						</reportElement>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{RELIGIOUS_DATE})]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="90" height="19" uuid="3444b410-95e4-47a9-b260-35ad4463c2f0"/>
-						<textElement textAlignment="Left">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Ngày quy y:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="90" y="20" width="153" height="1" uuid="b33f8e6c-e427-44f7-be6d-65ae5fb6880b"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="421" height="20" uuid="990179ed-769a-4e3d-be69-c96d9d1017db"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{ADOPTED_DATE})]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="421" height="1" uuid="df75d4eb-81cf-4c3f-8c39-7ae4530f17a2"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 				</frame>
 			</frame>
-		</band>
-		<band height="308">
-			<property name="local_mesure_unitheight" value="pixel"/>
-			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<frame>
-				<reportElement x="16" y="0" width="523" height="187" uuid="d789021b-323b-4391-bee9-9237a6b409aa">
-					<property name="local_mesure_unity" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
+				<reportElement x="0" y="105" width="521" height="26" uuid="31dc21a2-1877-4a33-b59d-30cf5fc57849"/>
 				<frame>
-					<reportElement x="0" y="42" width="523" height="21" isRemoveLineWhenBlank="true" uuid="945f172b-938a-4cbc-8a4d-939f2eb0b4f3">
+					<reportElement x="0" y="0" width="520" height="21" uuid="d7e218fa-e664-4de5-bd76-eda513bfe4cd">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="118" y="0" width="405" height="19" uuid="a93e9e80-45d6-489b-bce1-fc6c920d6680"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{STUDY_LEVEL}]]></textFieldExpression>
-					</textField>
 					<staticText>
-						<reportElement x="0" y="2" width="108" height="19" uuid="6ff9031c-efdb-4738-9355-3d18b3883b0d"/>
-						<textElement textAlignment="Left">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Trình độ học vấn:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="108" y="19" width="415" height="1" uuid="1c634ba8-1738-4ee7-a901-11dd3f55e18c"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="0" y="63" width="523" height="21" isRemoveLineWhenBlank="true" uuid="19ec8339-f4a1-43a1-a2c3-8e3b6c03c4da">
-						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="139" y="1" width="384" height="19" uuid="6c9a0f02-46dc-4188-8e73-bb659158c4b6"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{LANGUAGE_LEVEL}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="120" height="19" uuid="249703b7-3f5c-4759-a7a8-67ea1e7da9df"/>
-						<textElement textAlignment="Left">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Trình độ ngoại ngữ:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="120" y="20" width="403" height="1" uuid="ebb167bc-e909-45fe-9f52-08590293ce62"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="0" y="84" width="270" height="21" isRemoveLineWhenBlank="true" uuid="bbbcefa6-3b86-4b58-af68-817ec8138bef">
-						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="57" y="1" width="212" height="19" uuid="47c1ad0b-3a28-4356-a11b-c220d9f70c4e"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{EMAIL}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="50" height="19" uuid="7bcd62cc-c440-4fb5-b1db-f5781973034e"/>
-						<textElement textAlignment="Left">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Email:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="50" y="20" width="217" height="1" uuid="e8d2a419-0263-4114-bf95-e67e21eae305"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="270" y="84" width="253" height="21" isRemoveLineWhenBlank="true" uuid="3494a67e-2bf5-4c1b-b0b1-abea333956d5">
-						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="96" y="1" width="157" height="19" uuid="17b3772a-2932-4589-91f3-8577e42d7194"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{PHONE_NUMBER}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="90" height="19" uuid="229ac3cd-4a2f-4f54-9d4c-8e52ebaccf35"/>
-						<textElement textAlignment="Left">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Số ĐT liên hệ:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="90" y="20" width="163" height="1" uuid="807385c7-f603-40b8-9efc-b6749e2988ca"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="0" y="105" width="270" height="21" isRemoveLineWhenBlank="true" uuid="2beb19dd-6d0f-433c-abbd-a8d4bde1e67b">
-						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<printWhenExpression><![CDATA[$F{FATHER_FULLNAME} != null && !$F{FATHER_FULLNAME}.isEmpty()]]></printWhenExpression>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="65" y="1" width="202" height="19" uuid="6d8498fb-778f-4fec-b9a8-eee245a7a002"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{FATHER_FULLNAME}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="60" height="19" uuid="edac9760-7ab9-4b7d-bffb-ea265fbdedb5"/>
-						<textElement textAlignment="Left">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Tên Cha:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="60" y="20" width="207" height="1" uuid="5b3411e6-ce13-45c6-a17a-a036836d5b37"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement key="" x="0" y="127" width="523" height="60" isRemoveLineWhenBlank="true" uuid="90ada146-e640-4d11-b678-5fcd2da09af8">
-						<printWhenExpression><![CDATA[$F{NOTE} != null && !$F{NOTE}.isEmpty()]]></printWhenExpression>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="100" y="0" width="423" height="56" uuid="4d169149-438c-4943-82c6-69d28e3b57ce"/>
-						<box>
-							<topPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-							<leftPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-							<bottomPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-							<rightPen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
-						</box>
-						<textElement verticalAlignment="Middle">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{NOTE}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="94" height="28" uuid="39b673f9-9edf-4bee-88e3-274fa6695e48"/>
-						<textElement textAlignment="Left" verticalAlignment="Top">
-							<font fontName="Arial Unicode MS" size="13"/>
-						</textElement>
-						<text><![CDATA[Ghi chú:]]></text>
-					</staticText>
-					<line>
-						<reportElement x="94" y="56" width="429" height="1" uuid="df1b45bb-c1ea-4238-adf5-e918a5212b4f"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement key="" x="0" y="0" width="523" height="21" isRemoveLineWhenBlank="true" uuid="acb9da51-364c-41f5-9e8c-ddb99e3554ef">
-						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="94" y="0" width="427" height="19" uuid="9195fadc-51e8-4707-8892-ee5824399160">
-							<property name="local_mesure_unitheight" value="pixel"/>
-							<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						</reportElement>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{ID_NUMBER}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="0" y="2" width="70" height="19" uuid="0f1231c6-1e8d-4697-869f-7ded846e7e0e"/>
-						<textElement textAlignment="Left">
+						<reportElement x="0" y="0" width="73" height="21" uuid="d4db6f85-b4e2-4950-bcdb-62b80e673e9d"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
 						</textElement>
 						<text><![CDATA[Số CMND:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="70" y="20" width="453" height="1" uuid="eae44df9-9a2e-4575-b229-6e04beb3dd5c"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
+					<frame>
+						<reportElement x="76" y="0" width="444" height="21" uuid="062a06ec-ca31-4b76-a28b-e0e14afc7ce4">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="444" height="20" uuid="85633337-1e41-4075-80d4-dd0862f73a40"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{ID_NUMBER}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="444" height="1" uuid="a0e9d1d7-503a-4da7-a722-c9c3bda3e9e0"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="131" width="521" height="26" uuid="058b43ad-5e27-4a7d-ab6d-dbeb041db67d"/>
 				<frame>
-					<reportElement x="0" y="21" width="220" height="21" uuid="70ad8942-e047-4f6b-a8c0-6b19249110d5">
+					<reportElement x="0" y="0" width="520" height="21" uuid="05b3fd7e-2da7-426b-8cab-88e4a896727a">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="120" y="0" width="100" height="19" uuid="7e56a033-a088-416c-a6fe-b4ce0f7de81e">
-							<property name="local_mesure_unitheight" value="pixel"/>
-							<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						</reportElement>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{ID_NUMBER_ISSUE_DATE})]]></textFieldExpression>
-					</textField>
 					<staticText>
-						<reportElement x="0" y="1" width="108" height="19" uuid="abf0d367-d536-469d-837e-ea1639278289"/>
-						<textElement textAlignment="Left">
+						<reportElement x="0" y="0" width="110" height="21" uuid="b3dc7e55-e783-4df3-a822-be2735c55766"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
 						</textElement>
 						<text><![CDATA[Ngày cấp CMND:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="109" y="19" width="111" height="1" uuid="97b474c3-fedf-490b-84f7-e6e0ea9a82c3"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
-				</frame>
-				<frame>
-					<reportElement x="221" y="21" width="302" height="21" uuid="a9fc5235-d2ea-4298-8614-51c6b29a2450">
-						<property name="local_mesure_unitheight" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="110" y="0" width="192" height="19" uuid="7fd1de52-fa3b-4ced-bf32-cb2b9ba6d31f">
-							<property name="local_mesure_unitheight" value="pixel"/>
-							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<frame>
+						<reportElement x="110" y="0" width="150" height="21" uuid="695ec0c2-b6b2-4136-8e0a-311ad9961ac9">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						</reportElement>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{ID_NUMBER_ISSUE_PLACE}]]></textFieldExpression>
-					</textField>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="150" height="20" uuid="ffbb6b50-fabd-490f-827d-3731a0458803"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{ID_NUMBER_ISSUE_DATE})]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="150" height="1" uuid="b5bdb1bb-51c0-47c5-afaa-aebeec718a4c"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 					<staticText>
-						<reportElement x="0" y="2" width="95" height="19" uuid="9994dd96-faed-4364-8f38-eee8b43862b4"/>
-						<textElement textAlignment="Left">
+						<reportElement x="260" y="0" width="96" height="21" uuid="90898448-35c9-46b9-befe-1e33d20c31e8"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
+							<paragraph leftIndent="2"/>
 						</textElement>
 						<text><![CDATA[Nơi cấp CMND:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="99" y="19" width="203" height="1" uuid="391cc77d-4a09-4b4c-91b5-1e29eedbbe23"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
+					<frame>
+						<reportElement x="356" y="0" width="164" height="21" uuid="aa9fb91e-b565-4e07-9c4c-b6d31c3ea5de">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="164" height="20" uuid="51640c49-c17e-4e58-8c07-a9a2cef30052"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{ID_NUMBER_ISSUE_PLACE}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="164" height="1" uuid="e9164dd3-db50-49ac-89f0-828d1c1e110d"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="157" width="521" height="26" uuid="6c0901d8-28e2-49ad-832b-12be929555c3"/>
 				<frame>
-					<reportElement x="269" y="106" width="254" height="21" isRemoveLineWhenBlank="true" uuid="80c085a1-b3c8-4944-9258-9a3d4189c6a5">
+					<reportElement x="0" y="0" width="520" height="21" uuid="360fb6e9-b816-437b-84f8-8826e3f21013">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<printWhenExpression><![CDATA[$F{MOTHER_FULLNAME} != null && !$F{MOTHER_FULLNAME}.isEmpty()]]></printWhenExpression>
 					</reportElement>
-					<textField isBlankWhenNull="true">
-						<reportElement x="57" y="1" width="197" height="19" uuid="031dd440-2852-49b1-aeb8-9c59f0a43133"/>
-						<textElement verticalAlignment="Bottom">
-							<font fontName="Arial Unicode MS" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{MOTHER_FULLNAME}]]></textFieldExpression>
-					</textField>
 					<staticText>
-						<reportElement x="0" y="1" width="51" height="19" uuid="c3db4094-ac3e-4151-a027-9e9cad86ce06"/>
-						<textElement textAlignment="Left">
+						<reportElement x="0" y="0" width="110" height="21" uuid="9e0f8a1a-a078-4775-8887-5e5cb246f751">
+							<printWhenExpression><![CDATA[$F{STUDY_LEVEL}!=null && !$F{STUDY_LEVEL}.isEmpty()]]></printWhenExpression>
+						</reportElement>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
 							<font fontName="Arial Unicode MS" size="13"/>
+						</textElement>
+						<text><![CDATA[Trình độ học vấn:]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="110" y="0" width="126" height="21" uuid="7f18c55e-83a0-4fdd-967f-a3d5ea967165">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<printWhenExpression><![CDATA[$F{STUDY_LEVEL}!=null && !$F{STUDY_LEVEL}.isEmpty()]]></printWhenExpression>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="126" height="20" uuid="59667151-4bf3-4b4b-a19a-f730048e7d1f"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{STUDY_LEVEL}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="126" height="1" uuid="c530f1bc-22c3-4b53-8447-e1e0fca8d345"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
+					<staticText>
+						<reportElement x="237" y="0" width="119" height="21" uuid="c19efbfc-d491-4a45-82dc-832886e31ccb">
+							<printWhenExpression><![CDATA[$F{LANGUAGE_LEVEL}!=null && !$F{LANGUAGE_LEVEL}.isEmpty()]]></printWhenExpression>
+						</reportElement>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Arial Unicode MS" size="13"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Trình độ ngoại ngữ:]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="356" y="0" width="164" height="21" uuid="1b0a9e92-b654-40ff-9d56-bce85741b1b7">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="164" height="20" uuid="d7f0b8bf-1f6a-4d87-8dbe-d020fac4f17e">
+								<printWhenExpression><![CDATA[$F{LANGUAGE_LEVEL}!=null && !$F{LANGUAGE_LEVEL}.isEmpty()]]></printWhenExpression>
+							</reportElement>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{LANGUAGE_LEVEL}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="164" height="1" uuid="db20c91b-12e4-487a-856b-5d93ca7f6011"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
+				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="183" width="521" height="26" uuid="bd1b975a-cce2-42e0-bb72-369544b4949d"/>
+				<frame>
+					<reportElement x="0" y="0" width="520" height="21" uuid="e2be7a2c-b9a9-447d-90cb-4c5339c54b2a">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<staticText>
+						<reportElement x="0" y="0" width="40" height="21" uuid="457cb641-1768-40b7-a3cc-00610ac7e828"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Arial Unicode MS" size="13"/>
+						</textElement>
+						<text><![CDATA[Email:]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="40" y="0" width="220" height="21" uuid="b7c48712-763b-471c-a7e2-4b5b6b1f727c">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="220" height="20" uuid="982c5121-51bf-4703-90cd-fca2af764b25"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{EMAIL}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="220" height="1" uuid="35075050-5f51-4778-bd32-15c0ed11984a"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
+					<staticText>
+						<reportElement x="260" y="0" width="96" height="21" uuid="7e570097-db2e-476f-80c3-6d35afeff591"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Arial Unicode MS" size="13"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Số ĐT liên hệ:]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="356" y="0" width="164" height="21" uuid="7dcf3199-8595-4314-92fc-32c0ea73b00d">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="164" height="20" uuid="2a781aae-f67e-4090-afba-a5335c000361"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{PHONE_NUMBER}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="164" height="1" uuid="5a1bbfeb-8fe8-4eff-a409-4aa862328d93"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
+				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="209" width="521" height="26" uuid="a246fa22-2250-4545-ae84-dac5f237a725"/>
+				<frame>
+					<reportElement x="0" y="0" width="520" height="21" uuid="e3868cf7-87f6-4efd-95e0-ac1e88e94bea">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<staticText>
+						<reportElement x="0" y="0" width="60" height="21" uuid="2acb7f18-10cc-460f-a44a-9936cb672801">
+							<printWhenExpression><![CDATA[$F{FATHER_FULLNAME}!=null && !$F{FATHER_FULLNAME}.isEmpty()]]></printWhenExpression>
+						</reportElement>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Arial Unicode MS" size="13"/>
+						</textElement>
+						<text><![CDATA[Tên Cha:]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="60" y="0" width="200" height="21" uuid="4cbdf4f7-a9e3-47a7-a326-19e93aa65a85">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<printWhenExpression><![CDATA[$F{FATHER_FULLNAME}!=null && !$F{FATHER_FULLNAME}.isEmpty()]]></printWhenExpression>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="200" height="20" isRemoveLineWhenBlank="true" uuid="156320ff-02ca-4b4b-95e0-2141ad0fc5ca"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5" rightIndent="0"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{FATHER_FULLNAME}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="200" height="1" uuid="556373aa-4477-4fa9-92f0-965f6f75be75"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
+					<staticText>
+						<reportElement x="260" y="0" width="54" height="21" uuid="5ce6162c-3a11-4750-8671-7cb018799650">
+							<printWhenExpression><![CDATA[$F{MOTHER_FULLNAME}!=null && !$F{MOTHER_FULLNAME}.isEmpty()]]></printWhenExpression>
+						</reportElement>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Arial Unicode MS" size="13"/>
+							<paragraph leftIndent="2"/>
 						</textElement>
 						<text><![CDATA[Tên Mẹ:]]></text>
 					</staticText>
-					<line>
-						<reportElement x="51" y="19" width="203" height="1" uuid="108195be-2fe0-4536-bd60-386d95d1c885"/>
-						<graphicElement>
-							<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
-						</graphicElement>
-					</line>
+					<frame>
+						<reportElement x="314" y="0" width="206" height="21" uuid="00aada7a-2948-453e-8afa-dc42a7a3344f">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<printWhenExpression><![CDATA[$F{MOTHER_FULLNAME}!=null && !$F{MOTHER_FULLNAME}.isEmpty()]]></printWhenExpression>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="206" height="20" isRemoveLineWhenBlank="true" uuid="10e241ef-e356-421f-8980-58d98253b58d"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{MOTHER_FULLNAME}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="20" width="206" height="1" uuid="de97f19a-94a2-4d3b-8302-88aae6f71bd1"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
+				</frame>
+			</frame>
+		</band>
+		<band height="134">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<frame>
+				<reportElement x="0" y="0" width="521" height="67" uuid="1b65de23-cb0d-483e-968b-58ccb3b57784">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{NOTE}!=null && !$F{NOTE}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2"/>
+				<frame>
+					<reportElement x="0" y="0" width="521" height="61" uuid="bdb8899f-f87e-4ef6-b159-9a749eace354">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<staticText>
+						<reportElement x="0" y="0" width="76" height="61" uuid="49b86999-7328-4e6a-9a85-b34f69653674"/>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font fontName="Arial Unicode MS" size="13"/>
+						</textElement>
+						<text><![CDATA[Ghi chú:]]></text>
+					</staticText>
+					<frame>
+						<reportElement x="76" y="0" width="445" height="61" uuid="636c9ddb-d49e-4dd3-8165-3a1c2d80d660">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<property name="local_mesure_unitheight" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="445" height="60" uuid="328760ed-0577-4681-b8f4-02d3f04c3bef"/>
+							<textElement verticalAlignment="Top">
+								<font fontName="Arial Unicode MS" size="12" isBold="false"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{NOTE}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="60" width="445" height="1" uuid="304fcabb-447a-47ec-8638-45fc1421c682"/>
+							<graphicElement>
+								<pen lineStyle="Dotted"/>
+							</graphicElement>
+						</line>
+					</frame>
 				</frame>
 			</frame>
 			<staticText>
-				<reportElement x="334" y="200" width="205" height="52" uuid="af730f0e-5448-4ff0-864f-dae6bdbbcda1">
+				<reportElement x="320" y="67" width="205" height="67" uuid="3bb0f9ce-1e40-4204-a73c-b07b50504eeb">
 					<property name="local_mesure_unity" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
