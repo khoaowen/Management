@@ -858,8 +858,6 @@ public class MainFrameController {
 		URL reportStream = main.getJasperResource("exportList.jasper");
 
 		FilteredList<Person> filteredData = textFieldListener.getFilteredData();
-		System.out.println("print list: "
-				+ Arrays.toString(filteredData.toArray()));
 		List<Integer> filteredIds = new ArrayList<>();
 		for (Person p : filteredData) {
 			filteredIds.add(p.getId());
