@@ -6,6 +6,7 @@ import java.net.URL;
 import java.time.chrono.Chronology;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -799,7 +800,7 @@ public class MainFrameController {
     
     @FXML
     void printPerson() {
-        URL reportStream = main.getJasperResource();  
+        URL reportStream = main.getJasperResource("exportFormula.jasper");  
 		try {
 			
 			JasperReport jr = (JasperReport) JRLoader.loadObject(reportStream);
@@ -848,14 +849,69 @@ public class MainFrameController {
 			}).start();
 			
 		} catch (JRException e) {
-        	ExceptionHandler.showErrorAndLog("Can not open Jasper report", e);
+        	ExceptionHandler.showErrorAndLog("Can not open Jasper report when printing individual", e);
         }
     }
     
     @FXML
-    void printList() {
-    	System.out.println("print list: " + Arrays.toString(textFieldListener.getFilteredData().toArray()));
-    }
+	void printList() {
+		URL reportStream = main.getJasperResource("exportList.jasper");
+
+		FilteredList<Person> filteredData = textFieldListener.getFilteredData();
+		System.out.println("print list: "
+				+ Arrays.toString(filteredData.toArray()));
+		List<Integer> filteredIds = new ArrayList<>();
+		for (Person p : filteredData) {
+			filteredIds.add(p.getId());
+		}
+
+		try {
+
+			JasperReport jr = (JasperReport) JRLoader.loadObject(reportStream);
+
+			// Create the JasperPrint object
+			// Make sure to pass the JasperReport, report parameters, and data
+			// source
+
+			Map<String, Object> mapParameters = new HashMap<String, Object>();
+				mapParameters.put("FILTERED_LIST", filteredIds);
+			BorderPane progressPane = createLoadingPane();
+			progressPane.getStyleClass().add("progressPaneBackground");
+			stackPane.getChildren().add(progressPane);
+			new Thread(new Runnable() {
+				JasperViewer jv;
+
+				@Override
+				public void run() {
+					try {
+						JasperPrint jp = JasperFillManager.fillReport(jr,
+								mapParameters, main.getConnection());
+
+						jv = new JasperViewer(jp, false);
+					} catch (JRException e) {
+						ExceptionHandler.showErrorAndLog(
+								"Can not open Jasper report", e);
+					} finally {
+						Platform.runLater(new Runnable() {
+
+							@Override
+							public void run() {
+								stackPane.getChildren().remove(progressPane);
+								if (jv != null) {
+									jv.setVisible(true);
+								}
+							}
+						});
+					}
+
+				}
+			}).start();
+
+		} catch (JRException e) {
+			ExceptionHandler.showErrorAndLog("Can not open Jasper report when printing list", e);
+		}
+
+	}
     
     @FXML
     void displayBuddhistCheckMenu() {

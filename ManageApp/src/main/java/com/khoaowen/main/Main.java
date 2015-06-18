@@ -116,12 +116,13 @@ public class Main extends Application {
         return loader;
     }
     
-    /**
-     * 
-     * @return the resource for creating report
-     */
-    public URL getJasperResource() {
-    	return this.getClass().getResource("jasper/exportFormula.jasper");
+ /**
+  * 
+  * @param jasperFileName the file name with extension .jasper
+  * @return the resource for creating report
+  */
+    public URL getJasperResource(String jasperFileName) {
+    	return this.getClass().getResource("jasper/" + jasperFileName);
     }
     
 	/**
