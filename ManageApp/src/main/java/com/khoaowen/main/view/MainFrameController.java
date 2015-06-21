@@ -7,7 +7,6 @@ import java.time.chrono.Chronology;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -46,6 +45,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -89,11 +89,19 @@ public class MainFrameController {
 	@FXML
 	private TextField lastName;
 	@FXML
+	private Label lastNameLabel;
+	@FXML
 	private TextField firstName;
+	@FXML
+	private Label firstNameLabel;
 	@FXML
 	private RadioButton male;
 	@FXML
 	private RadioButton female;
+	@FXML
+	private FlowPane sexeFlowPane;
+	@FXML
+	private Label sexeLabel;
 	@FXML
 	private TextField sila;
 	@FXML
@@ -105,21 +113,39 @@ public class MainFrameController {
 	@FXML
 	private TextField email;
 	@FXML
+	private Label emailLabel;
+	@FXML
 	private TextField ethnicGroup;
+	@FXML
+	private Label ethnicGroupLabel;
 	@FXML
 	private TextField nationality;
 	@FXML
+	private Label nationalityLabel;
+	@FXML
 	private TextField hometown;
+	@FXML
+	private Label hometownLabel;
 	@FXML
 	private TextArea placeOfResidence;
 	@FXML
+	private Label placeOfResidenceLabel;
+	@FXML
 	private TextArea placeOfTempResidence;
+	@FXML
+	private Label placeOfTempResidenceLabel;
 	@FXML
 	private DatePicker birthday;
 	@FXML
+	private Label birthdayLabel;
+	@FXML
 	private TextField placeOfBirth;
 	@FXML
+	private Label placeOfBirthLabel;
+	@FXML
 	private DatePicker religiousDate;
+	@FXML
+	private Label religiousDateLabel;
 	@FXML
 	private DatePicker adoptedDate;
 	@FXML
@@ -127,11 +153,19 @@ public class MainFrameController {
 	@FXML
 	private TextField idNumber;
 	@FXML
+	private Label idNumberLabel;
+	@FXML
 	private DatePicker idNumberIssueDate;
+	@FXML
+	private Label idNumberIssueDateLabel;
 	@FXML
 	private TextField idNumberIssuePlace;
 	@FXML
+	private Label idNumberIssuePlaceLabel;
+	@FXML
 	private TextField phoneNumber;
+	@FXML
+	private Label phoneNumberLabel;
 	@FXML
 	private TextField fatherFullName;
 	@FXML
@@ -150,6 +184,8 @@ public class MainFrameController {
 	private Label languageLevelLabel;
 	@FXML
 	private TextArea note;
+	@FXML
+	private Label noteLabel;
 	@FXML
 	private ImageView imageView;
 	@FXML
@@ -670,54 +706,137 @@ public class MainFrameController {
     }
     
     private void configureForm(Role role) {
+    	gridpane.getChildren().clear();
+    	gridpane.add(lastNameLabel, 0, 0);
+		gridpane.add(lastName, 1, 0);
+		gridpane.add(firstNameLabel, 0, 1);
+		gridpane.add(firstName, 1, 1);
+		gridpane.add(sexeLabel, 0, 2);
+		gridpane.add(sexeFlowPane, 1, 2);
+		gridpane.add(birthdayLabel, 0, 3);
+		gridpane.add(birthday, 1, 3);
+		gridpane.add(placeOfBirthLabel, 0, 4);
+		gridpane.add(placeOfBirth, 1, 4);
+		gridpane.add(placeOfResidenceLabel, 0 , 5);
+		gridpane.add(placeOfResidence, 1 , 5);
+		gridpane.add(placeOfTempResidenceLabel, 0, 7);
+		gridpane.add(placeOfTempResidence, 1, 7);
+		gridpane.add(hometownLabel, 0, 9);
+		gridpane.add(hometown, 1, 9);
+		gridpane.add(nationalityLabel, 0, 10);
+		gridpane.add(nationality, 1, 10);
+		gridpane.add(ethnicGroupLabel, 0, 11);
+		gridpane.add(ethnicGroup, 1, 11);
 		switch (role) {
 		case BUDDHIST:
-			sila.setDisable(true);
-			silaLabel.setDisable(true);
-			religiousName.setDisable(false);
-			religiousNameLabel.setDisable(false);
-			adoptedDate.setDisable(true);
-			adoptedDateLabel.setDisable(true);
-			studyLevel.setDisable(true);
-			studyLevelLabel.setDisable(true);
-			languageLevel.setDisable(true);
-			languageLevelLabel.setDisable(true);
-			motherFullName.setDisable(true);
-			motherFullNameLabel.setDisable(true);
-			fatherFullName.setDisable(true);
-			fatherFullNameLabel.setDisable(true);
+			gridpane.add(religiousNameLabel, 0, 12);
+			gridpane.add(religiousName, 1, 12);
+			gridpane.add(religiousDateLabel, 0, 13);
+			gridpane.add(religiousDate, 1, 13);
+			gridpane.add(idNumberLabel, 0, 14);
+			gridpane.add(idNumber, 1, 14);
+			gridpane.add(idNumberIssueDateLabel, 0, 15);
+			gridpane.add(idNumberIssueDate, 1, 15);
+			gridpane.add(idNumberIssuePlaceLabel, 0, 16);
+			gridpane.add(idNumberIssuePlace, 1, 16);
+			gridpane.add(emailLabel, 0, 17);
+			gridpane.add(email, 1, 17);
+			gridpane.add(phoneNumberLabel, 0, 18);
+			gridpane.add(phoneNumber, 1, 18);
+			gridpane.add(noteLabel, 0, 19);
+			gridpane.add(note, 1, 19);
+//			sila.setDisable(true);
+//			silaLabel.setDisable(true);
+//			religiousName.setDisable(false);
+//			religiousNameLabel.setDisable(false);
+//			adoptedDate.setDisable(true);
+//			adoptedDateLabel.setDisable(true);
+//			studyLevel.setDisable(true);
+//			studyLevelLabel.setDisable(true);
+//			languageLevel.setDisable(true);
+//			languageLevelLabel.setDisable(true);
+//			motherFullName.setDisable(true);
+//			motherFullNameLabel.setDisable(true);
+//			fatherFullName.setDisable(true);
+//			fatherFullNameLabel.setDisable(true);
 			break;
 		case LAY_BROTHER:
-			sila.setDisable(true);
-			silaLabel.setDisable(true);
-			religiousName.setDisable(false);
-			religiousNameLabel.setDisable(false);
-			adoptedDate.setDisable(false);
-			adoptedDateLabel.setDisable(false);
-			studyLevel.setDisable(false);
-			studyLevelLabel.setDisable(false);
-			languageLevel.setDisable(false);
-			languageLevelLabel.setDisable(false);
-			motherFullName.setDisable(false);
-			motherFullNameLabel.setDisable(false);
-			fatherFullName.setDisable(false);
-			fatherFullNameLabel.setDisable(false);
+			gridpane.add(religiousNameLabel, 0, 12);
+			gridpane.add(religiousName, 1, 12);
+			gridpane.add(adoptedDateLabel, 0, 13);
+			gridpane.add(adoptedDate, 1, 13);
+			gridpane.add(studyLevelLabel, 0, 14);
+			gridpane.add(studyLevel, 1, 14);
+			gridpane.add(languageLevelLabel, 0, 15);
+			gridpane.add(languageLevel, 1, 15);
+			gridpane.add(motherFullNameLabel, 0, 16);
+			gridpane.add(motherFullName, 1, 16);
+			gridpane.add(fatherFullNameLabel, 0, 17);
+			gridpane.add(fatherFullName, 1, 17);
+			
+			gridpane.add(idNumberLabel, 0, 18);
+			gridpane.add(idNumber, 1, 18);
+			gridpane.add(idNumberIssueDateLabel, 0, 19);
+			gridpane.add(idNumberIssueDate, 1, 19);
+			gridpane.add(idNumberIssuePlaceLabel, 0, 20);
+			gridpane.add(idNumberIssuePlace, 1, 20);
+			gridpane.add(emailLabel, 0, 21);
+			gridpane.add(email, 1, 21);
+			gridpane.add(phoneNumberLabel, 0, 22);
+			gridpane.add(phoneNumber, 1, 22);
+			gridpane.add(noteLabel, 0, 23);
+			gridpane.add(note, 1, 23);
+//			sila.setDisable(true);
+//			silaLabel.setDisable(true);
+//			religiousName.setDisable(false);
+//			religiousNameLabel.setDisable(false);
+//			adoptedDate.setDisable(false);
+//			adoptedDateLabel.setDisable(false);
+//			studyLevel.setDisable(false);
+//			studyLevelLabel.setDisable(false);
+//			languageLevel.setDisable(false);
+//			languageLevelLabel.setDisable(false);
+//			motherFullName.setDisable(false);
+//			motherFullNameLabel.setDisable(false);
+//			fatherFullName.setDisable(false);
+//			fatherFullNameLabel.setDisable(false);
 			break;
 		case MASTER_BUDDHIST:
-			sila.setDisable(false);
-			silaLabel.setDisable(false);
-			religiousName.setDisable(true);
-			religiousNameLabel.setDisable(true);
-			adoptedDate.setDisable(false);
-			adoptedDateLabel.setDisable(false);
-			studyLevel.setDisable(false);
-			studyLevelLabel.setDisable(false);
-			languageLevel.setDisable(false);
-			languageLevelLabel.setDisable(false);
-			motherFullName.setDisable(true);
-			motherFullNameLabel.setDisable(true);
-			fatherFullName.setDisable(true);
-			fatherFullNameLabel.setDisable(true);
+			gridpane.add(silaLabel, 0, 12);
+			gridpane.add(sila, 1, 12);
+			gridpane.add(adoptedDateLabel, 0, 13);
+			gridpane.add(adoptedDate, 1, 13);
+			gridpane.add(studyLevelLabel, 0, 14);
+			gridpane.add(studyLevel, 1, 14);
+			gridpane.add(languageLevelLabel, 0, 15);
+			gridpane.add(languageLevel, 1, 15);
+			
+			gridpane.add(idNumberLabel, 0, 16);
+			gridpane.add(idNumber, 1, 16);
+			gridpane.add(idNumberIssueDateLabel, 0, 17);
+			gridpane.add(idNumberIssueDate, 1, 17);
+			gridpane.add(idNumberIssuePlaceLabel, 0, 18);
+			gridpane.add(idNumberIssuePlace, 1, 18);
+			gridpane.add(emailLabel, 0, 19);
+			gridpane.add(email, 1, 19);
+			gridpane.add(phoneNumberLabel, 0, 20);
+			gridpane.add(phoneNumber, 1, 20);
+			gridpane.add(noteLabel, 0, 21);
+			gridpane.add(note, 1, 21);
+//			sila.setDisable(false);
+//			silaLabel.setDisable(false);
+//			religiousName.setDisable(true);
+//			religiousNameLabel.setDisable(true);
+//			adoptedDate.setDisable(false);
+//			adoptedDateLabel.setDisable(false);
+//			studyLevel.setDisable(false);
+//			studyLevelLabel.setDisable(false);
+//			languageLevel.setDisable(false);
+//			languageLevelLabel.setDisable(false);
+//			motherFullName.setDisable(true);
+//			motherFullNameLabel.setDisable(true);
+//			fatherFullName.setDisable(true);
+//			fatherFullNameLabel.setDisable(true);
 			break;
 		}
 		
